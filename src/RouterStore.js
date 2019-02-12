@@ -4,8 +4,8 @@ import {observable, action} from "mobx";
 export default class RouterStore {
     toState = observable.ref(null);
     fromState = observable.ref(null);
-    err = observable.ref(err);
-    opts = observable.ref(opts);
+    err = observable.ref(null);
+    opts = observable.ref(null);
     
     router = null;
     routes = null;
