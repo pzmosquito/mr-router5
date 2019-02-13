@@ -1,7 +1,7 @@
-import Home from "./components/Home";
-import PkgRouteNode from "./components/PkgRouteNode";
-import PkgReact from "./components/PkgReact";
-import PkgMobx from "./components/PkgMobx";
+import Home from "../components/Home";
+import PkgRouteNode from "../components/pkg/RouteNode";
+import PkgReact from "../components/pkg/React";
+import PkgMobx from "../components/pkg/MobX";
 
 
 export default [

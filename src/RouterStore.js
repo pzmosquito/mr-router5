@@ -2,14 +2,21 @@ import {observable, action} from "mobx";
 
 
 export default class RouterStore {
-    toState = observable.ref(null);
-    fromState = observable.ref(null);
-    err = observable.ref(null);
-    opts = observable.ref(null);
-    
+    @observable.ref
+    toState = null;
+
+    @observable.ref
+    fromState = null;
+
+    @observable.ref
+    err = null;
+
+    @observable.ref
+    opts = null;
+
     router = null;
     routes = null;
-    
+
     init(router, routes) {
         this.router = router;
         this.routes = routes;
@@ -30,6 +37,8 @@ export default class RouterStore {
     onTransitionStart = action((toState, fromState) => {
         this.toState = toState;
         this.fromState = fromState;
+
+        console.log(this.toState);
     });
 
     onTransitionCancel = action((toState, fromState) => {
@@ -49,15 +58,17 @@ export default class RouterStore {
         this.opts = opts;
     });
 
-    get routeComponent(routes = this.routes, routeNamePrefix = "") {
+    routeComponent = (routes = this.routes, segmentName = "") => {
         for (const route of routes) {
-            if (`${routeNamePrefix}${route.name}` === this.toState.name) {
+            const routeName = segmentName ? `${segmentName}.${route.name}` : route.name;
+
+            if (routeName === this.toState.name) {
                 return route.component;
             }
             if (Object.prototype.hasOwnProperty.call(route, "children")) {
-                return this.routeComponent(route.children, `${route.name}.`);
+                return this.routeComponent(route.children, routeName);
             }
         }
         throw new Error(`route '${this.toState.name}' is not defined.`);
-    }
+    };
 }

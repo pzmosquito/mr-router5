@@ -1,23 +1,34 @@
 {
-  "name": "pz-mobx-router5-react",
+  "name": "mr-router5",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pzmosquito/pz-mobx-router5-react.git"
+    "url": "git+https://github.com/pzmosquito/mr-router5.git"
   },
   "author": "pzmosquito",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pzmosquito/pz-mobx-router5-react/issues"
+    "url": "https://github.com/pzmosquito/mr-router5/issues"
   },
-  "homepage": "https://github.com/pzmosquito/pz-mobx-router5-react#readme",
+  "homepage": "https://github.com/pzmosquito/mr-router5#readme",
+  "scripts": {
+    "dev": "parcel ./example/index.html --open --no-hmr"
+  },
   "dependencies": {
     "mobx": "~5.9.0",
     "mobx-react-lite": "~1.0.0",
     "react": "~16.8.1",
     "react-dom": "~16.8.1",
-    "router5": "~7.0.1"
+    "react-hot-loader": "~4.6.5",
+    "router5": "~7.0.1",
+    "router5-plugin-browser": "~7.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "~7.2.2",
+    "@babel/plugin-proposal-class-properties": "~7.3.0",
+    "@babel/plugin-proposal-decorators": "~7.3.0",
+    "@babel/preset-env": "~7.3.1",
+    "@babel/preset-react": "~7.0.0"
   }
 }
