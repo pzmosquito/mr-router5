@@ -2,12 +2,8 @@ import {observable} from "mobx";
 
 
 export default class RouterStore {
-    @observable.ref
-    route = null;
-
-    @observable.ref
-    previousRoute = null;
-
+    route = observable.box(null);
+    previousRoute = observable.box(null);
     router = null;
     routes = null;
 

@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 import {render} from "react-dom";
-import {routerApp} from "../../src/";
+import {routerApp} from "mr-router5";
 import createRouter from "../routing/create-router";
 import routes from "../routing/routes";
 import RootNode from "./RootNode";

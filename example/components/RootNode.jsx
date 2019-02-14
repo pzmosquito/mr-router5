@@ -1,5 +1,5 @@
-import React from "react";
-import {RouteComponent} from "../../src";
+import * as React from "react";
+import {RouteComponent} from "mr-router5";
 
 
 export default () => {

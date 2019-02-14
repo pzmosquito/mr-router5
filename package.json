@@ -1,7 +1,7 @@
 {
   "name": "mr-router5",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Mr. Router5",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pzmosquito/mr-router5.git"
@@ -12,10 +12,15 @@
     "url": "https://github.com/pzmosquito/mr-router5/issues"
   },
   "homepage": "https://github.com/pzmosquito/mr-router5#readme",
+  "main": "dist/mr-router5/index.js",
+  "module": "dist/mr-router5/index.js",
+  "umd:main": "dist/mr-router5/index.umd.js",
   "scripts": {
-    "dev": "parcel ./example/index.html --open --no-hmr"
+    "dev": "parcel example/index.html --out-dir dist/example --no-hmr --open",
+    "build:parcel": "parcel build src/index.js --out-dir dist/mr-router5 --target node",
+    "build": "microbundle build --entry src/index.js --output dist/mr-router5/index.js --watch"
   },
-  "dependencies": {
+  "peerDependencies": {
     "mobx": "~5.9.0",
     "mobx-react-lite": "~1.0.0",
     "react": "~16.8.1",
@@ -29,6 +34,15 @@
     "@babel/plugin-proposal-decorators": "~7.3.0",
     "@babel/preset-env": "~7.3.1",
     "@babel/preset-react": "~7.0.0",
+    "microbundle": "~0.9.0",
     "parcel-bundler": "~1.11.0"
+  },
+  "dependencies": {
+    "mobx": "~5.9.0",
+    "mobx-react-lite": "~1.0.0",
+    "react": "~16.8.1",
+    "react-dom": "~16.8.1",
+    "router5": "~7.0.1",
+    "router5-plugin-browser": "~7.0.1"
   }
 }

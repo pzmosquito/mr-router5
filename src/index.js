@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import RouterStore from "./RouterStore";
 import {observer} from "mobx-react-lite";
 
