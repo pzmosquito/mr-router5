@@ -1,5 +1,4 @@
 // @flow
-import {hot} from "react-hot-loader";
 import * as React from "react";
 import {render} from "react-dom";
 import {RouterStore} from "../../src/";
@@ -19,12 +18,9 @@ const App = () => (
     </AppContext.Provider>
 );
 
-// make app hot reloadable
-const HotApp = hot(module)(App);
-
 // renderer
 const renderApp = () => {
-    render(<HotApp />, document.getElementById("app"));
+    render(<App />, document.getElementById("app"));
 };
 
 export {

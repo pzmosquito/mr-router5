@@ -13,14 +13,13 @@
   },
   "homepage": "https://github.com/pzmosquito/mr-router5#readme",
   "scripts": {
-    "dev": "parcel ./example/index.html --open"
+    "dev": "parcel ./example/index.html --open --no-hmr"
   },
   "dependencies": {
     "mobx": "~5.9.0",
     "mobx-react-lite": "~1.0.0",
     "react": "~16.8.1",
     "react-dom": "~16.8.1",
-    "react-hot-loader": "~4.6.5",
     "router5": "~7.0.1",
     "router5-plugin-browser": "~7.0.1"
   },

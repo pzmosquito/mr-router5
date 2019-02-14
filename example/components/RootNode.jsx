@@ -1,18 +1,17 @@
 import React, {useContext} from  "react";
-import {observer} from "mobx-react-lite";
 import AppContext from "./Context";
+import {routeNode, RouteComponent} from "../../src";
 
 
-export default observer(() => {
-    const routeNodeName = "";
-    const routerStore = useContext(AppContext);
-    const Component = routerStore.routeComponent(routeNodeName);
+const routeNodeName = "";
+const routerStore = useContext(AppContext);
 
+export default routeNode(() => {
     return (
         <div>
             <h4>Header</h4>
             <hr />
-            <Component />
+            <RouteComponent routeNodeName={routeNodeName} routerStore={routerStore} />
             <hr/>
             <h4>Footer</h4>
         </div>

@@ -1,0 +1,1 @@
+export default ({routerStore, routeNodeName}) => routerStore.routeComponent(routeNodeName);
