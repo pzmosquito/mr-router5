@@ -1,26 +1,23 @@
-// @flow
-import * as React from "react";
+import React from "react";
 import {render} from "react-dom";
-import {RouterStore} from "../../src/";
+import {routerApp} from "../../src/";
 import createRouter from "../routing/create-router";
-import AppContext from "./Context";
+import routes from "../routing/routes";
 import RootNode from "./RootNode";
 
 
 // router
-const routerStore = new RouterStore();
-const router = createRouter(routerStore);
+const router = createRouter(routes);
 
 // app component
-const App = () => (
-    <AppContext.Provider value={routerStore}>
-        <RootNode />
-    </AppContext.Provider>
-);
+const App = routerApp(router, routes, () => <RootNode />);
 
 // renderer
 const renderApp = () => {
-    render(<App />, document.getElementById("app"));
+    render(
+        <App />,
+        document.getElementById("app")
+    );
 };
 
 export {

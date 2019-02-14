@@ -1,5 +1,4 @@
-import {observable, action, computed, autorun} from "mobx";
-import {observer} from "mobx-react-lite";
+import {observable} from "mobx";
 
 
 export default class RouterStore {

@@ -1,20 +1,18 @@
-import React, {useContext} from  "react";
-import AppContext from "./Context";
-import {routeNode, RouteComponent} from "../../src";
+import React from "react";
+import {RouteComponent} from "../../src";
 
 
-const routeNodeName = "";
-const routerStore = useContext(AppContext);
+export default () => {
+    const routeNodeName = "";
 
-export default routeNode(() => {
     return (
         <div>
             <h4>Header</h4>
             <hr />
-            <RouteComponent routeNodeName={routeNodeName} routerStore={routerStore} />
+            <RouteComponent routeNodeName={routeNodeName} />
             <hr/>
             <h4>Footer</h4>
         </div>
     );
-});
+};
 
