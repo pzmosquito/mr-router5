@@ -1,1 +1,4 @@
-export default "React Package";
+import * as React from  "react";
+
+
+export default () => <div>React Package</div>;

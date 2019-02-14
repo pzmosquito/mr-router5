@@ -1,11 +1,11 @@
 // @flow
-// import {hot} from "react-hot-loader";
+import {hot} from "react-hot-loader";
 import * as React from "react";
 import {render} from "react-dom";
-import RouterStore from "../../src/RouterStore";
+import {RouterStore} from "../../src/";
 import createRouter from "../routing/create-router";
-import RouteNode from "./RouteNode";
 import AppContext from "./Context";
+import RouteNode from "./RouteNode";
 
 
 // router

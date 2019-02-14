@@ -1,18 +1,9 @@
-import {observable, action} from "mobx";
+import {observable, action, computed, autorun} from "mobx";
 
 
 export default class RouterStore {
     @observable.ref
-    toState = null;
-
-    @observable.ref
-    fromState = null;
-
-    @observable.ref
-    err = null;
-
-    @observable.ref
-    opts = null;
+    route = null;
 
     router = null;
     routes = null;
@@ -20,55 +11,33 @@ export default class RouterStore {
     init(router, routes) {
         this.router = router;
         this.routes = routes;
+        this.router.subscribe(route => {
+            this.route = route;
+        })
     }
 
-    onStart() {
+    routeComponent(routeNodeName) {
+        if (routeNodeName === this.route.route.name) {
+            return () => null;
+        }
 
+        const routeNodeLevel = routeNodeName === "" ? 0 : routeNodeName.split(".").length;
+        const routeName = this.route.route.name.split(".").slice(0, routeNodeLevel + 1).join(".");
+
+        return this._getRouteComponent(this.routes, routeName);
     }
 
-    onStop() {
-
-    }
-
-    teardown() {
-
-    }
-
-    onTransitionStart = action((toState, fromState) => {
-        this.toState = toState;
-        this.fromState = fromState;
-
-        console.log(this.toState);
-    });
-
-    onTransitionCancel = action((toState, fromState) => {
-        this.toState = toState;
-        this.fromState = fromState;
-    });
-
-    onTransitionError = action((toState, fromState, err) => {
-        this.toState = toState;
-        this.fromState = fromState;
-        this.err = err;
-    });
-
-    onTransitionSuccess = action((toState, fromState, opts) => {
-        this.toState = toState;
-        this.fromState = fromState;
-        this.opts = opts;
-    });
-
-    routeComponent = (routes = this.routes, segmentName = "") => {
+    _getRouteComponent(routes, routeName, parentRouteName) {
         for (const route of routes) {
-            const routeName = segmentName ? `${segmentName}.${route.name}` : route.name;
+            const currentRouteName = parentRouteName ? `${parentRouteName}.${route.name}` : route.name;
 
-            if (routeName === this.toState.name) {
+            if (routeName === currentRouteName) {
                 return route.component;
             }
             if (Object.prototype.hasOwnProperty.call(route, "children")) {
-                return this.routeComponent(route.children, routeName);
+                return this._getRouteComponent(route.children, routeName, currentRouteName);
             }
         }
-        throw new Error(`route '${this.toState.name}' is not defined.`);
-    };
+        throw new Error(`route '${this.route.route.name}' is not defined.`);
+    }
 }

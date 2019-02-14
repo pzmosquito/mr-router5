@@ -1,1 +1,4 @@
-export default "MobX Package";
+import * as React from  "react";
+
+
+export default () => <div>MobX Package</div>;
