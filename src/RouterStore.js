@@ -5,24 +5,29 @@ export default class RouterStore {
     @observable.ref
     route = null;
 
+    @observable.ref
+    previousRoute = null;
+
     router = null;
     routes = null;
 
     init(router, routes) {
         this.router = router;
         this.routes = routes;
-        this.router.subscribe(route => {
-            this.route = route;
+
+        this.router.subscribe(routeObj => {
+            this.route = routeObj.route;
+            this.previousRoute = routeObj.previousRoute;
         })
     }
 
     routeComponent(routeNodeName) {
-        if (routeNodeName === this.route.route.name) {
+        if (!this.route || routeNodeName === this.route.name) {
             return () => null;
         }
 
         const routeNodeLevel = routeNodeName === "" ? 0 : routeNodeName.split(".").length;
-        const routeName = this.route.route.name.split(".").slice(0, routeNodeLevel + 1).join(".");
+        const routeName = this.route.name.split(".").slice(0, routeNodeLevel + 1).join(".");
 
         return this._getRouteComponent(this.routes, routeName);
     }
@@ -38,6 +43,6 @@ export default class RouterStore {
                 return this._getRouteComponent(route.children, routeName, currentRouteName);
             }
         }
-        throw new Error(`route '${this.route.route.name}' is not defined.`);
+        throw new Error(`route '${this.route.name}' is not defined.`);
     }
 }

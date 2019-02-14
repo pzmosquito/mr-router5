@@ -1,6 +1,5 @@
 import React, {useContext} from  "react";
 import {observer} from "mobx-react-lite";
-import {RouteNode} from "../../../src";
 import AppContext from "../Context";
 
 

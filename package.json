@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/pzmosquito/mr-router5#readme",
   "scripts": {
-    "dev": "parcel ./example/index.html --open --no-hmr"
+    "dev": "parcel ./example/index.html --open"
   },
   "dependencies": {
     "mobx": "~5.9.0",
