@@ -22,4 +22,4 @@ export {
     routerStore,
     routerApp,
     RouteComponent
-}
+};
