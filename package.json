@@ -16,26 +16,23 @@
   "module": "dist/mr-router5/index.js",
   "umd:main": "dist/mr-router5/index.umd.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --config webpack.config.js",
-    "build": "microbundle build --entry src/index.js --output dist/mr-router5/index.js --watch"
+    "dev": "webpack-dev-server",
+    "build": "microbundle build --entry src/index.js --output dist/mr-router5/index.js",
+    "build:watch": "microbundle watch --entry src/index.js --output dist/mr-router5/index.js"
   },
   "peerDependencies": {
     "mobx": "~5.9.0",
     "mobx-react-lite": "~1.0.0",
     "react": "~16.8.1",
-    "react-dom": "~16.8.1",
-    "router5": "~7.0.1",
-    "router5-plugin-browser": "~7.0.1"
+    "router5": "~7.0.1"
   },
   "devDependencies": {
     "@babel/core": "~7.2.2",
     "@babel/plugin-proposal-class-properties": "~7.3.0",
     "@babel/plugin-proposal-decorators": "~7.3.0",
-    "@babel/plugin-syntax-dynamic-import": "~7.2.0",
     "@babel/preset-env": "~7.3.1",
     "@babel/preset-react": "~7.0.0",
     "babel-loader": "~8.0.5",
-    "babel-preset-react": "~6.24.1",
     "html-webpack-plugin": "~3.2.0",
     "microbundle": "~0.9.0",
     "webpack": "~4.29.0",

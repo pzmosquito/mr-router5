@@ -2,8 +2,12 @@ import {observable} from "mobx";
 
 
 export default class RouterStore {
-    route = observable.box(null);
-    previousRoute = observable.box(null);
+    @observable.ref
+    route = null;
+
+    @observable.ref
+    previousRoute = null;
+    
     router = null;
     routes = null;
 
@@ -40,6 +44,6 @@ export default class RouterStore {
                 return this._getRoute(route.children, routeName, currentRouteName);
             }
         }
-        throw new Error(`route '${this.route.name}' is not defined.`);
+        throw new Error(`route '${routeName}' is not defined.`);
     }
 }
