@@ -10,7 +10,7 @@ import RootNode from "./RootNode";
 const router = createRouter(routes);
 
 // app component
-const App = routerApp(router, routes, () => <RootNode />);
+const App = routerApp(router, routes, () => <div><RootNode /></div>);
 
 // renderer
 const renderApp = () => {

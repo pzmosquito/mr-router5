@@ -1,6 +1,6 @@
 import * as React from "react";
+import {observer, useObservable, useObserver} from "mobx-react-lite";
 import RouterStore from "./RouterStore";
-import {observer} from "mobx-react-lite";
 
 
 const routerStore = new RouterStore();
@@ -11,8 +11,16 @@ const routerApp = (router, routes, WrappedComponent) => {
     return WrappedComponent;
 };
 
+const routeNode = (name, WrappedComponent) => () => <WrappedComponent routeNodeName={name} />;
+
 const RouteComponent = observer(({routeNodeName}) => {
-    const Component = routerStore.routeComponent(routeNodeName);
+    const toActivate = useObservable({routeName: null});
+
+    if (routerStore.transition.intersection === routeNodeName || toActivate.routeName === null) {
+        toActivate.routeName = routerStore.routeComponentToActivate(routeNodeName);
+    }
+
+    const Component = routerStore.routeComponent(toActivate.routeName);
 
     return <Component />;
 });
@@ -21,5 +29,6 @@ const RouteComponent = observer(({routeNodeName}) => {
 export {
     routerStore,
     routerApp,
-    RouteComponent
+    RouteComponent,
+    routeNode
 };
