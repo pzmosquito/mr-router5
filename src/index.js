@@ -1,5 +1,5 @@
 import * as React from "react";
-import {observer, useObservable, useObserver} from "mobx-react-lite";
+import {observer, useObservable} from "mobx-react-lite";
 import RouterStore from "./RouterStore";
 
 
@@ -18,7 +18,10 @@ const RouteComponent = observer(({routeNodeName}) => {
     // console.log(`RouteComponent name for route node '${routeNodeName}' was '${toActivate.name}'`);
 
     if (routerStore.transition.intersection === routeNodeName || toActivate.name === null) {
-        toActivate.name = routerStore.routeComponentToActivate(routeNodeName);
+        const toActivateName = routerStore.routeComponentToActivate(routeNodeName);
+        if (toActivate.name !== toActivateName) {
+            toActivate.name = toActivateName;
+        }
     }
     // console.log(`RouteComponent name for route node '${routeNodeName}' is '${toActivate.name}'`);
 
