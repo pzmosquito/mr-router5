@@ -14,13 +14,15 @@ const routerApp = (router, routes, WrappedComponent) => {
 const routeNode = (name, WrappedComponent) => () => <WrappedComponent routeNodeName={name} />;
 
 const RouteComponent = observer(({routeNodeName}) => {
-    const toActivate = useObservable({routeName: null});
+    const toActivate = useObservable({name: null});
+    // console.log(`RouteComponent name for route node '${routeNodeName}' was '${toActivate.name}'`);
 
-    if (routerStore.transition.intersection === routeNodeName || toActivate.routeName === null) {
-        toActivate.routeName = routerStore.routeComponentToActivate(routeNodeName);
+    if (routerStore.transition.intersection === routeNodeName || toActivate.name === null) {
+        toActivate.name = routerStore.routeComponentToActivate(routeNodeName);
     }
+    // console.log(`RouteComponent name for route node '${routeNodeName}' is '${toActivate.name}'`);
 
-    const Component = routerStore.routeComponent(toActivate.routeName);
+    const Component = routerStore.routeComponent(toActivate.name);
 
     return <Component />;
 });

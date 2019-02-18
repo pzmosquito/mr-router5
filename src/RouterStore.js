@@ -27,14 +27,15 @@ export default class RouterStore {
             this.transition.toActivate = transition.toActivate;
             this.transition.toDeactivate = transition.toDeactivate;
             this.transition.intersection = transition.intersection;
+            // console.log("toActivate routes:", this.transition.toActivate);
         });
     }
 
     // get the route name for RouteComponent to activate.
     routeComponentToActivate(routeNodeName) {
-        console.log(`getting RouteComponent route name for route node '${routeNodeName}'`);
+        // console.log(`getting RouteComponent route name for route node '${routeNodeName}'`);
         if (routeNodeName === "" || routeNodeName === this.transition.intersection) {
-            console.log(`found RouteComponent route name '${this.transition.toActivate[0]}'.`);
+            // console.log(`found RouteComponent route name '${this.transition.toActivate[0]}'.`);
             return this.transition.toActivate[0];
         }
 
@@ -49,7 +50,7 @@ export default class RouterStore {
         
         const routeComponentName = this.transition.toActivate[routeNodeIndex + 1];
 
-        console.log(`found RouteComponent route name '${routeComponentName}'.`);
+        // console.log(`found RouteComponent route name '${routeComponentName}'.`);
 
         return routeComponentName;
     }
