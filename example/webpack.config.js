@@ -9,19 +9,19 @@ module.exports = {
         extensions: ["*", ".js", ".jsx"]
     },
     entry: [
-        "./example/index.js"
+        "./src/index.js"
     ],
     output: {
         filename: "[name].[hash].js",
-        path: path.resolve(__dirname, "dist/example"),
+        path: path.resolve(__dirname, "dist"),
         publicPath: "/"
     },
     devServer: {
-        contentBase: "./dist/example",
+        contentBase: "./dist",
         historyApiFallback: true
     },
     plugins: [
-        new HtmlWebpackPlugin({template: "./example/index.html"}),
+        new HtmlWebpackPlugin({template: "./src/index.html"}),
     ],
     module: {
         rules: [

@@ -13,10 +13,10 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 
 ## Dependencies
 
-- React >= 16.0.0
-- router5 >= 7.0.0
-- mobx >= 4.0.0 (v5 is supported)
-- mobx-react-lite >= 1.0.0
+- `React` ^16.8.0
+- `router5` ^7.0.0
+- `mobx` ^4.0.0 || ^5.0.0
+- `mobx-react-lite` ^1.0.0
 
 
 ## Installation
@@ -84,9 +84,3 @@ router.start(() => {
 ```
 
 That's it. Enjoy routing.
-
-
-## Roadmap
-
-- support `mobx-react` backward compatibility.
-- 
