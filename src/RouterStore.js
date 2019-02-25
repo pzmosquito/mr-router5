@@ -14,7 +14,7 @@ export default class RouterStore {
     // route component name to activate for route nodes
     @observable.shallow
     routeNodeComponent = new Map();
-    
+
     // reference of router instance
     router = null;
 
@@ -35,21 +35,16 @@ export default class RouterStore {
     routeUpdated(routeObj) {
         this.route = routeObj.route;
         this.previousRoute = routeObj.previousRoute;
-        
+
         const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
         const updatedRoutes = [intersection].concat(toActivate);
-        
+
         for (let i = 0; i < updatedRoutes.length - 1; i++) {
-            const currRoute = this.getRouteName(updatedRoutes[i]);
+            const currRoute = updatedRoutes[i];
             const nextRoute = updatedRoutes[i + 1];
 
             this.routeNodeComponent.set(currRoute, nextRoute);
         }
-    }
-
-    // return mr-router5 specific route name (mainly for root node)
-    getRouteName(routeName) {
-        return routeName === "" ? "__" : routeName;
     }
 
     // get attached component for a given route name.
