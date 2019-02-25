@@ -3,23 +3,19 @@ import transitionPath from "router5-transition-path";
 
 
 export default class RouterStore {
-    // to route
-    @observable.ref
+    // route objects
     route = null;
-
-    // from route
-    @observable.ref
     previousRoute = null;
-
-    // route component name to activate for route nodes
-    @observable.shallow
-    routeNodeComponent = new Map();
 
     // reference of router instance
     router = null;
 
-    // reference of routes instance
+    // reference of routes definition
     routes = null;
+
+    // route component to activate for route nodes
+    @observable.shallow
+    routeNodeComponent = new Map();
 
     init(router, routes) {
         this.router = router;
