@@ -8,7 +8,7 @@ export default () => {
         <div>
             React Package
             <br />
-            <div onClick={() => routerStore.router.navigate("pkg.mobx")}>To To Mobx</div>
+            <div onClick={() => routerStore.router.navigate("pkg.mobx")}>Go To Mobx</div>
         </div>
     );
 };

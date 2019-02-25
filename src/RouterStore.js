@@ -1,18 +1,24 @@
-import {observable, entries} from "mobx";
+import {observable, action} from "mobx";
 import transitionPath from "router5-transition-path";
 
 
 export default class RouterStore {
+    // to route
     @observable.ref
     route = null;
 
+    // from route
     @observable.ref
     previousRoute = null;
 
+    // route component name to activate for route nodes
     @observable.shallow
-    transition = {};
+    routeNodeComponent = {};
     
+    // reference of router instance
     router = null;
+
+    // reference of routes instance
     routes = null;
 
     init(router, routes) {
@@ -20,39 +26,30 @@ export default class RouterStore {
         this.routes = routes;
 
         this.router.subscribe(routeObj => {
-            this.route = routeObj.route;
-            this.previousRoute = routeObj.previousRoute;
-            
-            const transition = transitionPath(this.route, this.previousRoute);
-            this.transition.toActivate = transition.toActivate;
-            this.transition.toDeactivate = transition.toDeactivate;
-            this.transition.intersection = transition.intersection;
-            // console.log("toActivate routes:", this.transition.toActivate);
+            this.routeUpdated(routeObj);
         });
     }
 
-    // get the route name for RouteComponent to activate.
-    routeComponentToActivate(routeNodeName) {
-        // console.log(`getting RouteComponent route name for route node '${routeNodeName}'`);
-        if (routeNodeName === "" || routeNodeName === this.transition.intersection) {
-            // console.log(`found RouteComponent route name '${this.transition.toActivate[0]}'.`);
-            return this.transition.toActivate[0];
-        }
-
-        const routeNodeIndex = this.transition.toActivate.indexOf(routeNodeName);
+    // handle route update
+    @action
+    routeUpdated(routeObj) {
+        this.route = routeObj.route;
+        this.previousRoute = routeObj.previousRoute;
         
-        if (routeNodeIndex < 0) {
-            throw new Error(`route '${routeNodeName}' is not defined.`);
-        }
-        if (routeNodeIndex === this.transition.toActivate.length - 1) {
-            throw new Error(`route '${routeNodeName}' is a route node.`);
-        }
+        const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
+        const updatedRoutes = [intersection].concat(toActivate);
         
-        const routeComponentName = this.transition.toActivate[routeNodeIndex + 1];
+        for (let i = 0; i < updatedRoutes.length - 1; i++) {
+            const currRoute = this.getRouteName(updatedRoutes[i]);
+            const nextRoute = updatedRoutes[i + 1];
 
-        // console.log(`found RouteComponent route name '${routeComponentName}'.`);
+            this.routeNodeComponent[currRoute] = nextRoute;
+        }
+    }
 
-        return routeComponentName;
+    // return mr-router5 specific route name (mainly for root node)
+    getRouteName(routeName) {
+        return routeName === "" ? "__" : routeName;
     }
 
     // get attached component for a given route name.
