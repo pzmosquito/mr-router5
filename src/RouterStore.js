@@ -13,7 +13,7 @@ export default class RouterStore {
 
     // route component name to activate for route nodes
     @observable.shallow
-    routeNodeComponent = {};
+    routeNodeComponent = new Map();
     
     // reference of router instance
     router = null;
@@ -43,7 +43,7 @@ export default class RouterStore {
             const currRoute = this.getRouteName(updatedRoutes[i]);
             const nextRoute = updatedRoutes[i + 1];
 
-            this.routeNodeComponent[currRoute] = nextRoute;
+            this.routeNodeComponent.set(currRoute, nextRoute);
         }
     }
 
