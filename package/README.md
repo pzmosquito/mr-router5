@@ -92,6 +92,6 @@ That's it. Enjoy routing.
 ## Example
 
 1. clone the repo
-1. go to `package` directory, `npm install` and `npm build`
+1. go to `package` directory, `npm install` and `npm run build`
 1. go to `example` directory, `npm install` and `npm run dev`
 1. launch browser, navigate to `http://localhost:8080`
