@@ -1,13 +1,13 @@
-import Home from "../components/Home";
-import PkgRouteNode from "../components/pkg/RouteNode";
-import PkgReact from "../components/pkg/React";
-import PkgMobx from "../components/pkg/MobX";
+import Home from "../components/home/Home";
+import UserNode from "../components/route-nodes/UserNode";
+import UserList from "../components/users/UserList";
+import UserView from "../components/users/UserView";
 
 
 export default [
     {name: "home", path: "/", component: Home},
-    {name: "pkg", path: "/pkg", component: PkgRouteNode, children: [
-        {name: "react", path: "/react", component: PkgReact},
-        {name: "mobx", path: "/mobx", component: PkgMobx}
+    {name: "users", path: "/users", component: UserNode, children: [
+        {name: "list", path: "/list", component: UserList},
+        {name: "view", path: "/view/:id<\\d+>", component: UserView}
     ]}
 ];

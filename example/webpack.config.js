@@ -6,7 +6,8 @@ module.exports = {
     target: "web",
     mode: "development",
     resolve: {
-        extensions: ["*", ".js", ".jsx"]
+        extensions: ["*", ".js", ".jsx"],
+        alias: {react: require.resolve("react")}
     },
     entry: [
         "./src/index.js"
