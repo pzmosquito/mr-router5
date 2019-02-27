@@ -28,7 +28,7 @@
   "dependencies": {
     "mobx": "~5.9.0",
     "mobx-react-lite": "~1.1.0",
-    "mr-router5": "~0.0.6",
+    "mr-router5": "0.0.7",
     "react": "~16.8.3",
     "react-dom": "~16.8.3",
     "router5": "~7.0.2",
