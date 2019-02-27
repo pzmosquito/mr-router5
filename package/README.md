@@ -32,29 +32,32 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 Both flat routes and tree routes are supported.
 
 ```js
-import Home from "./Home";
-import UserRouteNode from "./UserRouteNode";
-import UserView from "./UserView";
-import UserList from "./UserList";
+import Home from "../home/Home";
+import UserNode from "../route-nodes/UserNode";
+import UserList from "../users/UserList";
+import UserView from "../users/UserView";
 
 export default [
     {name: "home", path: "/", component: Home},
-    {name: "user", path: "/user", component: UserRouteNode, children: [
-        {name: "view", path: "/view", component: UserView},
-        {name: "list", path: "/list", component: UserList}
+    {name: "users", path: "/users", component: UserNode, children: [
+        {name: "list", path: "/list", component: UserList},
+        {name: "view", path: "/view/:id<\\d+>", component: UserView}
     ]}
 ];
+
 ```
 
 #### create RootNode component
 
-`routeNode` function takes route node name and component as arguments.
+`routeNode` function takes route node name and component as arguments.  
+Route node name must be the same as
+route name.
 
 ```js
 import * as React from "react";
 import {routeNode, RouteComponent} from "mr-router5";
 
-export default routeNode("", ({routeNodeName}) => { // "" is for root node
+export default routeNode("", ({routeNodeName}) => { // root route node
     return (
         <div>
             <h2>Header</h2>
@@ -73,10 +76,10 @@ export default routeNode("", ({routeNodeName}) => { // "" is for root node
 
 ```js
 import {routerApp} from "mr-router5";
+import RootNode from "./route-nodes/RootNode";
 
-// create routes definition
-// create router instance
-const App = routerApp(router, routes, () => <div><RootNode /></div>);
+// create router instance and import routes definition
+const App = routerApp(router, routes, RootNode);
 
 router.start(() => {
     ReactDOM.render(<App />, document.getElementById("app"));
@@ -84,3 +87,11 @@ router.start(() => {
 ```
 
 That's it. Enjoy routing.
+
+
+## Example
+
+1. clone the repo
+1. go to `package` directory, `npm install` and `npm build`
+1. go to `example` directory, `npm install` and `npm run dev`
+1. launch browser, navigate to `http://localhost:8080`
