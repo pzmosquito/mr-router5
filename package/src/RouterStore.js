@@ -15,7 +15,7 @@ export default class RouterStore {
 
     // route component to activate for route nodes
     @observable.shallow
-    routeNodeComponent = new Map();
+    routeNodePath = new Map();
 
 
     init(router, routes) {
@@ -39,20 +39,14 @@ export default class RouterStore {
         for (let i = 0; i < updatedRoutes.length - 1; i++) {
             const currRoute = updatedRoutes[i];
             const nextRoute = updatedRoutes[i + 1];
+            const nextRouteObj = Object.assign({}, this.getRoute(this.routes, nextRoute));
 
-            this.routeNodeComponent.set(currRoute, nextRoute);
+            this.routeNodePath.set(currRoute, nextRouteObj);
         }
     }
 
-    // get attached component for a given route name.
-    routeComponent(routeName) {
-        const route = this._getRoute(this.routes, routeName);
-
-        return route.component;
-    }
-
     // get route object for a given route name.
-    _getRoute(routes, routeName, parentRouteName) {
+    getRoute(routes, routeName, parentRouteName) {
         for (const route of routes) {
             const currentRouteName = parentRouteName ? `${parentRouteName}.${route.name}` : route.name;
 
@@ -60,7 +54,7 @@ export default class RouterStore {
                 return route;
             }
             if (Object.prototype.hasOwnProperty.call(route, "children")) {
-                return this._getRoute(route.children, routeName, currentRouteName);
+                return this.getRoute(route.children, routeName, currentRouteName);
             }
         }
         throw new Error(`route '${routeName}' is not defined.`);

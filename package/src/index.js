@@ -14,8 +14,8 @@ const routerApp = (router, routes, WrappedComponent) => {
 
 
 const RouteComponent = observer(({routeNodeName}) => {
-    const componentName = routerStore.routeNodeComponent.get(routeNodeName);
-    const Component = routerStore.routeComponent(componentName);
+    const routeObj = routerStore.routeNodePath.get(routeNodeName);
+    const Component = routeObj.component;
 
     return <Component />;
 });
