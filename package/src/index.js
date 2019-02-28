@@ -5,13 +5,13 @@ import RouterStore from "./RouterStore";
 
 const routerStore = new RouterStore();
 
+
 const routerApp = (router, routes, WrappedComponent) => {
     routerStore.init(router, routes);
 
     return WrappedComponent;
 };
 
-const routeNode = (name, WrappedComponent) => () => <WrappedComponent routeNodeName={name} />;
 
 const RouteComponent = observer(({routeNodeName}) => {
     const componentName = routerStore.routeNodeComponent.get(routeNodeName);
@@ -24,6 +24,5 @@ const RouteComponent = observer(({routeNodeName}) => {
 export {
     routerStore,
     routerApp,
-    RouteComponent,
-    routeNode
+    RouteComponent
 };

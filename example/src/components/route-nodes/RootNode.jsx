@@ -1,8 +1,10 @@
 import * as React from "react";
-import {routeNode, RouteComponent, routerStore} from "../../../../package/dist";
+import {RouteComponent, routerStore} from "../../../../package/dist";
 
 
-export default routeNode("", ({routeNodeName}) => {
+const routeNodeName = "";
+
+export default () => {
     console.log("rendering RootNode");
 
     return (
@@ -16,4 +18,4 @@ export default routeNode("", ({routeNodeName}) => {
             <RouteComponent routeNodeName={routeNodeName} />
         </div>
     );
-});
+};

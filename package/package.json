@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Mr. Router5",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "mobx-react-lite": "~1.1.0",
     "react": "~16.8.3",
     "router5": "~7.0.2",
-    "webpack": "~4.29.0",
+    "webpack": "~4.29.6",
     "webpack-cli": "~3.2.3"
   },
   "dependencies": {

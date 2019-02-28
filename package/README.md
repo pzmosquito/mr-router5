@@ -11,7 +11,7 @@ Mr. Router5 uses [Router5](https://router5.js.org) together with [MobX](https://
 First of all, router5 is just better than `react-router` IMO, simple, powerful, clean implementation. router5 has `react-router5` package that works with React application. However, using MobX makes the connection so much easier. In Fact, it's so easy that I'm even hesitant to create this package.
 
 
-## Dependencies
+## Peer Dependencies
 
 - `React` ^16.8.0
 - `router5` ^7.0.0
@@ -25,7 +25,19 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 
 ## How to use
 
-#### define router5 routes with additional `component` property
+`mr-router5` package export following:
+- `routerApp(router, routes, WrappedComponent)` the HOC to initialize `mr-router5`.
+  - `router` the user defined router instance.
+  - `routes` the user defined routes definition.
+  - `WrappedComponent` the root app component.
+- `routerStore` the MobX store object which contains:
+  - `route` the "to" route object.
+  - `previousRoute` the "from" route object.
+  - `router` the reference of user created router instance.
+  - `routes` the reference of user created routes definition.
+- `RouteComponent` the component to render view component for a route.
+
+### define router5 routes with additional `component` property
 
 *The component property here is not for router5 to be aware of the view, in fact, router5 should never know about the view. It's here for mr-router5 to compute which component to render.*
 
@@ -47,30 +59,28 @@ export default [
 
 ```
 
-#### create RootNode component
+### create root node component
 
-`routeNode` function takes route node name and component as arguments.  
-Route node name must be the same as
-route name.
+`routeNodeName` prop of `<RouteComponent>` must be the same as the route name.
 
 ```js
 import * as React from "react";
-import {routeNode, RouteComponent} from "mr-router5";
+import {RouteComponent} from "mr-router5";
 
-export default routeNode("", ({routeNodeName}) => { // root route node
-    return (
-        <div>
-            <h2>Header</h2>
-            <RouteComponent routeNodeName={routeNodeName} />
-            <h4>Footer</h4>
-        </div>
-    );
-});
+const routeNodeName = ""; // root route node
+
+export default () => (
+    <div>
+        <h2>Header</h2>
+        <RouteComponent routeNodeName={routeNodeName} />
+        <h4>Footer</h4>
+    </div>
+);
 ```
 
-#### wrap your base component with `routerApp`
+### wrap your base component with `routerApp`
 
-`routerApp` function takes `router` instance, `routes` definition, and the base component.
+`routerApp` function takes `router` instance, `routes` definition, and the root app component.
 
 *see [router5](https://router5.js.org/guides/defining-routes) for how to create `router` instance.*
 

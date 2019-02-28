@@ -17,6 +17,7 @@ export default class RouterStore {
     @observable.shallow
     routeNodeComponent = new Map();
 
+
     init(router, routes) {
         this.router = router;
         this.routes = routes;

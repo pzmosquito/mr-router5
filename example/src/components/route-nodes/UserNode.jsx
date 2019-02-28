@@ -1,8 +1,10 @@
 import * as React from "react";
-import {routeNode, RouteComponent} from "../../../../package/dist";
+import {RouteComponent} from "../../../../package/dist";
 
 
-export default routeNode("users", ({routeNodeName}) => {
+const routeNodeName = "users";
+
+export default () => {
     console.log("rendering UserNode");
 
     return (
@@ -10,4 +12,4 @@ export default routeNode("users", ({routeNodeName}) => {
             <RouteComponent routeNodeName={routeNodeName} />
         </div>
     );
-});
+};
