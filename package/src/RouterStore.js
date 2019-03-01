@@ -39,9 +39,13 @@ export default class RouterStore {
         for (let i = 0; i < updatedRoutes.length - 1; i++) {
             const currRoute = updatedRoutes[i];
             const nextRoute = updatedRoutes[i + 1];
-            const nextRouteObj = Object.assign({}, this.getRoute(this.routes, nextRoute));
+            const nextRouteObj = this.getRoute(this.routes, nextRoute);
 
-            this.routeNodePath.set(currRoute, nextRouteObj);
+            if (!nextRouteObj) {
+                throw new Error(`route '${nextRoute}' is not defined.`);
+            }
+
+            this.routeNodePath.set(currRoute, Object.assign({}, nextRouteObj));
         }
     }
 
@@ -54,9 +58,12 @@ export default class RouterStore {
                 return route;
             }
             if (Object.prototype.hasOwnProperty.call(route, "children")) {
-                return this.getRoute(route.children, routeName, currentRouteName);
+                const routeFound = this.getRoute(route.children, routeName, currentRouteName);
+                if (routeFound) {
+                    return routeFound;
+                }
             }
         }
-        throw new Error(`route '${routeName}' is not defined.`);
+        return null;
     }
 }
