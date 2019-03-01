@@ -41,10 +41,6 @@ export default class RouterStore {
             const nextRoute = updatedRoutes[i + 1];
             const nextRouteObj = this.getRoute(this.routes, nextRoute);
 
-            if (!nextRouteObj) {
-                throw new Error(`route '${nextRoute}' is not defined.`);
-            }
-
             this.routeNodePath.set(currRoute, Object.assign({}, nextRouteObj));
         }
     }
