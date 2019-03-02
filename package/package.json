@@ -2,6 +2,7 @@
   "name": "mr-router5",
   "version": "0.0.10",
   "description": "Mr. Router5",
+  "keywords": ["router5", "react", "mobx", "router", "routing"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pzmosquito/mr-router5.git"
