@@ -12,7 +12,7 @@ export default () => {
 
     const nextUser = () => {
         const randomUserIndex = Math.floor(Math.random() * users.length);
-        routerStore.router.navigate("users.view", {id: users[randomUserIndex].id});
+        routerStore.router.navigate("users.view.detail", {id: users[randomUserIndex].id});
     };
 
     const user = users.find(user => user.id === parseInt(routerStore.route.params.id));

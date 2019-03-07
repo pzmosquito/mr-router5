@@ -27,7 +27,7 @@ export default () => {
                 {users.map(user => (
                     <tr key={user.id}>
                         <td>{user.id}</td>
-                        <td><a href="javascript:void(0)" onClick={() => routerStore.router.navigate("users.view", {id: user.id})}>{user.name}</a></td>
+                        <td><a href="javascript:void(0)" onClick={() => routerStore.router.navigate("users.view.detail", {id: user.id})}>{user.name}</a></td>
                         <td>{user.isActive ? "Active" : "Inactive"}</td>
                     </tr>
                 ))}
