@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Mr. Router5",
   "keywords": ["router5", "react", "mobx", "router", "routing"],
   "repository": {
