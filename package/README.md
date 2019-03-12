@@ -49,6 +49,7 @@ Both flat routes and tree routes are supported.
 ```js
 import Home from "../home/Home";
 import UserNode from "../route-nodes/UserNode";
+import UserNode from "../route-nodes/UserViewNode";
 import UserList from "../users/UserList";
 import UserView from "../users/UserView";
 
@@ -56,7 +57,9 @@ export default [
     {name: "home", path: "/", component: Home},
     {name: "users", path: "/users", component: UserNode, children: [
         {name: "list", path: "/list", component: UserList},
-        {name: "view", path: "/view/:id<\\d+>", component: UserView}
+        {name: "view", path: "/view", component: UserViewNode, children: [
+            {name: "detail", path: "/:id<\\d+>", component: UserView}
+        ]}
     ]}
 ];
 
@@ -64,7 +67,7 @@ export default [
 
 ### create root node component
 
-`routeNodeName` prop of `<RouteComponent>` must be the same as the route name.
+*Important: `routeNodeName` prop must match the full route name. For example, `users.view` instead of `view`.*
 
 ```js
 import * as React from "react";
