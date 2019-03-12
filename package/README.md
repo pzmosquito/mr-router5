@@ -33,8 +33,11 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 - `routerStore` the MobX store object which contains:
   - `route` the "to" route object.
   - `previousRoute` the "from" route object.
+  - `obsRoute` the observable "to" route object.
+  - `obsPreviousRoute` the observable "from" route object.
   - `router` the reference of user created router instance.
   - `routes` the reference of user created routes definition.
+  - `getRoute` the utility method to get routes definition object with given route name.
 - `RouteComponent` the component to render view component for a route.
 
 ### define router5 routes with additional `component` property
