@@ -20,7 +20,7 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 
 
 ## Installation
-`npm install mr-router5`
+`npm install --save mr-router5`
 
 
 ## How to use
