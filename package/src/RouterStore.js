@@ -10,6 +10,8 @@ export default class RouterStore {
     // observable route objects
     @observable.ref
     obsRoute = null;
+    
+    @observable.ref
     obsPreviousRoute = null;
 
     // reference of router instance
