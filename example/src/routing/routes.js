@@ -10,6 +10,6 @@ export default [
     {name: "home", path: "/", component: Home},
     {name: "users", path: "/users", component: UserNode, children: [
         {name: "list", path: "/list", component: UserList, dataloader: userStore.getUsers},
-        {name: "view", path: "/view/:id<\\d+>", component: UserView}
+        {name: "view", path: "/view/:id<\\d+>", component: UserView, dataloader: userStore.getUser}
     ]}
 ];
