@@ -1,6 +1,7 @@
 import React from "react";
 import {observer} from "mobx-react-lite";
 import RouterStore from "./RouterStore";
+import dataloaderMiddlewareWrapper from "./dataloader-middleware";
 
 
 const routerStore = new RouterStore();
@@ -21,8 +22,12 @@ const RouteComponent = observer(({routeNodeName}) => {
 });
 
 
+const dataloaderMiddleware = dataloaderMiddlewareWrapper(routerStore);
+
+
 export {
     routerStore,
     routerApp,
-    RouteComponent
+    RouteComponent,
+    dataloaderMiddleware
 };

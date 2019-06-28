@@ -10,7 +10,7 @@ export default class RouterStore {
     // observable route objects
     @observable.ref
     obsRoute = null;
-    
+
     @observable.ref
     obsPreviousRoute = null;
 
@@ -30,6 +30,7 @@ export default class RouterStore {
         this.routes = routes;
 
         this.router.subscribe(routeObj => {
+            console.log("subscribed");
             this._routeUpdated(routeObj);
         });
     }
