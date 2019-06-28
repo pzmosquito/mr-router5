@@ -115,9 +115,10 @@ router.start(() => {
 ```js
 import {dataloaderMiddleware} from "mr-router5";
 
-const preloader = () => console.log("called when route transition starts.");
-const loader = () => console.log("called after preloader.");
-const postloader = () => console.log("called after route transition is done.");
+// dataloader middleware will pass an object consists of `toState`, `fromState`, `router` properties as argument to loader functions.
+const preloader = ({toState, fromState, router}) => console.log("called when route transition starts.");
+const loader = ({toState, fromState, router}) => console.log("called after preloader.");
+const postloader = ({toState, fromState, router}) => console.log("called after route transition is done.");
 
 const routes =  [
     {name: "home", path: "/", component: Home, preloader, loader, postloader},
