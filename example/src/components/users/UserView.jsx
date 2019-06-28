@@ -13,8 +13,18 @@ export default observer(() => {
 
     return (
         <div>
-            <h3>{userStore.currentUser.name || "Player Not Found"}</h3>
-            <p style={{height: "100px"}}>{userStore.currentUser.description}</p>
+            <div style={{height: "150px"}}>
+                {userStore.currentUser ? (
+                    <div>
+                        <h3>{userStore.currentUser.name || "Player Not Found"}</h3>
+                        <p style={{height: "100px"}}>{userStore.currentUser.description}</p>
+                    </div>
+                ) : (
+                    <h3>
+                        Loading user...
+                    </h3>
+                )}
+            </div>
             <hr />
             <button type="button" onClick={userList}>Go Back to List</button>
             <button type="button" onClick={userStore.getRandomUser}>View Random Player</button>

@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "0.0.13",
+  "version": "0.1.0",
   "description": "Mr. Router5",
   "keywords": [
     "router5",
@@ -37,12 +37,12 @@
     "@babel/preset-env": "~7.4.5",
     "@babel/preset-react": "~7.0.0",
     "babel-loader": "~8.0.6",
-    "mobx": "~5.10.0",
-    "mobx-react-lite": "~1.4.0",
+    "mobx": "~5.10.1",
+    "mobx-react-lite": "~1.4.1",
     "react": "~16.8.3",
     "router5": "~7.0.2",
-    "webpack": "~4.33.0",
-    "webpack-cli": "~3.3.3"
+    "webpack": "~4.35.0",
+    "webpack-cli": "~3.3.5"
   },
   "dependencies": {
     "router5-transition-path": "~7.0.1"
