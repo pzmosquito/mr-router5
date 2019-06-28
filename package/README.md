@@ -39,6 +39,7 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
   - `routes` the reference of user created routes definition.
   - `getRoute` the utility method to get routes definition object with given route name.
 - `RouteComponent` the component to render view component for a route.
+- `dataloaderMiddleware` the middleware for data loading lifecycle.
 
 ### define router5 routes with `component` property
 
@@ -64,25 +65,6 @@ export default [
 ];
 
 ```
-
-### define router5 routes with loader functions
-
-*We sometimes need to load data before/on/after rendering the component. Mr. Router5 has data loading lifecyle built-in. Please see `example` app for some sample code.*
-- `preloader`: called when route transition starts. Route transition **will not** wait for it to finish if the function returns a `Promise`.
-- `loader`: called after `preloader`. Route transition **will** wait for it to finish.
-- `postloader`: called after route transition is done.
-
-```js
-const preloader = () => console.log("called when route transition starts.");
-const loader = () => console.log("called after preloader.");
-const postloader = () => console.log("called after route transition is done.");
-
-export default [
-    {name: "home", path: "/", component: Home, preloader, loader, postloader},
-    ...
-];
-```
-
 
 ### create root node component
 
@@ -119,6 +101,31 @@ const App = routerApp(router, routes, RootNode);
 router.start(() => {
     ReactDOM.render(<App />, document.getElementById("app"));
 });
+```
+
+### define router5 routes with loader functions
+
+*We sometimes need to load data before/on/after rendering the component. Mr. Router5 has data loading lifecyle built-in. Please see `example` app for some sample code.*
+- `preloader`: called when route transition starts. Route transition **will not** wait for it to finish if the function returns a `Promise`.
+- `loader`: called after `preloader`. Route transition **will** wait for it to finish.
+- `postloader`: called after route transition is done.
+
+
+
+```js
+import {dataloaderMiddleware} from "mr-router5";
+
+const preloader = () => console.log("called when route transition starts.");
+const loader = () => console.log("called after preloader.");
+const postloader = () => console.log("called after route transition is done.");
+
+const routes =  [
+    {name: "home", path: "/", component: Home, preloader, loader, postloader},
+    ...
+];
+
+const router = createRouter(); // create router5 router instance.
+router.useMiddleware(dataloaderMiddleware);
 ```
 
 That's it. Enjoy routing.
