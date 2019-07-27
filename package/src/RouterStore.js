@@ -30,7 +30,6 @@ export default class RouterStore {
         this.routes = routes;
 
         this.router.subscribe(routeObj => {
-            console.log("subscribed");
             this._routeUpdated(routeObj);
         });
     }
