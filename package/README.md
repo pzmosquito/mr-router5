@@ -39,7 +39,7 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
   - `routes` the reference of user created routes definition.
   - `getRoute` the utility method to get routes definition object with given route name.
 - `RouteComponent` the component to render view component for a route.
-- `dataloaderMiddleware` the middleware for data loading lifecycle.
+- `dataloaderMiddleware` the middleware for data loading lifecycle methods.
 
 ### define router5 routes with `component` property
 
@@ -105,8 +105,8 @@ router.start(() => {
 
 ### define router5 routes with loader functions
 
-*We sometimes need to load data before/on/after rendering the component. Mr. Router5 has data loading lifecyle built-in. Please see `example` app for some sample code.*
-- `preloader`: called when route transition starts. Route transition **will not** wait for it to finish if the function returns a `Promise`.
+*We sometimes need to load data before/on/after rendering the component. Mr. Router5 supports data loading lifecyle methods. Please see `example` app for some sample code.*
+- `preloader`: called when route transition starts. Route transition and other lifecycle methods **will not** wait for it to finish if the function returns a `Promise`.
 - `loader`: called after `preloader`. Route transition **will** wait for it to finish.
 - `postloader`: called after route transition is done.
 
