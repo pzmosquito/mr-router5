@@ -9,7 +9,7 @@ export default () => {
 
     return (
         <div>
-            <h2>Mr. Router5 Example</h2>
+            <h2>mr-router5 Example</h2>
             <hr />
             <a href="javascript:void(0)" onClick={() => routerStore.router.navigate("home")}>Home</a>
             &nbsp; | &nbsp;

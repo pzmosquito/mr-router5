@@ -1,7 +1,7 @@
 {
   "name": "mr-router5-example",
   "version": "0.0.1",
-  "description": "Mr. Router5 Example",
+  "description": "mr-router5 Example",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pzmosquito/mr-router5.git"
