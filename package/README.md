@@ -8,9 +8,9 @@ Mr. Router5 uses [Router5](https://router5.js.org) together with [MobX](https://
 
 ## Status
 [![npm version](https://img.shields.io/npm/v/mr-router5)](https://www.npmjs.com/package/mr-router5)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/mr-router5)](https://bundlephobia.com/result?p=mr-router5)
-[![npm](https://img.shields.io/npm/dw/mr-router5)](https://bundlephobia.com/result?p=mr-router5)
-[![npm type definitions](https://img.shields.io/npm/types/mr-router5)](https://bundlephobia.com/result?p=mr-router5)
+[![npm bundle size](https://img.shields.io/bundlephobia/min/mr-router5)](https://bundlephobia.com/result?p=mr-router5)
+[![npm](https://img.shields.io/npm/dw/mr-router5)](https://www.npmjs.com/package/mr-router5)
+[![npm type definitions](https://img.shields.io/npm/types/mr-router5)](https://www.npmjs.com/package/mr-router5)
 
 ## Why Mr. Router5
 
