@@ -6,6 +6,12 @@ Mr. Router5 uses [Router5](https://router5.js.org) together with [MobX](https://
 - MobX is a battle tested library that makes state management simple and scalable by transparently applying functional reactive programming.
 
 
+## Status
+[![npm version](https://img.shields.io/npm/v/mr-router5)](https://www.npmjs.com/package/mr-router5)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/mr-router5)](https://bundlephobia.com/result?p=mr-router5)
+[![npm](https://img.shields.io/npm/dw/mr-router5)](https://bundlephobia.com/result?p=mr-router5)
+[![npm type definitions](https://img.shields.io/npm/types/mr-router5)](https://bundlephobia.com/result?p=mr-router5)
+
 ## Why Mr. Router5
 
 First of all, router5 is just better than `react-router` IMO, simple, powerful, clean implementation. router5 has `react-router5` package that works with React application. However, using MobX makes the connection so much easier. In Fact, it's so easy that I'm even hesitant to create this package.
