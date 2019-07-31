@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Mr. Router5",
   "keywords": [
     "router5",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/pzmosquito/mr-router5#readme",
   "main": "dist/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "build": "webpack",
     "build:watch": "webpack --watch"
