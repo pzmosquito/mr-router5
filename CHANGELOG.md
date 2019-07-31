@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 0.1.3 (*2019-07-31*)
+- fix typescript declaration.
+
+
 ### 0.1.2 (*2019-07-31*)
 - add typescript declaration file.
 
