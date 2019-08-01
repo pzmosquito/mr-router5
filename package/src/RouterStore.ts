@@ -1,42 +1,43 @@
-import {observable, action} from "mobx";
+import { observable, action, ObservableMap } from "mobx";
+import { Router, SubscribeState, State } from "router5";
 import transitionPath from "router5-transition-path";
+import { IRouterStore, RouteDef } from "./types";
 
 
-export default class RouterStore {
+export default class RouterStore implements IRouterStore {
     // route objects
-    route = null;
-    previousRoute = null;
+    route: State = null;
+    previousRoute: State = null;
 
     // observable route objects
     @observable.ref
-    obsRoute = null;
+    obsRoute: State = null;
 
     @observable.ref
-    obsPreviousRoute = null;
+    obsPreviousRoute: State = null;
 
     // reference of router instance
-    router = null;
+    router: Router = null;
 
     // reference of routes definition
-    routes = null;
+    routes: RouteDef[] = null;
 
     // route component to activate for route nodes
-    @observable.shallow
-    _routeNodePath = new Map();
+    routeNodePath: ObservableMap<string, RouteDef> = observable(new Map(), { deep: false });
 
 
-    _init(router, routes) {
+    init(router: Router, routes: RouteDef[]) {
         this.router = router;
         this.routes = routes;
 
         this.router.subscribe(routeObj => {
-            this._routeUpdated(routeObj);
+            this.routeUpdated(routeObj);
         });
     }
 
     // handle route update
     @action
-    _routeUpdated(routeObj) {
+    private routeUpdated(routeObj: SubscribeState) {
         this.route = routeObj.route;
         this.previousRoute = routeObj.previousRoute;
 
@@ -46,17 +47,17 @@ export default class RouterStore {
         const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
         const updatedRoutes = [intersection].concat(toActivate);
 
-        for (let i = 0; i < updatedRoutes.length - 1; i++) {
+        for (let i = 0; i < updatedRoutes.length - 1; i += 1) {
             const currRoute = updatedRoutes[i];
             const nextRoute = updatedRoutes[i + 1];
-            const nextRouteObj = this.getRoute(nextRoute);
+            const nextRouteDef = this.getRouteDef(nextRoute);
 
-            this._routeNodePath.set(currRoute, Object.assign({}, nextRouteObj));
+            this.routeNodePath.set(currRoute, Object.assign({}, nextRouteDef));
         }
     }
 
     // get route object for a given route name.
-    getRoute(routeName, routes = this.routes, parentRouteName = "") {
+    getRouteDef(routeName: string, routes = this.routes, parentRouteName = ""): RouteDef {
         for (const route of routes) {
             const currentRouteName = parentRouteName === "" ? route.name : `${parentRouteName}.${route.name}`;
 
@@ -64,7 +65,7 @@ export default class RouterStore {
                 return route;
             }
             if (Object.prototype.hasOwnProperty.call(route, "children")) {
-                const routeFound = this.getRoute(routeName, route.children, currentRouteName);
+                const routeFound = this.getRouteDef(routeName, route.children, currentRouteName);
                 if (routeFound) {
                     return routeFound;
                 }

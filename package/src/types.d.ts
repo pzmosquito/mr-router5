@@ -1,23 +1,23 @@
 import * as React from "react";
-import { Router, Route } from "router5";
+import { Router, State } from "router5";
 import { MiddlewareFactory } from "router5/types/types/router";
 
 
-declare class RouterStore {
-    route: Route | null;
-    previousRoute: Route | null;
+export declare interface IRouterStore {
+    route: State;
+    previousRoute: State;
 
-    obsRoute: Route | null;
-    obsPreviousRoute: Route | null;
+    obsRoute: State;
+    obsPreviousRoute: State;
 
-    router: Router | null;
-    routes: RouteDef[] | null;
+    router: Router;
+    routes: RouteDef[];
 
-    getRoute(
+    getRouteDef(
         routeName: string,
-        routes: RouteDef[],
-        parentRouteName: string
-    ): RouteDef | null;
+        routes?: RouteDef[],
+        parentRouteName?: string
+    ): RouteDef;
 }
 
 
@@ -32,7 +32,7 @@ export declare interface RouteDef {
     postloader?: Function
 }
 
-export declare const routerStore: RouterStore;
+export declare const routerStore: IRouterStore;
 
 export declare const routerApp: (
     router: Router,

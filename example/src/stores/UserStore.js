@@ -37,7 +37,7 @@ export default class UserStore {
             setTimeout(() => {
                 const userId = parseInt(toState.params.id);
                 resolve(this.data.find(user => user.id === userId) || {});
-            }, 1000)
+            }, 500)
         });
 
         return Promise.resolve(simulateFetchUser).then((data) => {
