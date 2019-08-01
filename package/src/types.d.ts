@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Router, State } from "router5";
+import { Router, State, Route } from "router5";
 import { MiddlewareFactory } from "router5/types/types/router";
 
 
@@ -21,10 +21,7 @@ export declare interface IRouterStore {
 }
 
 
-// mr-router5's Route definition, different from rotuer5's Route object
-export declare interface RouteDef {
-    name: string,
-    path: string,
+export declare interface RouteDef extends Route {
     component: React.ComponentType<object>,
     children?: RouteDef[],
     loader?: Function,
