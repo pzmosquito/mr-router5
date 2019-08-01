@@ -3,9 +3,12 @@ const path = require("path");
 
 module.exports = {
     target: "node",
+    resolve: {
+        extensions: [".ts"],
+    },
     mode: "production",
     entry: [
-        "./src/index.js"
+        "./src/index.ts"
     ],
     output: {
         filename: "index.js",
@@ -21,7 +24,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.ts$/,
                 exclude: /node_modules/,
                 use: ["babel-loader"]
             }

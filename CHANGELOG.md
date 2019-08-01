@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 0.1.4 (*2019-08-01*)
+- rewrite the package with typescript.
+
+
 ### 0.1.3 (*2019-07-31*)
 - fix typescript declaration.
 
