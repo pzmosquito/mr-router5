@@ -20,7 +20,6 @@ export declare interface IRouterStore {
     ): RouteDef;
 }
 
-
 export declare interface RouteDef extends Route {
     component: React.ComponentType<object>,
     children?: RouteDef[],

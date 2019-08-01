@@ -2,8 +2,8 @@
 
 mr-router5 uses [Router5](https://router5.js.org) together with [MobX](https://mobx.js.org) for your favorite React application.
 
-- router5 is an awesome framework and view library agnostic router.
-- MobX is a battle tested library that makes state management simple and scalable by transparently applying functional reactive programming.
+- `router5` is an awesome framework and view library agnostic router.
+- `MobX` is a battle tested library that makes state management simple and scalable by transparently applying functional reactive programming.
 
 
 ## Why mr-router5
@@ -41,9 +41,9 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 - `RouteComponent` the component to render view component for a route.
 - `dataloaderMiddleware` the middleware for data loading lifecycle methods.
 
-### define router5 routes with `component` property
+### define routes with additional `component` property
 
-*The component property here is not for router5 to be aware of the view, in fact, router5 should never know about the view. It's here for mr-router5 to compute which component to render.*
+*The `component` property is not for router5 to be aware of the view, in fact, router5 should never know about the view. It's here for mr-router5 to compute which component to render.*
 
 Both flat routes and tree routes are supported.
 
