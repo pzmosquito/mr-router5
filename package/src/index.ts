@@ -18,9 +18,8 @@ const routerApp = (router: Router, routes: RouteDef[], WrappedComponent: React.C
 
 const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) => {
     const routeDef = routerStore.routeNodePath.get(routeNodeName);
-    const Component = routeDef.component;
 
-    return React.createElement(Component);
+    return React.createElement(routeDef.component);
 });
 
 
