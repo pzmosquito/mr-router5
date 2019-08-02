@@ -1,6 +1,6 @@
 import * as React from "react";
 import createRouter, { Router } from "router5";
-import { routerApp, routerStore, dataloaderMiddleware } from "../index";
+import { routerApp, routerStore, dataloaderMiddleware, RouteComponent } from "../index";
 
 
 const AppComponent = () => React.createElement("<div>Root App Element</div>");
@@ -80,5 +80,22 @@ test("dataloaderMiddleware", (done) => {
             expect(loaders[2]).toBe("preloaded");
             done();
         }, 50);
+    });
+});
+
+test("RouteComponent", () => {
+    router.navigate("users.view", () => {
+        const enzyme = require("enzyme");
+        const Adapter = require("enzyme-adapter-react-16");
+
+        enzyme.configure({ adapter: new Adapter() });
+
+        let elem = React.createElement(RouteComponent, { routeNodeName: "" });
+        let wrapper = enzyme.shallow(elem);
+        expect(wrapper.equals(React.createElement(UserRouteNode))).toBe(true);
+
+        elem = React.createElement(RouteComponent, { routeNodeName: "users" });
+        wrapper = enzyme.shallow(elem);
+        expect(wrapper.equals(React.createElement(UserViewComponent))).toBe(true);
     });
 });
