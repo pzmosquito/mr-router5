@@ -30,19 +30,19 @@ export default class RouterStore implements IRouterStore {
         this.router = router;
         this.routes = routes;
 
-        this.router.subscribe(routeObj => {
-            this.routeUpdated(routeObj);
+        this.router.subscribe(state => {
+            this.routeUpdated(state);
         });
     }
 
     // handle route update
     @action
-    private routeUpdated(routeObj: SubscribeState) {
-        this.route = routeObj.route;
-        this.previousRoute = routeObj.previousRoute;
+    private routeUpdated(state: SubscribeState) {
+        this.route = state.route;
+        this.previousRoute = state.previousRoute;
 
-        this.obsRoute = routeObj.route;
-        this.obsPreviousRoute = routeObj.previousRoute;
+        this.obsRoute = state.route;
+        this.obsPreviousRoute = state.previousRoute;
 
         const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
         const updatedRoutes = [intersection].concat(toActivate);
