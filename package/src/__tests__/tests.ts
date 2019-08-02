@@ -10,9 +10,15 @@ const UserRouteNode = () => React.createElement("<RouteComponent />", { routeNod
 const UserViewComponent = () => React.createElement("<div>User View Element</div>");
 
 let loaders: string[] = [];
-const preloader = () => Promise.resolve().then(() => setTimeout(() => loaders.push("preloaded"), 500));
-const loader = () => Promise.resolve().then(() => loaders.push("loaded"));
-const postloader = () => Promise.resolve().then(() => loaders.push("postloaded"));
+const simulateFetch = (str: string, delay = 0) => new Promise((resolve) => {
+    setTimeout(() => {
+        loaders.push(str);
+        resolve(str);
+    }, delay);
+});
+const preloader = () => Promise.resolve(simulateFetch("preloaded", 30));
+const loader = () => Promise.resolve(simulateFetch("loaded", 15));
+const postloader = () => Promise.resolve(simulateFetch("postloaded"));
 
 const routes = [
     { name: "home", path: "/", component: HomeComponent },
@@ -60,11 +66,19 @@ test("routerStore.getRouteDef()", () => {
     expect(routerStore.getRouteDef("users.view").component).toBe(UserViewComponent);
 });
 
-test("dataloaderMiddleware", () => {
+test("dataloaderMiddleware", (done) => {
     expect(loaders.length).toBe(0);
     router.useMiddleware(dataloaderMiddleware);
     router.navigate("users.view", () => {
         expect(loaders.length).toBe(1);
         expect(loaders[0]).toBe("loaded");
+
+        setTimeout(() => {
+            expect(loaders.length).toBe(3);
+            expect(loaders[0]).toBe("loaded");
+            expect(loaders[1]).toBe("postloaded");
+            expect(loaders[2]).toBe("preloaded");
+            done();
+        }, 50);
     });
 });
