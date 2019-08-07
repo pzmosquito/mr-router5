@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Router } from "router5";
 import { observer } from "mobx-react-lite";
 import { RouteDef } from "./types";

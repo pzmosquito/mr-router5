@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Router, State, Route } from "router5";
 import { MiddlewareFactory } from "router5/types/types/router";
 

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": true,

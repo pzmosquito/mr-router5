@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import createRouter, { Router } from "router5";
 import { routerApp, routerStore, dataloaderMiddleware, RouteComponent } from "../index";
 import { shallow } from "enzyme";
