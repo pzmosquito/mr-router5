@@ -45,7 +45,7 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 
 *The `component` property is not for router5 to be aware of the view, in fact, router5 should never know about the view. It's here for mr-router5 to compute which component to render.*
 
-Both flat routes and tree routes are supported.
+**Both flat routes and tree routes are supported.**
 
 ```js
 import Home from "../home/Home";
@@ -89,13 +89,18 @@ export default () => (
 
 `routerApp` function takes `router` instance, `routes` definition, and the root app component.
 
-*see [router5](https://router5.js.org/guides/defining-routes) for how to create `router` instance.*
+*see [router5](https://router5.js.org/guides/defining-routes) on how to define routes and create router.*
 
 ```js
+import createRouter from "router5";
 import {routerApp} from "mr-router5";
 import RootNode from "./route-nodes/RootNode";
 
-// create router instance and routes definition first
+// create routes definition and router
+const routes = [...];
+const router = createRouter(routes);
+
+// initialize mr-router5 by wrapping RootNode with routerApp() HOC
 const App = routerApp(router, routes, RootNode);
 
 router.start(() => {
