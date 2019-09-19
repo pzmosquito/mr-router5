@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "mr-router5 uses Router5 together with MobX for your favorite React application.",
   "keywords": [
     "router5",
