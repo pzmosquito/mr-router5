@@ -112,7 +112,7 @@ router.start(() => {
 
 *We sometimes need to load data before/on/after rendering the component. mr-router5 supports data loading lifecyle methods. Please see `example` app for some sample code.*
 - `preloader`: called when route transition starts. Route transition and other lifecycle methods **will not** wait for it to finish if the function returns a `Promise`.
-- `loader`: called after `preloader`. Route transition **will** wait for it to finish.
+- `loader`: called after `preloader`. Route transition **will** wait for it to finish if the function returns a `Promise`.
 - `postloader`: called after route transition is done.
 
 
