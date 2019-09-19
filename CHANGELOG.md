@@ -1,7 +1,8 @@
 # CHANGELOG
 
-### 0.1.4 (*2019-08-01*)
+### 1.0.0 (*2019-09-19*)
 - rewrite the package with typescript.
+- [**breaking**] rename `routerStore.getRoute()` to `routerStore.getRouteDef()`
 
 
 ### 0.1.3 (*2019-07-31*)

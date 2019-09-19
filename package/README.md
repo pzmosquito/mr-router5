@@ -37,7 +37,7 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
   - `obsPreviousRoute` the observable "from" route object.
   - `router` the reference of user created router instance.
   - `routes` the reference of user created routes definition.
-  - `getRoute` the utility method to get routes definition object with given route name.
+  - `getRouteDef` the utility method to get routes definition object with given route name.
 - `RouteComponent` the component to render view component for a route.
 - `dataloaderMiddleware` the middleware for data loading lifecycle methods.
 
