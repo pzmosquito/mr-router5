@@ -1,32 +1,57 @@
 import { Router, State } from "router5";
 import { IRouterStore } from "./types";
-import { DoneFn } from "router5/types/types/base";
+import { DoneFn, Params } from "router5/types/types/base";
 
+
+declare interface DoneRedirect {
+    name: string;
+    params?: Params;
+}
+
+declare interface LoaderOption {
+    redirect?: DoneRedirect;
+    skipPostloader?: boolean;
+}
 
 export default (routerStore: IRouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {
     const routeDef = routerStore.getRouteDef(toState.name);
+    const loaderArgs = {toState, fromState, router};
 
+    // preloader
     if (Object.prototype.hasOwnProperty.call(routeDef, "preloader")) {
-        routeDef.preloader({toState, fromState, router});
+        routeDef.preloader(loaderArgs);
     }
 
-    const doneWithPostloader = () => {
-        done();
-        if (Object.prototype.hasOwnProperty.call(routeDef, "postloader")) {
-            routeDef.postloader({toState, fromState, router});
+    // postloader
+    const doneWithPostloader = (option: LoaderOption = {}) => {
+        const { redirect = null, skipPostloader = false } = option;
+
+        if (redirect) {
+            try {
+                done({ redirect });
+            }
+            catch (e) {
+                throw new Error("'redirect' argument must in {name: string, param?: object} shape.");
+            }
+        }
+        else {
+            done();
+        }
+
+        if (!skipPostloader && Object.prototype.hasOwnProperty.call(routeDef, "postloader")) {
+            routeDef.postloader(loaderArgs);
         }
     };
 
+    // loader
     if (Object.prototype.hasOwnProperty.call(routeDef, "loader")) {
-        const dl = routeDef.loader({toState, fromState, router});
+        const dl = routeDef.loader(loaderArgs);
 
         if (dl instanceof Promise) {
-            dl.then(() => {
-                doneWithPostloader();
-            });
+            dl.then(doneWithPostloader).catch(doneWithPostloader);
         }
         else {
-            doneWithPostloader();
+            doneWithPostloader(dl);
         }
     }
     else {

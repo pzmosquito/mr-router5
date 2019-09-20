@@ -112,22 +112,40 @@ router.start(() => {
 
 *We sometimes need to load data before/on/after rendering the component. mr-router5 supports data loading lifecyle methods. Please see `example` app for some sample code.*
 - `preloader`: called when route transition starts. Route transition and other lifecycle methods **will not** wait for it to finish if the function returns a `Promise`.
-- `loader`: called after `preloader`. Route transition **will** wait for it to finish if the function returns a `Promise`.
+- `loader`: called after `preloader`. Route transition **will** wait for it to finish.
+    - `loader` method optionally takes an object with following properties (if `loader` method returns a Promise, pass the object to `resolve()` or `reject()`; otherwise, simply return the object):
+        - `redirect`: an object with `name` and optional `params` properties for redirection.
+        - `skipPostloader`: a boolean value for skipping `postloader`.
 - `postloader`: called after route transition is done.
-
 
 
 ```js
 import {dataloaderMiddleware} from "mr-router5";
 
 // dataloader middleware will pass an object consists of `toState`, `fromState`, `router` properties as argument to loader functions.
-const preloader = ({toState, fromState, router}) => console.log("called when route transition starts.");
-const loader = ({toState, fromState, router}) => console.log("called after preloader.");
-const postloader = ({toState, fromState, router}) => console.log("called after route transition is done.");
+
+// preloader gets called when route transition starts.
+const preloader = ({toState, fromState, router}) => new Promise((resolve) => {
+    // load data that won't alter route transition
+    resolve();
+});
+
+// loader gets called after preloader but will not wait for preloader to settle.
+const loader = ({toState, fromState, router}) => new Promise((resolve, reject) => {
+    resolve();
+    // OR
+    reject({
+        redirect: { name: "login" },
+        skipPostloader: true,
+    });
+});
+
+// postloader gets called after route transition is done.
+const postloader = ({toState, fromState, router}) => console.log("transition is done.");
 
 const routes =  [
     {name: "home", path: "/", component: Home, preloader, loader, postloader},
-    ...
+    {name: "login", path: "/login", component: Login},
 ];
 
 const router = createRouter(); // create router5 router instance.

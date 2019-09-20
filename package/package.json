@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "mr-router5 uses Router5 together with MobX for your favorite React application.",
   "keywords": [
     "router5",
@@ -9,6 +9,10 @@
     "router",
     "routing"
   ],
+  "engines": {
+    "node": ">=8",
+    "npm": ">=5"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pzmosquito/mr-router5.git"

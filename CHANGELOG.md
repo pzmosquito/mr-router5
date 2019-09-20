@@ -1,5 +1,8 @@
 # CHANGELOG
 
+### 1.2.0 (*2019-09-20*)
+- add option to redirect and skip postloader in `loader` method.
+
 ### 1.1.0 (*2019-09-19*)
 - rewrite the package with typescript.
 - [**breaking**] rename `routerStore.getRoute()` to `routerStore.getRouteDef()`
