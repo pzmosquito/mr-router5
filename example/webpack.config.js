@@ -2,11 +2,10 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 
-const distPath = path.resolve(__dirname, "dist");
+const distPath = path.resolve(__dirname, "../docs");
 
 module.exports = {
     target: "web",
-    mode: "development",
     resolve: {
         extensions: ["*", ".js", ".jsx"],
         alias: {
@@ -17,9 +16,8 @@ module.exports = {
         "./src/index.js"
     ],
     output: {
-        filename: "[name].[hash].js",
+        filename: "[name].[contenthash].js",
         path: distPath,
-        publicPath: "/"
     },
     devServer: {
         contentBase: distPath,
