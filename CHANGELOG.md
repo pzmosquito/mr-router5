@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 1.2.0 (*2019-09-20*)
+### 1.2.1 (*2019-09-20*)
 - add option to redirect and skip postloader in `loader` method.
 
 ### 1.1.0 (*2019-09-19*)
