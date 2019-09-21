@@ -31,7 +31,7 @@ export default (routerStore: IRouterStore) => (router: Router) => (toState: Stat
                 done({ redirect });
             }
             catch (e) {
-                throw new Error("'redirect' argument must in {name: string, param?: object} shape.");
+                throw new Error("'redirect' option must be object of {name: string, params?: object} shape.");
             }
         }
         else {
