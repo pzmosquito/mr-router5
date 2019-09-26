@@ -1,21 +1,21 @@
 import * as React from "react";
-import {render} from "react-dom";
-import {routerApp} from "../../../package/dist";
+import { render } from "react-dom";
+import { connectRouter } from "../../../package/dist";
 import createRouter from "../routing/create-router";
-import routes from "../routing/routes";
+import routeTree from "../routing/routes";
 import RootNode from "./route-nodes/RootNode";
 
 
 // router
-const router = createRouter(routes);
+const router = createRouter(routeTree.getRoutes());
 
 // app component
-const App = routerApp(router, routes, RootNode);
+connectRouter(router, routeTree);
 
 // renderer
 const renderApp = () => {
     render(
-        <App />,
+        <RootNode />,
         document.getElementById("app")
     );
 };

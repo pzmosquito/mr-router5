@@ -1,10 +1,8 @@
 import React from "react";
 import createRouter, { Router } from "router5";
-import { routerApp, routerStore, dataloaderMiddleware, RouteComponent } from "../index";
-import { shallow } from "enzyme";
+import { connectRouter, dataloaderMiddleware, RouteTree, RouteView } from "../index";
 
 
-const AppComponent = () => React.createElement("<div>Root App Element</div>");
 const HomeComponent = () => React.createElement("<div>Home Element</div>");
 const LoginComponent = () => React.createElement("<div>Login Element</div>");
 const UserRouteNode = () => React.createElement("<RouteComponent />", { routeNodeName: "users" });
@@ -28,58 +26,44 @@ const loader = (stateName: string) => simulateFetch(`${stateName} loaded`, 15);
 const errLoader = (stateName: string, skipPostloader = false) => simulateFetch(`${stateName} err loaded`, 15, true, skipPostloader);
 const postloader = (stateName: string) => simulateFetch(`${stateName} postloaded`);
 
-const routes = [
-    { name: "home", path: "/", component: HomeComponent },
-    { name: "login", path: "/login", component: LoginComponent, postloader: () => postloader("login") },
-    { name: "users", path: "/users", component: UserRouteNode, children: [
-        { name: "view", path: "/view", component: UserViewComponent, preloader: () => preloader("view"), loader: () => loader("view"), postloader: () => postloader("view") },
-        { name: "viewerr", path: "/viewerr", component: UserViewComponent, preloader: () => preloader("viewerr"), loader: () => errLoader("viewerr"), postloader: () => postloader("viewerr") },
-        { name: "viewerrskip", path: "/viewerrskip", component: UserViewComponent, preloader: () => preloader("viewerrskip"), loader: () => errLoader("viewerrskip", true), postloader: () => postloader("viewerrskip") },
-        { name: "viewerrskipsync", path: "/viewerrskipsync", component: UserViewComponent, loader: () => ({ redirect: { name: "login" }, skipPostloader: true }), postloader: () => postloader("viewerrskipsync") },
-    ] },
-];
+const routeTree = new RouteTree([
+    new RouteView({ name: "home", path: "/" }, HomeComponent),
+    new RouteView({ name: "login", path: "/login" }, LoginComponent).setPostloader(() => postloader("login")),
+    new RouteView({ name: "users", path: "/users" }, UserRouteNode),
+    new RouteView({ name: "users.view", path: "/view" }, UserViewComponent)
+        .setPreloader(() => preloader("view"))
+        .setLoader(() => loader("view"))
+        .setPostloader(() => postloader("view")),
+    new RouteView({ name: "users.viewerr", path: "/viewerr" }, UserViewComponent)
+        .setPreloader(() => preloader("viewerr"))
+        .setLoader(() => errLoader("viewerr"))
+        .setPostloader(() => postloader("viewerr")),
+    new RouteView({ name: "users.viewerrskip", path: "/viewerrskip" }, UserViewComponent)
+        .setPreloader(() => preloader("viewerrskip"))
+        .setLoader(() => errLoader("viewerrskip", true))
+        .setPostloader(() => postloader("viewerrskip")),
+    new RouteView({ name: "users.viewerrskipsync", path: "/viewerrskipsync" }, UserViewComponent)
+        .setLoader(() => ({ redirect: { name: "login" }, skipPostloader: true }))
+        .setPostloader(() => postloader("viewerrskipsync")),
+]);
+
 let router: Router = null;
-let WrappedApp: React.ComponentType<object> = null;
 
 beforeEach(() => {
-    router = createRouter(routes);
-    WrappedApp = routerApp(router, routes, AppComponent);
+    router = createRouter(routeTree.getRoutes());
+    connectRouter(router, routeTree);
     router.start("/");
+    router.useMiddleware(dataloaderMiddleware);
+    expect(loaders.length).toBe(0);
 });
 
 afterEach(() => {
     router = null;
-    WrappedApp = null;
     loaders = [];
 })
 
-test("routerApp", () => {
-    expect(routerStore.routes).toBe(routes);
-    expect(routerStore.router).toBe(router);
-    expect(WrappedApp).toBe(AppComponent);
-});
-
-test("routerStore.routeUpdated()", () => {
-    router.navigate("login", () => {
-        expect(routerStore.route.name).toBe("login");
-        expect(routerStore.routeNodePath.get("").component).toBe(LoginComponent);
-    });
-    router.navigate("users.view", () => {
-        expect(routerStore.route.name).toBe("users.view");
-        expect(routerStore.routeNodePath.get("users").component).toBe(UserViewComponent);
-    });
-});
-
-test("routerStore.getRouteDef()", () => {
-    expect(routerStore.getRouteDef("home").component).toBe(HomeComponent);
-    expect(routerStore.getRouteDef("login").component).toBe(LoginComponent);
-    expect(routerStore.getRouteDef("users").component).toBe(UserRouteNode);
-    expect(routerStore.getRouteDef("users.view").component).toBe(UserViewComponent);
-});
-
 test("dataloaderMiddleware", (done) => {
     expect(loaders.length).toBe(0);
-    router.useMiddleware(dataloaderMiddleware);
     router.navigate("users.view", () => {
         expect(loaders.length).toBe(1);
         expect(loaders[0]).toBe("view loaded");
@@ -96,8 +80,6 @@ test("dataloaderMiddleware", (done) => {
 });
 
 test("dataloaderMiddlewareRedirect", (done) => {
-    expect(loaders.length).toBe(0);
-    router.useMiddleware(dataloaderMiddleware);
     router.navigate("users.viewerr", () => {
         expect(loaders.length).toBe(1);
         expect(loaders[0]).toBe("viewerr err loaded");
@@ -115,8 +97,6 @@ test("dataloaderMiddlewareRedirect", (done) => {
 });
 
 test("dataloaderMiddlewareRedirectSkipPostloader", (done) => {
-    expect(loaders.length).toBe(0);
-    router.useMiddleware(dataloaderMiddleware);
     router.navigate("users.viewerrskip", () => {
         expect(loaders.length).toBe(1);
         expect(loaders[0]).toBe("viewerrskip err loaded");
@@ -133,8 +113,6 @@ test("dataloaderMiddlewareRedirectSkipPostloader", (done) => {
 });
 
 test("dataloaderMiddlewareRedirectSkipPostloaderSync", (done) => {
-    expect(loaders.length).toBe(0);
-    router.useMiddleware(dataloaderMiddleware);
     router.navigate("users.viewerrskipsync", () => {
         setTimeout(() => {
             expect(router.getState().name).toBe("login");
@@ -145,14 +123,19 @@ test("dataloaderMiddlewareRedirectSkipPostloaderSync", (done) => {
     });
 });
 
-test("RouteComponent", () => {
-    router.navigate("users.view", () => {
-        let elem = React.createElement(RouteComponent, { routeNodeName: "" });
-        let wrapper = shallow(elem);
-        expect(wrapper.equals(React.createElement(UserRouteNode))).toBe(true);
+test("global loaders", (done) => {
+    routeTree.setPreloader(() => preloader("global"));
+    routeTree.setLoader(() => loader("global"));
+    routeTree.setPostloader(() => postloader("global"));
 
-        elem = React.createElement(RouteComponent, { routeNodeName: "users" });
-        wrapper = shallow(elem);
-        expect(wrapper.equals(React.createElement(UserViewComponent))).toBe(true);
+    router.navigate("login", () => {
+        setTimeout(() => {
+            expect(router.getState().name).toBe("login");
+            expect(loaders.length).toBe(3);
+            expect(loaders[0]).toBe("global loaded");
+            expect(loaders[1]).toBe("login postloaded");
+            expect(loaders[2]).toBe("global preloaded");
+            done();
+        }, 50);
     });
 });

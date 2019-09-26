@@ -18,6 +18,7 @@ module.exports = {
     output: {
         filename: "[name].[contenthash].js",
         path: distPath,
+        publicPath: "/",
     },
     devServer: {
         contentBase: distPath,

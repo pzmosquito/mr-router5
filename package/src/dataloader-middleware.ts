@@ -1,29 +1,37 @@
 import { Router, State } from "router5";
-import { IRouterStore } from "./types";
 import { DoneFn, Params } from "router5/types/types/base";
+import RouterStore from "./RouterStore";
 
-
-declare interface DoneRedirect {
-    name: string;
-    params?: Params;
-}
 
 declare interface LoaderOption {
-    redirect?: DoneRedirect;
+    redirect?: {
+        name: string;
+        params?: Params;
+    };
     skipPostloader?: boolean;
 }
 
-export default (routerStore: IRouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {
-    const routeDef = routerStore.getRouteDef(toState.name);
-    const loaderArgs = {toState, fromState, router};
+export default (routerStore: RouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {
+    // cannot use routerStore.routeView because it's not yet set
+    const routeView = routerStore.routeTree.getRouteView(toState.name);
+
+    // arguments to be passed to all loaders
+    const loaderArgs = {
+        toState,
+        fromState,
+        routeView,
+        routeTree: routerStore.routeTree,
+        router,
+    };
 
     // preloader
-    if (Object.prototype.hasOwnProperty.call(routeDef, "preloader")) {
-        routeDef.preloader(loaderArgs);
+    const preloader = routeView.getPreloader() || routerStore.routeTree.getPreloader();
+    if (preloader) {
+        preloader(loaderArgs);
     }
 
     // postloader
-    const doneWithPostloader = (option: LoaderOption = {}) => {
+    const doneWithOption = (option: LoaderOption = {}) => {
         const { redirect = null, skipPostloader = false } = option;
 
         if (redirect) {
@@ -38,23 +46,27 @@ export default (routerStore: IRouterStore) => (router: Router) => (toState: Stat
             done();
         }
 
-        if (!skipPostloader && Object.prototype.hasOwnProperty.call(routeDef, "postloader")) {
-            routeDef.postloader(loaderArgs);
+        if (!skipPostloader) {
+            const postloader = routeView.getPostloader() || routerStore.routeTree.getPostloader();
+            if (postloader) {
+                postloader(loaderArgs);
+            }
         }
     };
 
     // loader
-    if (Object.prototype.hasOwnProperty.call(routeDef, "loader")) {
-        const dl = routeDef.loader(loaderArgs);
+    const loader = routeView.getLoader() || routerStore.routeTree.getLoader();
+    if (loader) {
+        const loaded = loader(loaderArgs);
 
-        if (dl instanceof Promise) {
-            dl.then(doneWithPostloader).catch(doneWithPostloader);
+        if (loaded instanceof Promise) {
+            loaded.then(doneWithOption).catch(doneWithOption);
         }
         else {
-            doneWithPostloader(dl);
+            doneWithOption(loaded);
         }
     }
     else {
-        doneWithPostloader();
+        doneWithOption();
     }
 };

@@ -1,26 +1,25 @@
 import React from "react";
 import { Router } from "router5";
 import { observer } from "mobx-react-lite";
-import { RouteDef } from "./types";
 import RouterStore from "./RouterStore";
+import RouteView from "./RouteView";
+import RouteTree from "./RouteTree";
 import dataloaderMiddlewareWrapper from "./dataloader-middleware";
 
 
 const routerStore = new RouterStore();
 
 
-const routerApp = (router: Router, routes: RouteDef[], WrappedComponent: React.ComponentType<object>) => {
-    routerStore.init(router, routes);
-
-    return WrappedComponent;
-};
-
-
 const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) => {
-    const routeDef = routerStore.routeNodePath.get(routeNodeName);
+    const routeView = routerStore.routeNodePath.get(routeNodeName);
 
-    return React.createElement(routeDef.component);
+    return React.createElement(routeView.getComponent());
 });
+
+
+const connectRouter = (router: Router, routeTree: RouteTree) => {
+    routerStore.init(router, routeTree);
+};
 
 
 const dataloaderMiddleware = dataloaderMiddlewareWrapper(routerStore);
@@ -28,7 +27,9 @@ const dataloaderMiddleware = dataloaderMiddlewareWrapper(routerStore);
 
 export {
     routerStore,
-    routerApp,
     RouteComponent,
-    dataloaderMiddleware
+    RouteView,
+    RouteTree,
+    connectRouter,
+    dataloaderMiddleware,
 };
