@@ -67,10 +67,13 @@ export default class RoutePayload {
 
     // extra
     setExtra(name: string | object, data?: any) {
+        if (!name) {
+            throw new Error("'name' param is required.");
+        }
         if (typeof name === "string") {
             this.extra[name] = data;
         }
-        else if (typeof name === "object") {
+        else if (name.constructor === Object) {
             Object.assign(this.extra, name);
         }
         else {
