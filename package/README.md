@@ -44,11 +44,10 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 #### `mr-router5` package exports following:
 - `RouteTree` hold all RouteView objects.
     - `constructor(routeViews)` create RouteTree instance with array of RouteView objects.
-    - `add(routeView, routeView, ...)` add RouteView objects to the route tree.
-    - `getRoutes()` retrieve array of `router5` route objects.
+    - `getRoutes()` retrieve array of router5 route objects.
     - `static createRouteView(route, component)` create RouteView object.
-        - `route` `router5` route object.
-        - `component` React component to render for the route.
+        - `route` the router5 route object.
+        - `component` the React component to render for the route.
     - `getRouteView(name)` retrieve RouteView object by route name.
     - `setPreloader(loaderFn)` define global `preloader` lifecycle method for all routes.
     - `setLoader(loaderFn)` define global `loader` lifecycle method for all routes.
@@ -57,16 +56,17 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
         - 'name' param can be object that maps 'key, value' to 'name' and 'data'.
     - `getExtra(name?)` retrieve global extra payload by name.
 - `initRouterStore(router, routeTree)` initialize router store.
-    - `router` the `router5` router instance.
+    - `router` the router5 router instance.
     - `routeTree` the `RouteTree` instance.
-- `RouteComponent` the React component to render component defined in `RouteView`.
+- `RouteComponent` the React component to render component defined in the route view.
 - `routerStore` the store object which contains:
     - `route` the "to" route object.
     - `previousRoute` the "from" route object.
     - `routeView` the "to" RouteView object.
     - `previousRouteView` the "from" RouteView object.
-    - `router` the reference of the `router5` router instance.
-    - `routeTree` the reference of the `RouteTree` instance.
+    - `router` the reference of the router5 router instance.
+    - `routeTree` the reference of the RouteTree instance.
+    - `addRouteViews(routeView, routeView, ...)` add RouteView objects to the route tree and the router instance.
 - [`dataloaderMiddleware`](#dataloader) the middleware for data loader lifecycle methods.
 
 

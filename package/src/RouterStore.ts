@@ -68,4 +68,10 @@ export default class RouterStore {
 
         return routeView.getComponent();
     }
+
+    addRouteViews(...routeViews: RouteView[]) {
+        const routes = routeViews.map((rv) => rv.getRoute());
+        this.router.add(routes);
+        this.routeTree.add(...routeViews);
+    }
 }
