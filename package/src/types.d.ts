@@ -1,13 +1,12 @@
 import React from "react";
-import { Router, State, Route } from "router5";
-import { MiddlewareFactory } from "router5/types/types/router";
-import RouteDef from "./RouteView";
-import RouteTree from "./RouteTree";
 import { ObservableMap } from "mobx";
+import { Router, State } from "router5";
+import { MiddlewareFactory } from "router5/types/types/router";
+import RouteTree from "./RouteTree";
 import RouteView from "./RouteView";
 
 
-export declare interface IRouterStore {
+export declare const routerStore: {
     route: State;
 
     previousRoute: State;
@@ -20,12 +19,12 @@ export declare interface IRouterStore {
 
     routeTree: RouteTree;
 
-    routeNodePath: ObservableMap<string, RouteView>;
-}
+    init: (router: Router, routeTree: RouteTree) => void;
 
-export declare const routerStore: IRouterStore;
+    getRouteNodeComponent: (routeNodeName: string) => React.ComponentType<object>;
+};
 
-export declare const connectRouter: (router: Router, routeTree: RouteTree) => void;
+export declare const initRouterStore: (router: Router, routeTree: RouteTree) => void;
 
 export declare const RouteComponent: React.FunctionComponent<{ routeNodeName: string }>;
 

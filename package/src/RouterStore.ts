@@ -1,12 +1,11 @@
 import { observable, action, ObservableMap } from "mobx";
 import { Router, SubscribeState, State } from "router5";
 import transitionPath from "router5-transition-path";
-import { IRouterStore } from "./types";
 import RouteTree from "./RouteTree";
 import RouteView from "./RouteView";
 
 
-export default class RouterStore implements IRouterStore {
+export default class RouterStore {
     // observable route objects
     @observable.ref
     route: State = null;
@@ -27,7 +26,7 @@ export default class RouterStore implements IRouterStore {
     routeTree: RouteTree = null;
 
     // route component to activate for route nodes
-    routeNodePath: ObservableMap<string, RouteView> = observable(new Map(), { deep: false });
+    private routeNodePath: ObservableMap<string, RouteView> = observable(new Map(), { deep: false });
 
     init(router: Router, routeTree: RouteTree) {
         this.route = null;
@@ -62,5 +61,11 @@ export default class RouterStore implements IRouterStore {
 
             this.routeNodePath.set(currRouteName, nextRouteView);
         }
+    }
+
+    getRouteNodeComponent(routeNodeName: string) {
+        const routeView = this.routeNodePath.get(routeNodeName);
+
+        return routeView.getComponent();
     }
 }

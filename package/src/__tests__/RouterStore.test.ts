@@ -23,11 +23,11 @@ test("routerStore.routeUpdated()", () => {
 
     router.navigate("login", () => {
         expect(routerStore.route.name).toBe("login");
-        expect(routerStore.routeNodePath.get("").getComponent()).toBe(LoginComponent);
+        expect(routerStore.getRouteNodeComponent("")).toBe(LoginComponent);
 
         router.navigate("users.view", () => {
             expect(routerStore.route.name).toBe("users.view");
-            expect(routerStore.routeNodePath.get("users").getComponent()).toBe(UserViewComponent);
+            expect(routerStore.getRouteNodeComponent("users")).toBe(UserViewComponent);
         });
     });
 });

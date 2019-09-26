@@ -4,7 +4,7 @@ import RoutePayload from "./RoutePayload";
 
 
 export default class RouteTree extends RoutePayload {
-    private routeViews: RouteView[] = null;
+    private routeViews: RouteView[] = [];
 
     constructor(routeViews: RouteView[] = []) {
         super();

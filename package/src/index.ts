@@ -12,9 +12,9 @@ const dataloaderMiddleware = dataloaderMiddlewareWrapper(routerStore);
 
 
 const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) => {
-    const routeView = routerStore.routeNodePath.get(routeNodeName);
+    const component = routerStore.getRouteNodeComponent(routeNodeName);
 
-    return React.createElement(routeView.getComponent());
+    return React.createElement(component);
 });
 
 
