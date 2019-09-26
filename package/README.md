@@ -95,13 +95,8 @@ export default new RouteTree([
 ]);
 
 ```
-`RouteTree.createRouteView()` takes 2 arguments, and returns a `RouteView` object, which is the superset of `router5` route object:
-- `route`: the `router5` [route object](https://router5.js.org/guides/defining-routes).
-- `component`: the React component for `mr-router5` to render.
 
 ### create root node component
-
-*Important: `routeNodeName` prop **must** match the full route name. For example, `users.view` instead of `view`.*
 
 ```js
 // RootNode.jsx
@@ -109,6 +104,7 @@ export default new RouteTree([
 import React from "react";
 import { RouteComponent } from "mr-router5";
 
+// Important: routeNodeName must match the full route name. For example, `users.view` instead of `view`.*
 const routeNodeName = ""; // empty string for root route node
 
 export default () => (
