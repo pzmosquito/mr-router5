@@ -8,7 +8,7 @@ mr-router5 uses [Router5](https://router5.js.org) together with [MobX](https://m
 
 ## Why mr-router5
 
-First of all, router5 is just better than `react-router` IMO, simple, powerful, clean implementation. router5 has `react-router5` package that works with React application. However, using MobX makes the connection so much easier. In Fact, it's so easy that I'm even hesitant to create this package.
+First of all, router5 is just better than `react-router` IMO, simple, powerful, clean implementation. router5 has `react-router5` package that works with React application. However, using MobX makes the connection so much easier. `mr-router5` also has powerful data loader lifecycle methods and payload system that make route transition much more flexible .
 
 
 ## Peer Dependencies
@@ -23,56 +23,91 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 `npm install --save mr-router5`
 
 
+## Reference
+
+- `RouteView` contain route info, more like a superset of router5 [route object](https://router5.js.org/guides/defining-routes).
+    - `setRoute(route)` set router5 route object.
+    - `getRoute()` retrieve router5 route object.
+    - `setComponent(component)` set React component for the route.
+    - `getComponent()` retrieve React component for the route.
+    - `setPreloader(loaderFn)` define route level `preloader` lifecycle method.
+        - if set, it'll override global method.
+    - `setLoader(loaderFn)` define route level `loader` lifecycle method.
+        - if set, it'll override global method.
+    - `setPostloader(loaderFn)` define route level `postloader` lifecycle method.
+        - if set, it'll override global method.
+    - `setExtra(name, data?)` define route level extra payload.
+        - 'name' param can be object that maps 'key, value' to 'name' and 'data'.
+        - it **does not** override global extra payload.
+    - `getExtra(name?)` retrieve route level extra payload by name.
+
+#### `mr-router5` package exports following:
+- `RouteTree` hold all RouteView objects.
+    - `constructor(routeViews)` create RouteTree instance with array of RouteView objects.
+    - `add(routeView, routeView, ...)` add RouteView objects to the route tree.
+    - `getRoutes()` retrieve array of `router5` route objects.
+    - `static createRouteView(route, component)` create RouteView object.
+        - `route` `router5` route object.
+        - `component` React component to render for the route.
+    - `getRouteView(name)` retrieve RouteView object by route name.
+    - `setPreloader(loaderFn)` define global `preloader` lifecycle method for all routes.
+    - `setLoader(loaderFn)` define global `loader` lifecycle method for all routes.
+    - `setPostloader(loaderFn)` define global `postloader` lifecycle method for all routes.
+    - `setExtra(name, data?)` define global extra payload for all routes.
+        - 'name' param can be object that maps 'key, value' to 'name' and 'data'.
+    - `getExtra(name?)` retrieve global extra payload by name.
+- `initRouterStore(router, routeTree)` initialize router store.
+    - `router` the `router5` router instance.
+    - `routeTree` the `RouteTree` instance.
+- `RouteComponent` the React component to render component defined in `RouteView`.
+- `routerStore` the store object which contains:
+    - `route` the "to" route object.
+    - `previousRoute` the "from" route object.
+    - `routeView` the "to" RouteView object.
+    - `previousRouteView` the "from" RouteView object.
+    - `router` the reference of the `router5` router instance.
+    - `routeTree` the reference of the `RouteTree` instance.
+- [`dataloaderMiddleware`](#dataloader) the middleware for data loader lifecycle methods.
+
+
 ## How to use
 
-`mr-router5` package export following:
-- `routerApp(router, routes, WrappedComponent)` the HOC to initialize `mr-router5`.
-  - `router` the user defined router instance.
-  - `routes` the user defined routes definition.
-  - `WrappedComponent` the root app component.
-- `routerStore` the MobX store object which contains:
-  - `route` the "to" route object.
-  - `previousRoute` the "from" route object.
-  - `obsRoute` the observable "to" route object.
-  - `obsPreviousRoute` the observable "from" route object.
-  - `router` the reference of user created router instance.
-  - `routes` the reference of user created routes definition.
-  - `getRouteDef` the utility method to get routes definition object with given route name.
-- `RouteComponent` the component to render view component for a route.
-- [`dataloaderMiddleware`](#dataloader) the middleware for data loading lifecycle methods.
+### define route tree
 
-### define routes with additional `component` property
-
-*The `component` property is not for router5 to be aware of the view, in fact, router5 should never know about the view. It's here for mr-router5 to compute which component to render.*
-
-**Both flat routes and tree routes are supported.**
+**Only flat routes are supported.**
 
 ```js
+// routes.js
+
+import { RouteTree } from "mr-router5";
 import Home from "../home/Home";
 import UserNode from "../route-nodes/UserNode";
 import UserNode from "../route-nodes/UserViewNode";
 import UserList from "../users/UserList";
 import UserView from "../users/UserView";
 
-export default [
-    {name: "home", path: "/", component: Home},
-    {name: "users", path: "/users", component: UserNode, children: [
-        {name: "list", path: "/list", component: UserList},
-        {name: "view", path: "/view", component: UserViewNode, children: [
-            {name: "detail", path: "/:id<\\d+>", component: UserView}
-        ]}
-    ]}
-];
+export default new RouteTree([
+    RouteTree.createRouteView({name: "home", path: "/"}, Home),
+    RouteTree.createRouteView({name: "users", path: "/users"}, UserNode),
+    RouteTree.createRouteView({name: "users.list", path: "/list"}, UserList),
+    RouteTree.createRouteView({name: "users.view", path: "/view"}, UserViewNode),
+    RouteTree.createRouteView({name: "users.view.detail", path: "/:id<\\d+>"}, UserView),
+]);
 
 ```
+`RouteTree.createRouteView()` takes 2 arguments, and returns a `RouteView` object, which is the superset of `router5` route object:
+- `route`: the `router5` [route object](https://router5.js.org/guides/defining-routes).
+- `component`: the React component for `mr-router5` to render.
 
 ### create root node component
 
 *Important: `routeNodeName` prop **must** match the full route name. For example, `users.view` instead of `view`.*
 
 ```js
-import * as React from "react";
-import {RouteComponent} from "mr-router5";
+// RootNode.jsx
+
+import React from "react";
+import { RouteComponent } from "mr-router5";
 
 const routeNodeName = ""; // empty string for root route node
 
@@ -85,26 +120,27 @@ export default () => (
 );
 ```
 
-### wrap your base component with `routerApp`
+### initialize router store
 
-`routerApp` function takes `router` instance, `routes` definition, and the root app component.
-
-*see [router5](https://router5.js.org/guides/defining-routes) on how to define routes and create router.*
+*see [router5](https://router5.js.org/guides/defining-routes#adding-routes) on how to create router.*
 
 ```js
+// App.jsx
+
+import React from "react";
+import { render } from "react-dom";
 import createRouter from "router5";
-import {routerApp} from "mr-router5";
+import { initRouterStore } from "mr-router5";
+import routeTree from "./routes";
 import RootNode from "./route-nodes/RootNode";
 
-// create routes definition and router
-const routes = [...];
-const router = createRouter(routes);
+const router = createRouter(routeTree.getRoutes(), {});
+initRouterStore(router, routeTree);
 
-// initialize mr-router5 by wrapping RootNode with routerApp() HOC
-const App = routerApp(router, routes, RootNode);
+// IMPORTANT: if you call routeTree.add() to add RouteView after router is created, you need to call `router.add(routeTree.getRoutes())` to add new routes as well.
 
 router.start(() => {
-    ReactDOM.render(<App />, document.getElementById("app"));
+    render(<RootNode />, document.getElementById("app"));
 });
 ```
 <a name="dataloader"></a>
@@ -120,18 +156,19 @@ router.start(() => {
 
 
 ```js
-import {dataloaderMiddleware} from "mr-router5";
+import { dataloaderMiddleware, RouteTree } from "mr-router5";
+import createRouter from "router5";
 
-// dataloader middleware will pass an object consists of `toState`, `fromState`, `router` properties as argument to loader functions.
+// dataloader middleware will pass an object consists of `toState`, `fromState`, `routeTree`, `router` properties as argument to loader functions.
 
 // preloader gets called when route transition starts.
-const preloader = ({toState, fromState, router}) => new Promise((resolve) => {
+const preloader = ({toState, fromState, routeTree, router}) => new Promise((resolve) => {
     // load data that won't alter route transition
     resolve();
 });
 
 // loader gets called after preloader but will not wait for preloader to settle.
-const loader = ({toState, fromState, router}) => new Promise((resolve, reject) => {
+const loader = ({toState, fromState, routeTree, router}) => new Promise((resolve, reject) => {
     resolve();
     // OR
     reject({
@@ -141,14 +178,23 @@ const loader = ({toState, fromState, router}) => new Promise((resolve, reject) =
 });
 
 // postloader gets called after route transition is done.
-const postloader = ({toState, fromState, router}) => console.log("transition is done.");
+const postloader = ({toState, fromState, routeTree, router}) => console.log("transition is done.");
 
-const routes =  [
-    {name: "home", path: "/", component: Home, preloader, loader, postloader},
-    {name: "login", path: "/login", component: Login},
-];
+const routeTree = new RouteTree([
+    RouteTree.createRouteView({name: "home", path: "/"})
+        .setPreloader(preloader)
+        .setLoader(loader)
+        .setPostloader(postloader),
+    RouteTree.createRouteView({name: "login", path: "/login"}, Login),
+]);
 
-const router = createRouter(); // create router5 router instance.
+// you can also define global loaders. global loaders will be loaded on all routes.
+// if you have loader defined for a route, it'll override the global loader.
+routeTree.setPostloader(({ toState }) => {
+    console.log(`${toState.name} loaded`);
+});
+
+const router = createRouter(routeTree.getRoutes(), {});
 router.useMiddleware(dataloaderMiddleware);
 ```
 
