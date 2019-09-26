@@ -7,12 +7,6 @@ export default class RouteView extends RoutePayload {
 
     private component: React.ComponentType<object> = null;
 
-    constructor(route: Route, component: React.ComponentType<object>) {
-        super();
-        this.route = route;
-        this.component = component;
-    }
-
     // route
     setRoute(route: Route) {
         this.route = route;

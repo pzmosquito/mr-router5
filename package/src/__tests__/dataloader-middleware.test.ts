@@ -1,10 +1,12 @@
 import React from "react";
-import createRouter, { Router } from "router5";
-import { connectRouter, dataloaderMiddleware, RouteTree, RouteView } from "../index";
+import createRouter, { Router, State } from "router5";
+import { initRouterStore, dataloaderMiddleware } from "../index";
+import RouteTree from "../RouteTree";
 
 
 const HomeComponent = () => React.createElement("<div>Home Element</div>");
 const LoginComponent = () => React.createElement("<div>Login Element</div>");
+const AdminComponent = () => React.createElement("<div>Admin Element</div>");
 const UserRouteNode = () => React.createElement("<RouteComponent />", { routeNodeName: "users" });
 const UserViewComponent = () => React.createElement("<div>User View Element</div>");
 
@@ -26,32 +28,40 @@ const loader = (stateName: string) => simulateFetch(`${stateName} loaded`, 15);
 const errLoader = (stateName: string, skipPostloader = false) => simulateFetch(`${stateName} err loaded`, 15, true, skipPostloader);
 const postloader = (stateName: string) => simulateFetch(`${stateName} postloaded`);
 
-const routeTree = new RouteTree([
-    new RouteView({ name: "home", path: "/" }, HomeComponent),
-    new RouteView({ name: "login", path: "/login" }, LoginComponent).setPostloader(() => postloader("login")),
-    new RouteView({ name: "users", path: "/users" }, UserRouteNode),
-    new RouteView({ name: "users.view", path: "/view" }, UserViewComponent)
-        .setPreloader(() => preloader("view"))
-        .setLoader(() => loader("view"))
-        .setPostloader(() => postloader("view")),
-    new RouteView({ name: "users.viewerr", path: "/viewerr" }, UserViewComponent)
-        .setPreloader(() => preloader("viewerr"))
-        .setLoader(() => errLoader("viewerr"))
-        .setPostloader(() => postloader("viewerr")),
-    new RouteView({ name: "users.viewerrskip", path: "/viewerrskip" }, UserViewComponent)
-        .setPreloader(() => preloader("viewerrskip"))
-        .setLoader(() => errLoader("viewerrskip", true))
-        .setPostloader(() => postloader("viewerrskip")),
-    new RouteView({ name: "users.viewerrskipsync", path: "/viewerrskipsync" }, UserViewComponent)
-        .setLoader(() => ({ redirect: { name: "login" }, skipPostloader: true }))
-        .setPostloader(() => postloader("viewerrskipsync")),
-]);
+let routeTree: RouteTree = null;
 
 let router: Router = null;
 
 beforeEach(() => {
+    routeTree = new RouteTree([
+        RouteTree.createRouteView({ name: "home", path: "/" }, HomeComponent),
+        RouteTree.createRouteView({ name: "login", path: "/login" }, LoginComponent)
+            .setPostloader(() => postloader("login")),
+        RouteTree.createRouteView({ name: "admin", path: "/admin" }, AdminComponent)
+            .setExtra("loginRequired", true)
+            .setLoader(({ toState, routeTree }: { toState: State, routeTree: RouteTree}) => {
+                loaders.push(routeTree.getExtra("loginRequired"));
+                loaders.push(routeTree.getRouteView(toState.name).getExtra("loginRequired"));
+            }),
+        RouteTree.createRouteView({ name: "users", path: "/users" }, UserRouteNode),
+        RouteTree.createRouteView({ name: "users.view", path: "/view" }, UserViewComponent)
+            .setPreloader(() => preloader("view"))
+            .setLoader(() => loader("view"))
+            .setPostloader(() => postloader("view")),
+        RouteTree.createRouteView({ name: "users.viewerr", path: "/viewerr" }, UserViewComponent)
+            .setPreloader(() => preloader("viewerr"))
+            .setLoader(() => errLoader("viewerr"))
+            .setPostloader(() => postloader("viewerr")),
+        RouteTree.createRouteView({ name: "users.viewerrskip", path: "/viewerrskip" }, UserViewComponent)
+            .setPreloader(() => preloader("viewerrskip"))
+            .setLoader(() => errLoader("viewerrskip", true))
+            .setPostloader(() => postloader("viewerrskip")),
+        RouteTree.createRouteView({ name: "users.viewerrskipsync", path: "/viewerrskipsync" }, UserViewComponent)
+            .setLoader(() => ({ redirect: { name: "login" }, skipPostloader: true }))
+            .setPostloader(() => postloader("viewerrskipsync")),
+    ]);
     router = createRouter(routeTree.getRoutes());
-    connectRouter(router, routeTree);
+    initRouterStore(router, routeTree);
     router.start("/");
     router.useMiddleware(dataloaderMiddleware);
     expect(loaders.length).toBe(0);
@@ -135,6 +145,19 @@ test("global loaders", (done) => {
             expect(loaders[0]).toBe("global loaded");
             expect(loaders[1]).toBe("login postloaded");
             expect(loaders[2]).toBe("global preloaded");
+            done();
+        }, 50);
+    });
+});
+
+test("loader extra", (done) => {
+    routeTree.setExtra("loginRequired", false);
+    router.navigate("admin", () => {
+        setTimeout(() => {
+            expect(router.getState().name).toBe("admin");
+            expect(loaders.length).toBe(2);
+            expect(loaders[0]).toBe(false);
+            expect(loaders[1]).toBe(true);
             done();
         }, 50);
     });

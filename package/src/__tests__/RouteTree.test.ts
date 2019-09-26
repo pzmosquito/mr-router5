@@ -1,9 +1,9 @@
-import { RouteTree, RouteView } from "..";
+import RouteTree from "../RouteTree";
 
 
 const routeViews = [
-    new RouteView({name: "r1", path: "/r1"}, null),
-    new RouteView({name: "r2", path: "/r2"}, null),
+    RouteTree.createRouteView({name: "r1", path: "/r1"}, null),
+    RouteTree.createRouteView({name: "r2", path: "/r2"}, null),
 ];
 
 

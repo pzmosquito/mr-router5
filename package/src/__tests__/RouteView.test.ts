@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteView } from "..";
+import RouteView from "../RouteView";
 
 
 test("create route view", () => {
@@ -9,7 +9,8 @@ test("create route view", () => {
         }
     }
     const route = {name: "r1", path: "/r1"};
-    const rv = new RouteView(route, TestComponent);
+    const rv = new RouteView();
+    rv.setRoute(route).setComponent(TestComponent);
     expect(rv.getComponent()).toBe(TestComponent);
     expect(rv.getRoute()).toBe(route);
 

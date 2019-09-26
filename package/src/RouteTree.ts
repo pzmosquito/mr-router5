@@ -1,3 +1,4 @@
+import { Route } from "router5";
 import RouteView from "./RouteView";
 import RoutePayload from "./RoutePayload";
 
@@ -19,6 +20,11 @@ export default class RouteTree extends RoutePayload {
      */
     getRoutes() {
         return this.routeViews.map((rv) => rv.getRoute());
+    }
+
+    static createRouteView(route: Route, component: React.ComponentType<object>) {
+        const routeView = new RouteView();
+        return routeView.setRoute(route).setComponent(component);
     }
 
     /**

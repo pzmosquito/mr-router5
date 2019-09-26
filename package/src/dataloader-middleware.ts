@@ -12,20 +12,19 @@ declare interface LoaderOption {
 }
 
 export default (routerStore: RouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {
-    // cannot use routerStore.routeView because it's not yet set
-    const routeView = routerStore.routeTree.getRouteView(toState.name);
+    const routeTree = routerStore.routeTree;
+    const toRouteView = routeTree.getRouteView(toState.name);
 
     // arguments to be passed to all loaders
     const loaderArgs = {
         toState,
         fromState,
-        routeView,
-        routeTree: routerStore.routeTree,
+        routeTree,
         router,
     };
 
     // preloader
-    const preloader = routeView.getPreloader() || routerStore.routeTree.getPreloader();
+    const preloader = toRouteView.getPreloader() || routerStore.routeTree.getPreloader();
     if (preloader) {
         preloader(loaderArgs);
     }
@@ -47,7 +46,7 @@ export default (routerStore: RouterStore) => (router: Router) => (toState: State
         }
 
         if (!skipPostloader) {
-            const postloader = routeView.getPostloader() || routerStore.routeTree.getPostloader();
+            const postloader = toRouteView.getPostloader() || routerStore.routeTree.getPostloader();
             if (postloader) {
                 postloader(loaderArgs);
             }
@@ -55,7 +54,7 @@ export default (routerStore: RouterStore) => (router: Router) => (toState: State
     };
 
     // loader
-    const loader = routeView.getLoader() || routerStore.routeTree.getLoader();
+    const loader = toRouteView.getLoader() || routerStore.routeTree.getLoader();
     if (loader) {
         const loaded = loader(loaderArgs);
 

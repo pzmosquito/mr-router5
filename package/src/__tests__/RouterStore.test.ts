@@ -1,6 +1,7 @@
 import React from "react";
 import createRouter from "router5";
-import { routerStore, connectRouter, RouteView, RouteTree } from "..";
+import { routerStore, initRouterStore } from "..";
+import RouteTree from "../RouteTree";
 
 
 test("routerStore.routeUpdated()", () => {
@@ -10,14 +11,14 @@ test("routerStore.routeUpdated()", () => {
     const UserViewComponent = () => React.createElement("<div>User View Element</div>");
 
     const routeTree = new RouteTree([
-        new RouteView({ name: "home", path: "/" }, HomeComponent),
-        new RouteView({ name: "login", path: "/login" }, LoginComponent),
-        new RouteView({ name: "users", path: "/users" }, UserRouteNode),
-        new RouteView({ name: "users.view", path: "/view" }, UserViewComponent),
+        RouteTree.createRouteView({ name: "home", path: "/" }, HomeComponent),
+        RouteTree.createRouteView({ name: "login", path: "/login" }, LoginComponent),
+        RouteTree.createRouteView({ name: "users", path: "/users" }, UserRouteNode),
+        RouteTree.createRouteView({ name: "users.view", path: "/view" }, UserViewComponent),
     ]);
 
     const router = createRouter(routeTree.getRoutes());
-    connectRouter(router, routeTree);
+    initRouterStore(router, routeTree);
     router.start("/");
 
     router.navigate("login", () => {

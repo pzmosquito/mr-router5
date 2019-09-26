@@ -29,8 +29,12 @@ export default class RouterStore implements IRouterStore {
     // route component to activate for route nodes
     routeNodePath: ObservableMap<string, RouteView> = observable(new Map(), { deep: false });
 
-
     init(router: Router, routeTree: RouteTree) {
+        this.route = null;
+        this.previousRoute = null;
+        this.routeView = null;
+        this.previousRouteView = null;
+
         this.router = router;
         this.routeTree = routeTree;
 
