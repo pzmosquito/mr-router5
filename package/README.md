@@ -70,77 +70,51 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 - [`dataloaderMiddleware`](#dataloader) the middleware for data loader lifecycle methods.
 
 
-## How to use
+## Basic Usage
 
-### define route tree
-
-**Only flat routes are supported.**
+*see [router5](https://router5.js.org/guides/defining-routes#adding-routes) on how to create router.*
 
 ```js
-// routes.js
+import React from "react";
+import { render } from "react-dom";
+import createRouter from "router5";
+import { initRouterStore, RouteComponent, RouteTree } from "mr-router5";
 
-import { RouteTree } from "mr-router5";
-import Home from "../home/Home";
-import UserNode from "../route-nodes/UserNode";
-import UserNode from "../route-nodes/UserViewNode";
-import UserList from "../users/UserList";
-import UserView from "../users/UserView";
+// define components.
+const Home = () => <div>'home' component</div>;
+const UserNode = () => <div>'user' route node component</div>;
+const UserList = () => <div>'user list' component</div>;
+const UserView = () => <div>'user view' component</div>;
 
-export default new RouteTree([
+// define route tree. NOTE, only flat routes are supported.
+const routeTree = new RouteTree([
     RouteTree.createRouteView({name: "home", path: "/"}, Home),
     RouteTree.createRouteView({name: "users", path: "/users"}, UserNode),
     RouteTree.createRouteView({name: "users.list", path: "/list"}, UserList),
-    RouteTree.createRouteView({name: "users.view", path: "/view"}, UserViewNode),
-    RouteTree.createRouteView({name: "users.view.detail", path: "/:id<\\d+>"}, UserView),
+    RouteTree.createRouteView({name: "users.view", path: "/view"}, UserView),
 ]);
 
-```
+// initialize router and router store.
+const router = createRouter(routeTree.getRoutes(), {});
+initRouterStore(router, routeTree);
 
-### create root node component
-
-```js
-// RootNode.jsx
-
-import React from "react";
-import { RouteComponent } from "mr-router5";
-
-// Important: routeNodeName must match the full route name. For example, `users.view` instead of `view`.*
+// create root route node.
 const routeNodeName = ""; // empty string for root route node
-
-export default () => (
+const RootNode = () => (
     <div>
         <h2>Header</h2>
         <RouteComponent routeNodeName={routeNodeName} />
         <h4>Footer</h4>
     </div>
 );
-```
 
-### initialize router store
-
-*see [router5](https://router5.js.org/guides/defining-routes#adding-routes) on how to create router.*
-
-```js
-// App.jsx
-
-import React from "react";
-import { render } from "react-dom";
-import createRouter from "router5";
-import { initRouterStore } from "mr-router5";
-import routeTree from "./routes";
-import RootNode from "./route-nodes/RootNode";
-
-const router = createRouter(routeTree.getRoutes(), {});
-initRouterStore(router, routeTree);
-
-// IMPORTANT: if you call routeTree.add() to add RouteView after router is created, you need to call `router.add(routeTree.getRoutes())` to add new routes as well.
-
+// start the router.
 router.start(() => {
     render(<RootNode />, document.getElementById("app"));
 });
 ```
 <a name="dataloader"></a>
-### define router5 routes with loader functions
+## dataloaderMiddleware
 
 *We sometimes need to load data before/on/after rendering the component. mr-router5 supports data loading lifecyle methods. Please see `example` app for some sample code.*
 - `preloader`: called when route transition starts. Route transition and other lifecycle methods **will not** wait for it to finish if the function returns a `Promise`.
