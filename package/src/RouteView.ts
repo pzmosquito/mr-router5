@@ -2,9 +2,20 @@ import { Route } from "router5";
 import RoutePayload from "./RoutePayload";
 
 
+/**
+ * @class
+ */
 export default class RouteView extends RoutePayload {
+    /**
+     * @member {Route}
+     * @private
+     */
     private route: Route = null;
 
+    /**
+     * @member {React.ComponentType<object>}
+     * @private
+     */
     private component: React.ComponentType<object> = null;
 
     /**
