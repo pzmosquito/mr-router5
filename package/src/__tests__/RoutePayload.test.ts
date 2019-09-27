@@ -50,6 +50,10 @@ test("extra", () => {
         // @ts-ignore
         routePayload.setExtra(123);
     }).toThrow();
+    expect(() => {
+        // @ts-ignore
+        routePayload.setExtra();
+    }).toThrow();
 
     routePayload.setExtra("k1", "v1");
     expect(Object.keys(routePayload.getExtra()).length).toBe(1);

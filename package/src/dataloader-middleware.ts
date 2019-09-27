@@ -34,12 +34,7 @@ export default (routerStore: RouterStore) => (router: Router) => (toState: State
         const { redirect = null, skipPostloader = false } = option;
 
         if (redirect) {
-            try {
-                done({ redirect });
-            }
-            catch (e) {
-                throw new Error("'redirect' option must be object of {name: string, params?: object} shape.");
-            }
+            done({ redirect });
         }
         else {
             done();
