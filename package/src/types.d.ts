@@ -22,6 +22,8 @@ export declare const routerStore: {
     init: (router: Router, routeTree: RouteTree) => void;
 
     getRouteNodeComponent: (routeNodeName: string) => React.ComponentType<object>;
+
+    addRouteViews: (...routeViews: RouteView[]) => void;
 };
 
 export declare const initRouterStore: (router: Router, routeTree: RouteTree) => void;
