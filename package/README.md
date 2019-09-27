@@ -45,6 +45,7 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 - `RouteTree` hold all RouteView objects.
     - `constructor(routeViews)` create RouteTree instance with array of RouteView objects.
     - `getRoutes()` retrieve array of router5 route objects.
+    - `addRouteViews(routeView, routeView, ...)` add RouteView objects to the route tree and the router instance.
     - `static createRouteView(route, component)` create RouteView object.
         - `route` the router5 route object.
         - `component` the React component to render for the route.
@@ -66,7 +67,6 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
     - `previousRouteView` the "from" RouteView object.
     - `router` the reference of the router5 router instance.
     - `routeTree` the reference of the RouteTree instance.
-    - `addRouteViews(routeView, routeView, ...)` add RouteView objects to the route tree and the router instance.
 - [`dataloaderMiddleware`](#dataloader) the middleware for data loader lifecycle methods.
 
 

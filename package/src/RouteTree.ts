@@ -1,4 +1,4 @@
-import { Route } from "router5";
+import { Route, Router } from "router5";
 import RouteView from "./RouteView";
 import RoutePayload from "./RoutePayload";
 
@@ -8,10 +8,18 @@ import RoutePayload from "./RoutePayload";
  */
 export default class RouteTree extends RoutePayload {
     /**
+     * hold array of all route views.
      * @member {RouteView[]}
      * @private
      */
     private routeViews: RouteView[] = [];
+
+    /**
+     * reference of router5 router instance.
+     * @member {Router}
+     * @private
+     */
+    private router: Router = null;
 
     /**
      * create a route tree.
@@ -24,11 +32,20 @@ export default class RouteTree extends RoutePayload {
     }
 
     /**
-     * add route view objects to the route tree.
-     * NOTE, this only adds to the route tree, not the router instance.
-     * @param {...RouteView[]} routeViews - route view objects.
+     * set router5 router instance.
+     * @param {Router{} router - router5 router instance.
      */
-    add(...routeViews: RouteView[]) {
+    setRouter(router: Router) {
+        this.router = router;
+    }
+
+    /**
+     * add route views to the route tree and router.
+     * @param {...RouteView[]} routeViews - route views to be added.
+     */
+    addRouteViews(...routeViews: RouteView[]) {
+        const routes = routeViews.map((rv) => rv.getRoute());
+        this.router.add(routes);
         this.routeViews.push(...routeViews);
     }
 

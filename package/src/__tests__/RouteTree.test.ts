@@ -1,4 +1,5 @@
 import RouteTree from "../RouteTree";
+import createRouter from "router5";
 
 
 const routeViews = [
@@ -17,15 +18,19 @@ test("getRouteView - constructor()", () => {
     expect(routeTree.getRouteView("r2")).toBe(routeViews[1]);
 });
 
-test("getRouteView - add()", () => {
+test("getRouteView - addRouteViews()", () => {
+    const router = createRouter();
     const routeTree = new RouteTree();
-    routeTree.add(...routeViews);
+    routeTree.setRouter(router);
+    routeTree.addRouteViews(...routeViews);
+    router.start("/r1");
 
     expect(() => {
-        routeTree.getRouteView("r3")
+        routeTree.getRouteView("r3");
     }).toThrow();
     expect(routeTree.getRouteView("r1")).toBe(routeViews[0]);
     expect(routeTree.getRouteView("r2")).toBe(routeViews[1]);
+    expect(router.getState().path).toBe("/r1");
 });
 
 test("getRoutes", () => {

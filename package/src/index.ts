@@ -35,6 +35,7 @@ const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) =
  * @param {RouteTree} routeTree - route tree instance.
  */
 const initRouterStore = (router: Router, routeTree: RouteTree) => {
+    routeTree.setRouter(router);
     routerStore.init(router, routeTree);
 };
 

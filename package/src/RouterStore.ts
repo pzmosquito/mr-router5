@@ -110,14 +110,4 @@ export default class RouterStore {
 
         return routeView.getComponent();
     }
-
-    /**
-     * add route views to the route tree and router.
-     * @param {...RouteView[]} routeViews - route views to be added.
-     */
-    addRouteViews(...routeViews: RouteView[]) {
-        const routes = routeViews.map((rv) => rv.getRoute());
-        this.router.add(routes);
-        this.routeTree.add(...routeViews);
-    }
 }

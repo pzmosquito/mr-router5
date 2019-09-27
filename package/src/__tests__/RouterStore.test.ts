@@ -23,12 +23,4 @@ test("routerStore.routeUpdated()", () => {
         expect(routerStore.route.name).toBe("users.view");
         expect(routerStore.getRouteNodeComponent("users")).toBe(UserViewComponent);
     });
-
-    const LoginComponent = () => React.createElement("<div>Login Element</div>");
-    routerStore.addRouteViews(RouteTree.createRouteView({ name: "login", path: "/login" }, LoginComponent));
-
-    router.navigate("login", () => {
-        expect(routerStore.route.name).toBe("login");
-        expect(routerStore.getRouteNodeComponent("")).toBe(LoginComponent);
-    });
 });
