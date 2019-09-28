@@ -50,10 +50,10 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.9.0",
-    "mobx": "^5.13.0",
+    "mobx": "^5.13.1",
     "mobx-react-lite": "^1.4.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
     "router5": "^7.0.2",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
