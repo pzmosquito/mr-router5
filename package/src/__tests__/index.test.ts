@@ -15,7 +15,7 @@ const routeTree = new RouteTree([
     new RouteView({ name: "home", path: "/" }, HomeComponent),
     new RouteView({ name: "login", path: "/login" }, LoginComponent),
     new RouteView({ name: "users", path: "/users" }, UserRouteNode),
-    new RouteView({ name: "users.view", path: "/view" }, UserViewComponent),
+    new RouteView({ name: "users.view", path: "/view" }, UserViewComponent, { userId: 0 }),
 ]);
 
 let router: Router = null;
@@ -54,7 +54,7 @@ test("RouteComponent", () => {
 
             elem = React.createElement(RouteComponent, { routeNodeName: "users" });
             wrapper = shallow(elem);
-            expect(wrapper.equals(React.createElement(UserViewComponent))).toBe(true);
+            expect(wrapper.equals(React.createElement(UserViewComponent, { userId: 0 }))).toBe(true);
         });
     });
 });

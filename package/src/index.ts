@@ -24,9 +24,9 @@ const dataloaderMiddleware = dataloaderMiddlewareWrapper(routerStore);
  * @constant
  */
 const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) => {
-    const component = routerStore.getRouteNodeComponent(routeNodeName);
+    const { component, props } = routerStore.getRouteNodeComponent(routeNodeName);
 
-    return React.createElement(component);
+    return React.createElement(component, props);
 });
 
 

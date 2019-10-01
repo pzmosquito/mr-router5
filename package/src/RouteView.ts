@@ -13,9 +13,16 @@ export default class RouteView extends Payload {
     private _route: Route = null;
 
     /**
+     * the component to render.
      * @member {React.ComponentType<object>}
      */
     component: React.ComponentType<object> = null;
+
+    /**
+     * the props for the component.
+     * @member
+     */
+    props: { [name: string]: any } = null;
 
     /**
      * create a route view.
@@ -23,10 +30,11 @@ export default class RouteView extends Payload {
      * @param route
      * @param component
      */
-    constructor(route: Route, component: React.ComponentType<object>) {
+    constructor(route: Route, component: React.ComponentType<object>, props: { [name: string]: any } = {}) {
         super();
         this._route = route;
         this.component = component;
+        this.props = props;
     }
 
     /**

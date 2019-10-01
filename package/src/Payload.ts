@@ -4,7 +4,7 @@
 export default class Payload {
     /**
      * payload data.
-     * @member {RouteExtra}
+     * @member {Object}
      * @private
      */
     private payloadData: { [key: string]: any } = {};

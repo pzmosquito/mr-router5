@@ -22,6 +22,6 @@ test("routerStore.routeUpdated()", () => {
 
     router.navigate("users.view", () => {
         expect(routerStore.route.name).toBe("users.view");
-        expect(routerStore.getRouteNodeComponent("users")).toBe(UserViewComponent);
+        expect(routerStore.getRouteNodeComponent("users").component).toBe(UserViewComponent);
     });
 });

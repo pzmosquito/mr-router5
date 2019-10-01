@@ -108,6 +108,6 @@ export default class RouterStore {
     getRouteNodeComponent(routeNodeName: string) {
         const routeView = this.routeNodePath.get(routeNodeName);
 
-        return routeView.component;
+        return { component: routeView.component, props: routeView.props };
     }
 }
