@@ -1,7 +1,8 @@
 import React from "react";
 import createRouter from "router5";
-import { routerStore, initRouterStore } from "..";
+import { routerStore, initMrRouter5 } from "..";
 import RouteTree from "../RouteTree";
+import RouteView from "../RouteView";
 
 
 test("routerStore.routeUpdated()", () => {
@@ -10,13 +11,13 @@ test("routerStore.routeUpdated()", () => {
     const UserViewComponent = () => React.createElement("<div>User View Element</div>");
 
     const routeTree = new RouteTree([
-        RouteTree.createRouteView({ name: "home", path: "/" }, HomeComponent),
-        RouteTree.createRouteView({ name: "users", path: "/users" }, UserRouteNode),
-        RouteTree.createRouteView({ name: "users.view", path: "/view" }, UserViewComponent),
+        new RouteView({ name: "home", path: "/" }, HomeComponent),
+        new RouteView({ name: "users", path: "/users" }, UserRouteNode),
+        new RouteView({ name: "users.view", path: "/view" }, UserViewComponent),
     ]);
 
     const router = createRouter(routeTree.getRoutes());
-    initRouterStore(router, routeTree);
+    initMrRouter5(router, routeTree);
     router.start("/");
 
     router.navigate("users.view", () => {
