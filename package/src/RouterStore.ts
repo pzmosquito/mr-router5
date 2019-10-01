@@ -90,11 +90,11 @@ export default class RouterStore {
         }
 
         const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
-        const updatedPath = [intersection].concat(toActivate);
+        const activatePath = [intersection].concat(toActivate);
 
-        for (let i = 0; i < updatedPath.length - 1; i += 1) {
-            const currRouteName = updatedPath[i];
-            const nextRouteView = this.routeTree.getRouteView(updatedPath[i + 1]);
+        for (let i = 0; i < activatePath.length - 1; i += 1) {
+            const currRouteName = activatePath[i];
+            const nextRouteView = this.routeTree.getRouteView(activatePath[i + 1]);
 
             this.routeNodePath.set(currRouteName, nextRouteView);
         }
@@ -108,6 +108,6 @@ export default class RouterStore {
     getRouteNodeComponent(routeNodeName: string) {
         const routeView = this.routeNodePath.get(routeNodeName);
 
-        return routeView.getComponent();
+        return routeView.component;
     }
 }

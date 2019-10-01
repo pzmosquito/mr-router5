@@ -3,6 +3,7 @@ import { Router } from "router5";
 import { observer } from "mobx-react-lite";
 import RouterStore from "./RouterStore";
 import RouteTree from "./RouteTree";
+import RouteView from "./RouteView";
 import dataloaderMiddlewareWrapper from "./dataloader-middleware";
 
 
@@ -34,7 +35,7 @@ const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) =
  * @param {Router} router - router5 router instance.
  * @param {RouteTree} routeTree - route tree instance.
  */
-const initRouterStore = (router: Router, routeTree: RouteTree) => {
+const initMrRouter5 = (router: Router, routeTree: RouteTree) => {
     routeTree.setRouter(router);
     routerStore.init(router, routeTree);
 };
@@ -42,8 +43,9 @@ const initRouterStore = (router: Router, routeTree: RouteTree) => {
 
 export {
     RouteTree,
+    RouteView,
     routerStore,
     dataloaderMiddleware,
     RouteComponent,
-    initRouterStore,
+    initMrRouter5,
 };

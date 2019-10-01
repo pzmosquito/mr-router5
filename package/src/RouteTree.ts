@@ -1,12 +1,12 @@
-import { Route, Router } from "router5";
+import { Router } from "router5";
 import RouteView from "./RouteView";
-import RoutePayload from "./RoutePayload";
+import Payload from "./Payload";
 
 
 /**
  * @class
  */
-export default class RouteTree extends RoutePayload {
+export default class RouteTree extends Payload {
     /**
      * hold array of all route views.
      * @member {RouteView[]}
@@ -41,11 +41,16 @@ export default class RouteTree extends RoutePayload {
 
     /**
      * add route views to the route tree and router.
-     * @param {...RouteView[]} routeViews - route views to be added.
+     * @param {RouteView[]} routeViews - route views to be added.
+     * @param {boolean} addToRouter - whether to add routes to router instance.
      */
-    addRouteViews(...routeViews: RouteView[]) {
-        const routes = routeViews.map((rv) => rv.getRoute());
-        this.router.add(routes);
+    addRouteViews(routeViews: RouteView[], addToRouter = true) {
+        if (addToRouter) {
+            if (this.router === null) {
+                throw new Error("router store must be initialized first.")
+            }
+            this.router.add(routeViews.map((rv) => rv.route));
+        }
         this.routeViews.push(...routeViews);
     }
 
@@ -54,18 +59,7 @@ export default class RouteTree extends RoutePayload {
      * @return {Route[]} router5 routes.
      */
     getRoutes() {
-        return this.routeViews.map((rv) => rv.getRoute());
-    }
-
-    /**
-     * create route view object.
-     * @param {Route} route - router5 route object.
-     * @param {Route} component - React component to render for the route.
-     * @return {RouteView} a route view object of the route.
-     */
-    static createRouteView(route: Route, component: React.ComponentType<object>) {
-        const routeView = new RouteView();
-        return routeView.setRoute(route).setComponent(component);
+        return this.routeViews.map((rv) => rv.route);
     }
 
     /**
@@ -74,7 +68,7 @@ export default class RouteTree extends RoutePayload {
      * @return {RouteView} the route view object.
      */
     getRouteView(name: string) {
-        const routeView = this.routeViews.find((rv) => rv.getRoute().name === name);
+        const routeView = this.routeViews.find((rv) => rv.route.name === name);
 
         if (routeView) {
             return routeView;
