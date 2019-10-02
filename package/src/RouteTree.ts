@@ -1,12 +1,12 @@
 import { Router } from "router5";
 import RouteView from "./RouteView";
-import Extra from "./Extra";
+import RouteExtra from "./RouteExtra";
 
 
 /**
  * @class
  */
-export default class RouteTree extends Extra {
+export default class RouteTree extends RouteExtra {
     /**
      * hold array of all route views.
      * @member {RouteView[]}

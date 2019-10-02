@@ -1,10 +1,10 @@
-import DataLoader from "./DataLoader";
+import DataLoader, { MergeDataLoaderTag } from "./DataLoader";
 
 
 /**
  * @class
  */
-export default class Extra {
+export default class RouteExtra {
     /**
      * payload data.
      * @member {object}
@@ -15,8 +15,9 @@ export default class Extra {
     /**
      * hold data loaders.
      * @member
+     * @private
      */
-    dataLoaders: DataLoader[] = [];
+    private dataLoaders: (DataLoader | MergeDataLoaderTag)[] = [];
 
 
     /**
@@ -50,5 +51,18 @@ export default class Extra {
             return this.payload[name];
         }
         return this.payload;
+    }
+
+    addDataLoaders(...dataLoaders: (DataLoader | MergeDataLoaderTag )[]) {
+        this.dataLoaders.push(...dataLoaders);
+        return this;
+    }
+
+    getDataLoaders() {
+        return this.dataLoaders;
+    }
+
+    protected static createMergeDataLoaderTag() {
+        return new MergeDataLoaderTag();
     }
 }

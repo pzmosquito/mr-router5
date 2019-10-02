@@ -1,10 +1,10 @@
-import Extra from "../Extra";
+import RouteExtra from "../RouteExtra";
 
 
-let extra: Extra = null;
+let extra: RouteExtra = null;
 
 beforeEach(() => {
-    extra = new Extra();
+    extra = new RouteExtra();
 });
 
 afterEach(() => {
