@@ -1,12 +1,14 @@
+import React from "react";
 import { Route } from "router5";
-import Payload from "./Payload";
+import Extra from "./Extra";
 
 
 /**
  * @class
  */
-export default class RouteView extends Payload {
+export default class RouteView extends Extra {
     /**
+     * the router5 route object.
      * @member {Route}
      * @private
      */
@@ -22,7 +24,7 @@ export default class RouteView extends Payload {
      * the props for the component.
      * @member
      */
-    props: { [name: string]: any } = null;
+    props: { [key: string] : any } = null;
 
     /**
      * create a route view.
@@ -30,7 +32,7 @@ export default class RouteView extends Payload {
      * @param route
      * @param component
      */
-    constructor(route: Route, component: React.ComponentType<object>, props: { [name: string]: any } = {}) {
+    constructor(route: Route, component: React.ComponentType<object>, props: { [key: string] : any } = {}) {
         super();
         this._route = route;
         this.component = component;

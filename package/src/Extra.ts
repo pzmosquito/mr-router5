@@ -1,29 +1,38 @@
+import DataLoader from "./DataLoader";
+
+
 /**
  * @class
  */
-export default class Payload {
+export default class Extra {
     /**
      * payload data.
-     * @member {Object}
+     * @member {object}
      * @private
      */
-    private payloadData: { [key: string]: any } = {};
+    private payload: { [key: string]: any } = {};
+
+    /**
+     * hold data loaders.
+     * @member
+     */
+    dataLoaders: DataLoader[] = [];
 
 
     /**
      * set payload.
-     * @param {(string | Object)} name - name of the payload of Object to set.
+     * @param {(string | { [key: string]: any })} name - name of the payload of Object to set.
      * @param {*} [data] - the data of the payload if 'name' param is string.
      */
-    setPayload(name: string | Object, data?: any) {
+    setPayload(name: string | { [key: string]: any }, data?: any) {
         if (!name) {
             throw new Error("'name' param is required.");
         }
         if (typeof name === "string") {
-            this.payloadData[name] = data;
+            this.payload[name] = data;
         }
         else if (name.constructor === Object) {
-            Object.assign(this.payloadData, name);
+            Object.assign(this.payload, name);
         }
         else {
             throw new Error("invalid payload format.");
@@ -38,8 +47,8 @@ export default class Payload {
      */
     getPayload(name?: string) {
         if (name) {
-            return this.payloadData[name];
+            return this.payload[name];
         }
-        return this.payloadData;
+        return this.payload;
     }
 }

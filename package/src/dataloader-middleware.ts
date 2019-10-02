@@ -3,64 +3,46 @@ import { DoneFn, Params } from "router5/types/types/base";
 import RouterStore from "./RouterStore";
 
 
-declare interface LoaderOption {
-    redirect?: {
-        name: string;
-        params?: Params;
-    };
-    skipPostloader?: boolean;
-}
-
 export default (routerStore: RouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {
     const routeTree = routerStore.routeTree;
-    const toRouteView = routeTree.getRouteView(toState.name);
+    const { dataLoaders } = routeTree.getRouteView(toState.name);
 
-    // arguments to be passed to all loaders
-    const loaderArgs = {
-        toState,
-        fromState,
-        routeTree,
-        router,
-    };
-
-    // preloader
-    const preloader = toRouteView.getPreloader() || routerStore.routeTree.getPreloader();
-    if (preloader) {
-        preloader(loaderArgs);
-    }
-
-    // postloader
-    const doneWithOption = (option: LoaderOption = {}) => {
-        const { redirect = null, skipPostloader = false } = option;
-
-        if (redirect) {
-            done({ redirect });
-        }
-        else {
+    const runDataLoader = (dlIndex = 0) => {
+        if (dlIndex === dataLoaders.length) {
             done();
         }
+        else {
+            const { loader, wait } = dataLoaders[dlIndex];
+            const loaded = loader({ toState, fromState, routeTree, router });
 
-        if (!skipPostloader) {
-            const postloader = toRouteView.getPostloader() || routerStore.routeTree.getPostloader();
-            if (postloader) {
-                postloader(loaderArgs);
+            // data loader returns a Promise
+            if (loaded instanceof Promise) {
+                // need to wait for data loader
+                if (wait) {
+                    loaded
+                        .then(() => {
+                            runDataLoader(dlIndex + 1);
+                        })
+                        .catch((redirect) => {
+                            done(redirect);
+                        });
+                }
+
+                // no need to wait for data loader
+                else {
+                    runDataLoader(dlIndex + 1);
+                    loaded.catch((redirect) => {
+                        done(redirect);
+                    });
+                }
+            }
+
+            // data loader returns anything else
+            else {
+                runDataLoader(dlIndex + 1);
             }
         }
-    };
-
-    // loader
-    const loader = toRouteView.getLoader() || routerStore.routeTree.getLoader();
-    if (loader) {
-        const loaded = loader(loaderArgs);
-
-        if (loaded instanceof Promise) {
-            loaded.then(doneWithOption).catch(doneWithOption);
-        }
-        else {
-            doneWithOption(loaded);
-        }
     }
-    else {
-        doneWithOption();
-    }
+
+    runDataLoader();
 };

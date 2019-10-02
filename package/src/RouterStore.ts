@@ -101,13 +101,11 @@ export default class RouterStore {
     }
 
     /**
-     * retrieve the React component to render for a route node.
+     * retrieve the route node of a given name.
      * @param {string} routeNodeName - name of the route node.
-     * @return {React.ComponentType<object>} - the React component to render.
+     * @return {RouteView} - the route view of the route node.
      */
-    getRouteNodeComponent(routeNodeName: string) {
-        const routeView = this.routeNodePath.get(routeNodeName);
-
-        return { component: routeView.component, props: routeView.props };
+    getRouteNode(routeNodeName: string) {
+        return this.routeNodePath.get(routeNodeName);
     }
 }
