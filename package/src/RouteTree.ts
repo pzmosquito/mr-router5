@@ -34,6 +34,7 @@ export default class RouteTree extends RouteExtra {
     /**
      * set router5 router instance.
      * @param {Router{} router - router5 router instance.
+     * @private
      */
     setRouter(router: Router) {
         this.router = router;
