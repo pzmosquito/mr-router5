@@ -6,6 +6,7 @@ module.exports = {
         "**/__tests__/**/*",
         "**/RouteExtra.ts",
         "**/dataloader-middleware.ts",
+        "**/MergeDataLoaderTag.ts",
     ],
     mode: "file",
     excludePrivate: false,

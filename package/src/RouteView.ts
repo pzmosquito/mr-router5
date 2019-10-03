@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "router5";
 import RouteExtra from "./RouteExtra";
-import { MergeDataLoaderTag } from "./DataLoader";
+import MergeDataLoaderTag from "./MergeDataLoaderTag";
 
 
 export default class RouteView extends RouteExtra {

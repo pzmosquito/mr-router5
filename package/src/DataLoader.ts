@@ -10,11 +10,6 @@ type Loader = (arg0: {
     carriedData: any,
 }) => any;
 
-/**
- * @private
- */
-export class MergeDataLoaderTag {}
-
 
 export default class DataLoader {
     /**

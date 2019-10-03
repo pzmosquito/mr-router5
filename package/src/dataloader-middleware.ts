@@ -1,7 +1,7 @@
 import { Router, State } from "router5";
 import { DoneFn } from "router5/types/types/base";
 import RouterStore from "./RouterStore";
-import { MergeDataLoaderTag } from "./DataLoader";
+import MergeDataLoaderTag from "./MergeDataLoaderTag";
 
 
 export default (routerStore: RouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {

@@ -1,4 +1,5 @@
-import DataLoader, { MergeDataLoaderTag } from "./DataLoader";
+import DataLoader from "./DataLoader";
+import MergeDataLoaderTag from "./MergeDataLoaderTag";
 
 
 /**
