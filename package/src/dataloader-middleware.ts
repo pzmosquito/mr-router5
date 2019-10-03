@@ -14,7 +14,7 @@ export default (routerStore: RouterStore) => (router: Router) => (toState: State
         dataLoaders.splice(mergeDataLoaderTagIndex, 1, ...routeTree.getDataLoaders());
     }
 
-    const runDataLoader = (dlIndex = 0) => {
+    const runDataLoader = (dlIndex = 0, carriedData: any = null) => {
         if (dlIndex === dataLoaders.length) {
             done();
             return;
@@ -22,27 +22,21 @@ export default (routerStore: RouterStore) => (router: Router) => (toState: State
 
         // @ts-ignore dataLoaders should all be instance of DataLoader at this point.
         const { loader, wait } = dataLoaders[dlIndex];
-        const loaded = loader({ toState, fromState, routeTree, router });
+        const loaded = loader({ toState, fromState, routeTree, router, carriedData });
 
-        if (loaded instanceof Promise) {
-            if (wait) {
-                loaded
-                    .then(() => {
-                        runDataLoader(dlIndex + 1);
-                    })
-                    .catch((err: any) => {
-                        done(err);
-                    });
-            }
-            else {
-                runDataLoader(dlIndex + 1);
-                loaded.catch((err: any) => {
+        if (loaded instanceof Promise && wait) {
+            loaded
+                .then((resolved) => {
+                    console.log(resolved);
+                    runDataLoader(dlIndex + 1, resolved);
+                })
+                .catch((err: any) => {
                     done(err);
                 });
-            }
         }
         else {
-            runDataLoader(dlIndex + 1);
+            console.log("function", loaded);
+            runDataLoader(dlIndex + 1, loaded);
         }
     };
 

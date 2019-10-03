@@ -26,8 +26,8 @@ const simulateFetch = (str: string, delay = 0, toReject = false) => new Promise(
     }, delay);
 });
 const preloader = (stateName: string) => simulateFetch(`${stateName} preloaded`, 30);
-const loader = (stateName: string) => simulateFetch(`${stateName} loaded`, 15);
-const errLoader = (stateName: string) => simulateFetch(`${stateName} err loaded`, 15, true);
+const loader = (stateName: string) => simulateFetch(`${stateName} loaded`, 10);
+const errLoader = (stateName: string) => simulateFetch(`${stateName} err loaded`, 10, true);
 const postloader = (stateName: string) => simulateFetch(`${stateName} postloaded`);
 
 let routeTree: RouteTree = null;
@@ -35,6 +35,10 @@ let routeTree: RouteTree = null;
 let router: Router = null;
 
 beforeEach(() => {
+    router = null;
+    loaders = [];
+    routeTree = null;
+
     routeTree = new RouteTree([
         new RouteView({ name: "home", path: "/" }, HomeComponent),
         new RouteView({ name: "login", path: "/login" }, LoginComponent)
@@ -76,11 +80,6 @@ beforeEach(() => {
     expect(loaders.length).toBe(0);
 });
 
-afterEach(() => {
-    router = null;
-    loaders = [];
-})
-
 test("dataloaderMiddleware", (done) => {
     router.navigate("users.view", () => {
         expect(loaders.length).toBe(2);
@@ -115,20 +114,6 @@ test("dataloaderMiddlewareRedirect wait", (done) => {
     });
 });
 
-// test("dataloaderMiddlewareRedirect no wait", (done) => {
-//     router.navigate("users.viewerrskip", () => {
-//         setTimeout(() => {
-//             expect(router.getState().name).toBe("login");
-//             expect(loaders.length).toBe(3);
-//             expect(loaders[0]).toBe("viewerrskip preloaded");
-//             expect(loaders[1]).toBe("viewerrskip err loaded");
-//             expect(loaders[2]).toBe("login postloaded");
-//             done();
-//         }, 80);
-//     });
-// });
-
-
 test("global loaders with merge", (done) => {
     routeTree.addDataLoaders(
         new DataLoader(() => loader("global")),
@@ -149,6 +134,25 @@ test("global loaders with merge", (done) => {
     expect(() => {
         routeTree.getRouteView("login").mergeDataLoaders();
     }).toThrow();
+});
+
+test("global loaders carried data", (done) => {
+    let data = "";
+    routeTree.addDataLoaders(
+        new DataLoader(() => "d1"),
+        new DataLoader(({ carriedData }) => Promise.resolve(carriedData + "d2")),
+        new DataLoader(({ carriedData }) => data = carriedData),
+    );
+
+    routeTree.getRouteView("login").mergeDataLoaders();
+
+    router.navigate("login", () => {
+        setTimeout(() => {
+            expect(router.getState().name).toBe("login");
+            expect(data).toBe("d1d2");
+            done();
+        }, 50);
+    });
 });
 
 test("payload", (done) => {

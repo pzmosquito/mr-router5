@@ -7,6 +7,7 @@ type Loader = (arg0: {
     fromState: State,
     routeTree: RouteTree,
     router: Router,
+    carriedData: any,
 }) => any;
 
 export class MergeDataLoaderTag {}
