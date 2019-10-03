@@ -30,7 +30,8 @@
     "build": "webpack",
     "build:watch": "webpack --watch",
     "test": "jest --coverage",
-    "test:watch": "npm run test -- --watchAll"
+    "test:watch": "npm run test -- --watchAll",
+    "publish": "npm run build && npm publish"
   },
   "peerDependencies": {
     "mobx": "^4.0.0 || ^5.0.0",
