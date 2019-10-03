@@ -9,6 +9,7 @@ module.exports = {
         "**/MergeDataLoaderTag.ts",
     ],
     mode: "file",
-    excludePrivate: false,
-    excludeProtected: false,
+    excludePrivate: true,
+    excludeProtected: true,
+    excludeNotExported: true,
 };
