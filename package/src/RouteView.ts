@@ -30,8 +30,8 @@ export default class RouteView extends RouteExtra {
     /**
      * create a route view.
      * @constructor
-     * @param route
-     * @param component
+     * @param route - router5 route object.
+     * @param component - the React component to render.
      */
     constructor(route: Route, component: React.ComponentType<object>, props: { [key: string] : any } = {}) {
         super();
@@ -42,7 +42,7 @@ export default class RouteView extends RouteExtra {
 
     /**
      * retrieve router5 route object.
-     * @return {Route} the router5 route object.
+     * @return the router5 route object.
      */
     get route() {
         return this._route;

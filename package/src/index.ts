@@ -10,7 +10,6 @@ import DataLoader from "./DataLoader";
 
 /**
  * @constant
- * @type {RouterStore}
  */
 const routerStore = new RouterStore();
 
@@ -33,8 +32,8 @@ const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) =
 
 /**
  * initilize router store.
- * @param {Router} router - router5 router instance.
- * @param {RouteTree} routeTree - route tree instance.
+ * @param router - router5 router instance.
+ * @param routeTree - route tree instance.
  */
 const initMrRouter5 = (router: Router, routeTree: RouteTree) => {
     routeTree.setRouter(router);

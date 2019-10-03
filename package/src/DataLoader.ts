@@ -35,8 +35,8 @@ export default class DataLoader {
     /**
      * create a data loader.
      * @constructor
-     * @param {Loader} loader - the loader function to call within dataloader-middleware.
-     * @param {boolean} [wait=true] - whether dataloader-middleware should wait for the loader to settle.
+     * @param loader - the loader function to call within dataloader-middleware.
+     * @param wait - whether dataloader-middleware should wait for the loader to settle.
      */
     constructor(loader: Loader, wait = true) {
         this._loader = loader;

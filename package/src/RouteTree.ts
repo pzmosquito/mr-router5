@@ -24,7 +24,7 @@ export default class RouteTree extends RouteExtra {
     /**
      * create a route tree.
      * @constructor
-     * @param {RouteView[]} routeViews array of route view objects.
+     * @param routeViews - array of route view objects.
      */
     constructor(routeViews: RouteView[] = []) {
         super();
@@ -33,7 +33,7 @@ export default class RouteTree extends RouteExtra {
 
     /**
      * set router5 router instance.
-     * @param {Router{} router - router5 router instance.
+     * @param router - router5 router instance.
      * @private
      */
     setRouter(router: Router) {
@@ -42,7 +42,7 @@ export default class RouteTree extends RouteExtra {
 
     /**
      * add route views to the route tree and router.
-     * @param {RouteView[]} routeViews - route views to be added.
+     * @param routeViews - route views to be added.
      */
     addRouteViews(routeViews: RouteView[]) {
         if (this.router === null) {
@@ -53,7 +53,7 @@ export default class RouteTree extends RouteExtra {
 
     /**
      * retrieve array of router5 routes.
-     * @return {Route[]} router5 routes.
+     * @return router5 routes.
      */
     getRoutes() {
         return this.routeViews.map((rv) => rv.route);
@@ -61,8 +61,8 @@ export default class RouteTree extends RouteExtra {
 
     /**
      * retrieve route view object by route name.
-     * @param {string} name - route name.
-     * @return {RouteView} the route view object.
+     * @param name - route name.
+     * @return the route view object.
      */
     getRouteView(name: string) {
         const routeView = this.routeViews.find((rv) => rv.route.name === name);

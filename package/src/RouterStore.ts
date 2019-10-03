@@ -40,14 +40,16 @@ export default class RouterStore {
     /**
      * reference of router instance
      * @member
+     * @private
      */
-    router: Router = null;
+    private _router: Router = null;
 
     /**
      * reference of route tree instance
      * @member
+     * @private
      */
-    routeTree: RouteTree = null;
+    private _routeTree: RouteTree = null;
 
     /**
      * route component to activate for route nodes
@@ -58,8 +60,9 @@ export default class RouterStore {
 
     /**
      * initialize router store.
-     * @param {Router} router - router5 router instance.
-     * @param {RouteTree} routeTree - route tree instance.
+     * @param router - router5 router instance.
+     * @param routeTree - route tree instance.
+     * @private
      */
     init(router: Router, routeTree: RouteTree) {
         this.route = null;
@@ -67,26 +70,40 @@ export default class RouterStore {
         this.routeView = null;
         this.previousRouteView = null;
 
-        this.router = router;
-        this.routeTree = routeTree;
+        this._router = router;
+        this._routeTree = routeTree;
 
-        this.router.subscribe(state => {
+        this._router.subscribe(state => {
             this.routeUpdated(state);
         });
     }
 
     /**
+     * reference of router instance
+     */
+    get router() {
+        return this._router;
+    }
+
+    /**
+     * reference of route tree instance
+     */
+    get routeTree() {
+        return this._routeTree;
+    }
+
+    /**
      * handle route update.
-     * @param {SubscribeState} state - the current state route.
+     * @param state - the current state route.
      * @private
      */
     @action
     private routeUpdated(state: SubscribeState) {
         this.route = state.route;
         this.previousRoute = state.previousRoute;
-        this.routeView = this.routeTree.getRouteView(this.route.name);
+        this.routeView = this._routeTree.getRouteView(this.route.name);
         if (this.previousRoute) {
-            this.previousRouteView = this.routeTree.getRouteView(this.previousRoute.name);
+            this.previousRouteView = this._routeTree.getRouteView(this.previousRoute.name);
         }
 
         const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
@@ -94,7 +111,7 @@ export default class RouterStore {
 
         for (let i = 0; i < activatePath.length - 1; i += 1) {
             const currRouteName = activatePath[i];
-            const nextRouteView = this.routeTree.getRouteView(activatePath[i + 1]);
+            const nextRouteView = this._routeTree.getRouteView(activatePath[i + 1]);
 
             this.routeNodePath.set(currRouteName, nextRouteView);
         }
@@ -102,8 +119,8 @@ export default class RouterStore {
 
     /**
      * retrieve the route node of a given name.
-     * @param {string} routeNodeName - name of the route node.
-     * @return {RouteView} - the route view of the route node.
+     * @param routeNodeName - name of the route node.
+     * @return the route view of the route node.
      */
     getRouteNode(routeNodeName: string) {
         return this.routeNodePath.get(routeNodeName);

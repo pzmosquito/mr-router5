@@ -22,8 +22,8 @@ export default class RouteExtra {
 
     /**
      * set payload.
-     * @param {(string | { [key: string]: any })} name - name of the payload of Object to set.
-     * @param {*} [data] - the data of the payload if 'name' param is string.
+     * @param name - name of the payload of Object to set.
+     * @param [data] - the data of the payload if 'name' param is string.
      */
     setPayload(name: string | { [key: string]: any }, data?: any) {
         if (!name) {
@@ -43,8 +43,8 @@ export default class RouteExtra {
 
     /**
      * retrieve payload by name or all payload if name is not provided.
-     * @param {string} [name] - name of the payload.
-     * @return {*} data of the payload.
+     * @param [name] - name of the payload.
+     * @return data of the payload.
      */
     getPayload(name?: string) {
         if (name) {
@@ -55,7 +55,7 @@ export default class RouteExtra {
 
     /**
      * add data loaders.
-     * @param {(DataLoader | MergeDataLoaderTag )[]} dataLoaders - data loaders to add.
+     * @param dataLoaders - data loaders to add.
      */
     addDataLoaders(...dataLoaders: (DataLoader | MergeDataLoaderTag )[]) {
         this.dataLoaders.push(...dataLoaders);
@@ -71,7 +71,6 @@ export default class RouteExtra {
 
     /**
      * create a mergeDataLoaderTag placeholder for merging global data loaders.
-     * @return {MergeDataLoaderTag}
      */
     protected static createMergeDataLoaderTag() {
         return new MergeDataLoaderTag();
