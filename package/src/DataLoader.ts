@@ -10,6 +10,10 @@ type Loader = (arg0: {
     carriedData: any,
 }) => any;
 
+/**
+ * @class
+ * @private
+ */
 export class MergeDataLoaderTag {}
 
 /**
@@ -17,13 +21,13 @@ export class MergeDataLoaderTag {}
  */
 export default class DataLoader {
     /**
-     * @member {Loader}
+     * @member
      * @private
      */
     private _loader: Loader = null;
 
     /**
-     * @member {boolean}
+     * @member
      * @private
      */
     private _wait: boolean = null;

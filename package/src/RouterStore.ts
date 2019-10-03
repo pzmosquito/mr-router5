@@ -11,47 +11,47 @@ import RouteView from "./RouteView";
 export default class RouterStore {
     /**
      * the observable 'to' state route.
-     * @member {State}
+     * @member
      */
     @observable.ref
     route: State = null;
 
     /**
      * the observable 'from' state route.
-     * @member {State}
+     * @member
      */
     @observable.ref
     previousRoute: State = null;
 
     /**
      * the observable 'to' route view.
-     * @member {RouteView}
+     * @member
      */
     @observable.ref
     routeView: RouteView = null;
 
     /**
      * the observable 'from' route view.
-     * @member {RouteView}
+     * @member
      */
     @observable.ref
     previousRouteView: RouteView = null;
 
     /**
      * reference of router instance
-     * @member {Router}
+     * @member
      */
     router: Router = null;
 
     /**
      * reference of route tree instance
-     * @member {RouteTree}
+     * @member
      */
     routeTree: RouteTree = null;
 
     /**
      * route component to activate for route nodes
-     * @member {ObservableMap<string, RouteView>}
+     * @member
      * @private
      */
     private routeNodePath: ObservableMap<string, RouteView> = observable(new Map(), { deep: false });

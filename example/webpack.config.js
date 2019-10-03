@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 
-const distPath = path.resolve(__dirname, "../docs");
+const distPath = path.resolve(__dirname, "dist");
 
 module.exports = {
     target: "web",

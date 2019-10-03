@@ -10,14 +10,14 @@ import { MergeDataLoaderTag } from "./DataLoader";
 export default class RouteView extends RouteExtra {
     /**
      * the router5 route object.
-     * @member {Route}
+     * @member
      * @private
      */
     private _route: Route = null;
 
     /**
      * the component to render.
-     * @member {React.ComponentType<object>}
+     * @member
      */
     component: React.ComponentType<object> = null;
 

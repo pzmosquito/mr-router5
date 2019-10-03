@@ -9,14 +9,14 @@ import RouteExtra from "./RouteExtra";
 export default class RouteTree extends RouteExtra {
     /**
      * hold array of all route views.
-     * @member {RouteView[]}
+     * @member
      * @private
      */
     private routeViews: RouteView[] = [];
 
     /**
      * reference of router5 router instance.
-     * @member {Router}
+     * @member
      * @private
      */
     private router: Router = null;

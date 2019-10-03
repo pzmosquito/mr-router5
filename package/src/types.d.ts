@@ -1,5 +1,4 @@
 import React from "react";
-import { ObservableMap } from "mobx";
 import { Router, State } from "router5";
 import { MiddlewareFactory } from "router5/types/types/router";
 import RouteTree from "./RouteTree";
@@ -21,12 +20,10 @@ export declare const routerStore: {
 
     init: (router: Router, routeTree: RouteTree) => void;
 
-    getRouteNodeComponent: (routeNodeName: string) => React.ComponentType<object>;
-
-    addRouteViews: (...routeViews: RouteView[]) => void;
+    getRouteNode: (routeNodeName: string) => RouteView;
 };
 
-export declare const initRouterStore: (router: Router, routeTree: RouteTree) => void;
+export declare const initMrRouter5: (router: Router, routeTree: RouteTree) => void;
 
 export declare const RouteComponent: React.FunctionComponent<{ routeNodeName: string }>;
 
