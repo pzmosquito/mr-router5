@@ -42,14 +42,10 @@ export default class RouteTree extends RouteExtra {
     /**
      * add route views to the route tree and router.
      * @param {RouteView[]} routeViews - route views to be added.
-     * @param {boolean} addToRouter - whether to add routes to router instance.
      */
-    addRouteViews(routeViews: RouteView[], addToRouter = true) {
-        if (addToRouter) {
-            if (this.router === null) {
-                throw new Error("router store must be initialized first.")
-            }
-            this.router.add(routeViews.map((rv) => rv.route));
+    addRouteViews(routeViews: RouteView[]) {
+        if (this.router === null) {
+            throw new Error("router store must be initialized first.")
         }
         this.routeViews.push(...routeViews);
     }

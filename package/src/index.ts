@@ -5,6 +5,7 @@ import RouterStore from "./RouterStore";
 import RouteTree from "./RouteTree";
 import RouteView from "./RouteView";
 import dataloaderMiddlewareWrapper from "./dataloader-middleware";
+import DataLoader from "./DataLoader";
 
 
 /**
@@ -45,6 +46,7 @@ export {
     RouteTree,
     RouteView,
     routerStore,
+    DataLoader,
     dataloaderMiddleware,
     RouteComponent,
     initMrRouter5,

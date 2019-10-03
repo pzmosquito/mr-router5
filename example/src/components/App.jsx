@@ -1,6 +1,6 @@
 import * as React from "react";
 import { render } from "react-dom";
-import { initRouterStore } from "../../../package/dist";
+import { initMrRouter5 } from "../../../package/dist";
 import createRouter from "../routing/create-router";
 import routeTree from "../routing/routes";
 import RootNode from "./route-nodes/RootNode";
@@ -10,7 +10,7 @@ import RootNode from "./route-nodes/RootNode";
 const router = createRouter(routeTree.getRoutes());
 
 // app component
-initRouterStore(router, routeTree);
+initMrRouter5(router, routeTree);
 
 // renderer
 const renderApp = () => {

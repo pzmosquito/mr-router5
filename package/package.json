@@ -28,8 +28,8 @@
   "scripts": {
     "build": "webpack",
     "build:watch": "webpack --watch",
-    "test": "jest",
-    "test:watch": "jest --watchAll"
+    "test": "jest --coverage",
+    "test:watch": "npm run test -- --watchAll"
   },
   "peerDependencies": {
     "mobx": "^4.0.0 || ^5.0.0",

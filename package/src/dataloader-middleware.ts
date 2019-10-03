@@ -27,7 +27,6 @@ export default (routerStore: RouterStore) => (router: Router) => (toState: State
         if (loaded instanceof Promise && wait) {
             loaded
                 .then((resolved) => {
-                    console.log(resolved);
                     runDataLoader(dlIndex + 1, resolved);
                 })
                 .catch((err: any) => {
@@ -35,7 +34,6 @@ export default (routerStore: RouterStore) => (router: Router) => (toState: State
                 });
         }
         else {
-            console.log("function", loaded);
             runDataLoader(dlIndex + 1, loaded);
         }
     };
