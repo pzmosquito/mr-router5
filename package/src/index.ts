@@ -1,34 +1,52 @@
 import React from "react";
 import { Router } from "router5";
 import { observer } from "mobx-react-lite";
-import { RouteDef } from "./types";
 import RouterStore from "./RouterStore";
+import RouteTree from "./RouteTree";
+import RouteView from "./RouteView";
 import dataloaderMiddlewareWrapper from "./dataloader-middleware";
+import DataLoader from "./DataLoader";
 
 
+/**
+ * @constant
+ */
 const routerStore = new RouterStore();
 
 
-const routerApp = (router: Router, routes: RouteDef[], WrappedComponent: React.ComponentType<object>) => {
-    routerStore.init(router, routes);
-
-    return WrappedComponent;
-};
-
-
-const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) => {
-    const routeDef = routerStore.routeNodePath.get(routeNodeName);
-
-    return React.createElement(routeDef.component);
-});
-
-
+/**
+ * @constant
+ */
 const dataloaderMiddleware = dataloaderMiddlewareWrapper(routerStore);
 
 
+/**
+ * @constant
+ */
+const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) => {
+    const { component, props } = routerStore.getRouteNode(routeNodeName);
+
+    return React.createElement(component, props);
+});
+
+
+/**
+ * initilize router store.
+ * @param router - router5 router instance.
+ * @param routeTree - route tree instance.
+ */
+const initMrRouter5 = (router: Router, routeTree: RouteTree) => {
+    routeTree.setRouter(router);
+    routerStore.init(router, routeTree);
+};
+
+
 export {
+    RouteTree,
+    RouteView,
     routerStore,
-    routerApp,
+    DataLoader,
+    dataloaderMiddleware,
     RouteComponent,
-    dataloaderMiddleware
+    initMrRouter5,
 };

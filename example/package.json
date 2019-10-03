@@ -13,8 +13,7 @@
   },
   "homepage": "https://github.com/pzmosquito/mr-router5#readme",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "rm -rf ../docs && webpack --mode='production'"
+    "dev": "webpack-dev-server"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

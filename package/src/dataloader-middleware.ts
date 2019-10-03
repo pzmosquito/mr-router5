@@ -1,60 +1,42 @@
 import { Router, State } from "router5";
-import { IRouterStore } from "./types";
-import { DoneFn, Params } from "router5/types/types/base";
+import { DoneFn } from "router5/types/types/base";
+import RouterStore from "./RouterStore";
+import { MergeDataLoaderTag } from "./DataLoader";
 
 
-declare interface DoneRedirect {
-    name: string;
-    params?: Params;
-}
+export default (routerStore: RouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {
+    const routeTree = routerStore.routeTree;
+    const dataLoaders = routeTree.getRouteView(toState.name).getDataLoaders().slice();
 
-declare interface LoaderOption {
-    redirect?: DoneRedirect;
-    skipPostloader?: boolean;
-}
-
-export default (routerStore: IRouterStore) => (router: Router) => (toState: State, fromState: State, done: DoneFn) => {
-    const routeDef = routerStore.getRouteDef(toState.name);
-    const loaderArgs = {toState, fromState, router};
-
-    // preloader
-    if (Object.prototype.hasOwnProperty.call(routeDef, "preloader")) {
-        routeDef.preloader(loaderArgs);
+    // merge global data loaders and remove MergeDataLoaderTag
+    const mergeDataLoaderTagIndex = dataLoaders.findIndex(dl => dl instanceof MergeDataLoaderTag);
+    if (mergeDataLoaderTagIndex >= 0) {
+        dataLoaders.splice(mergeDataLoaderTagIndex, 1, ...routeTree.getDataLoaders());
     }
 
-    // postloader
-    const doneWithPostloader = (option: LoaderOption = {}) => {
-        const { redirect = null, skipPostloader = false } = option;
+    const runDataLoader = (dlIndex = 0, carriedData: any = null) => {
+        if (dlIndex === dataLoaders.length) {
+            done();
+            return;
+        }
 
-        if (redirect) {
-            try {
-                done({ redirect });
-            }
-            catch (e) {
-                throw new Error("'redirect' option must be object of {name: string, params?: object} shape.");
-            }
+        // @ts-ignore dataLoaders should all be instance of DataLoader at this point.
+        const { loader, wait } = dataLoaders[dlIndex];
+        const loaded = loader({ toState, fromState, routeTree, router, carriedData });
+
+        if (loaded instanceof Promise && wait) {
+            loaded
+                .then((resolved) => {
+                    runDataLoader(dlIndex + 1, resolved);
+                })
+                .catch((err: any) => {
+                    done(err);
+                });
         }
         else {
-            done();
-        }
-
-        if (!skipPostloader && Object.prototype.hasOwnProperty.call(routeDef, "postloader")) {
-            routeDef.postloader(loaderArgs);
+            runDataLoader(dlIndex + 1, loaded);
         }
     };
 
-    // loader
-    if (Object.prototype.hasOwnProperty.call(routeDef, "loader")) {
-        const dl = routeDef.loader(loaderArgs);
-
-        if (dl instanceof Promise) {
-            dl.then(doneWithPostloader).catch(doneWithPostloader);
-        }
-        else {
-            doneWithPostloader(dl);
-        }
-    }
-    else {
-        doneWithPostloader();
-    }
+    runDataLoader();
 };

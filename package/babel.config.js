@@ -5,7 +5,6 @@ const plugins = [
 
 const presets = [
     "@babel/preset-env",
-    "@babel/preset-react",
     "@babel/typescript",
 ];
 

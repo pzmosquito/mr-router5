@@ -1,76 +1,118 @@
 import { observable, action, ObservableMap } from "mobx";
 import { Router, SubscribeState, State } from "router5";
 import transitionPath from "router5-transition-path";
-import { IRouterStore, RouteDef } from "./types";
+import RouteTree from "./RouteTree";
+import RouteView from "./RouteView";
 
 
-export default class RouterStore implements IRouterStore {
-    // route objects
+export default class RouterStore {
+    /**
+     * the observable 'to' state route.
+     */
+    @observable.ref
     route: State = null;
+
+    /**
+     * the observable 'from' state route.
+     */
+    @observable.ref
     previousRoute: State = null;
 
-    // observable route objects
+    /**
+     * the observable 'to' route view.
+     */
     @observable.ref
-    obsRoute: State = null;
+    routeView: RouteView = null;
 
+    /**
+     * the observable 'from' route view.
+     */
     @observable.ref
-    obsPreviousRoute: State = null;
+    previousRouteView: RouteView = null;
 
-    // reference of router instance
-    router: Router = null;
+    /**
+     * reference of router instance
+     * @private
+     */
+    private _router: Router = null;
 
-    // reference of routes definition
-    routes: RouteDef[] = null;
+    /**
+     * reference of route tree instance
+     * @private
+     */
+    private _routeTree: RouteTree = null;
 
-    // route component to activate for route nodes
-    routeNodePath: ObservableMap<string, RouteDef> = observable(new Map(), { deep: false });
+    /**
+     * route component to activate for route nodes
+     * @private
+     */
+    private routeNodePath: ObservableMap<string, RouteView> = observable(new Map(), { deep: false });
 
+    /**
+     * initialize router store.
+     * @param router - router5 router instance.
+     * @param routeTree - route tree instance.
+     * @private
+     */
+    init(router: Router, routeTree: RouteTree) {
+        this.route = null;
+        this.previousRoute = null;
+        this.routeView = null;
+        this.previousRouteView = null;
 
-    init(router: Router, routes: RouteDef[]) {
-        this.router = router;
-        this.routes = routes;
+        this._router = router;
+        this._routeTree = routeTree;
 
-        this.router.subscribe(state => {
+        this._router.subscribe(state => {
             this.routeUpdated(state);
         });
     }
 
-    // handle route update
+    /**
+     * reference of router instance
+     */
+    get router() {
+        return this._router;
+    }
+
+    /**
+     * reference of route tree instance
+     */
+    get routeTree() {
+        return this._routeTree;
+    }
+
+    /**
+     * handle route update.
+     * @param state - the current state route.
+     * @private
+     */
     @action
     private routeUpdated(state: SubscribeState) {
         this.route = state.route;
         this.previousRoute = state.previousRoute;
-
-        this.obsRoute = state.route;
-        this.obsPreviousRoute = state.previousRoute;
+        this.routeView = this._routeTree.getRouteView(this.route.name);
+        if (this.previousRoute) {
+            this.previousRouteView = this._routeTree.getRouteView(this.previousRoute.name);
+        }
 
         const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
-        const updatedRoutes = [intersection].concat(toActivate);
+        const activatePath = [intersection].concat(toActivate);
 
-        for (let i = 0; i < updatedRoutes.length - 1; i += 1) {
-            const currRoute = updatedRoutes[i];
-            const nextRoute = updatedRoutes[i + 1];
-            const nextRouteDef = this.getRouteDef(nextRoute);
+        for (let i = 0; i < activatePath.length - 1; i += 1) {
+            const currRouteName = activatePath[i];
+            const nextRouteView = this._routeTree.getRouteView(activatePath[i + 1]);
 
-            this.routeNodePath.set(currRoute, Object.assign({}, nextRouteDef));
+            this.routeNodePath.set(currRouteName, nextRouteView);
         }
     }
 
-    // get route object for a given route name.
-    getRouteDef(routeName: string, routes = this.routes, parentRouteName = ""): RouteDef {
-        for (const route of routes) {
-            const currentRouteName = parentRouteName === "" ? route.name : `${parentRouteName}.${route.name}`;
-
-            if (routeName === currentRouteName) {
-                return route;
-            }
-            if (Object.prototype.hasOwnProperty.call(route, "children")) {
-                const routeFound = this.getRouteDef(routeName, route.children, currentRouteName);
-                if (routeFound) {
-                    return routeFound;
-                }
-            }
-        }
-        return null;
+    /**
+     * retrieve the route node of a given name.
+     * @param routeNodeName - name of the route node.
+     * @return the route view of the route node.
+     */
+    getRouteNode(routeNodeName: string) {
+        return this.routeNodePath.get(routeNodeName);
     }
 }
