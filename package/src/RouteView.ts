@@ -4,34 +4,28 @@ import RouteExtra from "./RouteExtra";
 import { MergeDataLoaderTag } from "./DataLoader";
 
 
-/**
- * @class
- */
 export default class RouteView extends RouteExtra {
     /**
      * the router5 route object.
-     * @member
      * @private
      */
     private _route: Route = null;
 
     /**
      * the component to render.
-     * @member
      */
     component: React.ComponentType<object> = null;
 
     /**
      * the props for the component.
-     * @member
      */
     props: { [key: string] : any } = null;
 
     /**
      * create a route view.
-     * @constructor
      * @param route - router5 route object.
      * @param component - the React component to render.
+     * @param props - the props of the React component.
      */
     constructor(route: Route, component: React.ComponentType<object>, props: { [key: string] : any } = {}) {
         super();

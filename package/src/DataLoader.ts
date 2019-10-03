@@ -11,30 +11,24 @@ type Loader = (arg0: {
 }) => any;
 
 /**
- * @class
  * @private
  */
 export class MergeDataLoaderTag {}
 
-/**
- * @class
- */
+
 export default class DataLoader {
     /**
-     * @member
      * @private
      */
     private _loader: Loader = null;
 
     /**
-     * @member
      * @private
      */
     private _wait: boolean = null;
 
     /**
      * create a data loader.
-     * @constructor
      * @param loader - the loader function to call within dataloader-middleware.
      * @param wait - whether dataloader-middleware should wait for the loader to settle.
      */

@@ -2,19 +2,17 @@ import DataLoader, { MergeDataLoaderTag } from "./DataLoader";
 
 
 /**
- * @class
+ * @private
  */
 export default class RouteExtra {
     /**
      * payload data.
-     * @member
      * @private
      */
     private payload: { [key: string]: any } = {};
 
     /**
      * hold data loaders.
-     * @member
      * @private
      */
     private dataLoaders: (DataLoader | MergeDataLoaderTag)[] = [];
@@ -23,7 +21,7 @@ export default class RouteExtra {
     /**
      * set payload.
      * @param name - name of the payload of Object to set.
-     * @param [data] - the data of the payload if 'name' param is string.
+     * @param data - the data of the payload if 'name' param is string.
      */
     setPayload(name: string | { [key: string]: any }, data?: any) {
         if (!name) {
@@ -43,7 +41,7 @@ export default class RouteExtra {
 
     /**
      * retrieve payload by name or all payload if name is not provided.
-     * @param [name] - name of the payload.
+     * @param name - name of the payload.
      * @return data of the payload.
      */
     getPayload(name?: string) {

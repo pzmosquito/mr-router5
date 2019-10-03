@@ -3,27 +3,22 @@ import RouteView from "./RouteView";
 import RouteExtra from "./RouteExtra";
 
 
-/**
- * @class
- */
+
 export default class RouteTree extends RouteExtra {
     /**
      * hold array of all route views.
-     * @member
      * @private
      */
     private routeViews: RouteView[] = [];
 
     /**
      * reference of router5 router instance.
-     * @member
      * @private
      */
     private router: Router = null;
 
     /**
      * create a route tree.
-     * @constructor
      * @param routeViews - array of route view objects.
      */
     constructor(routeViews: RouteView[] = []) {
