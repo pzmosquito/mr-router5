@@ -76,13 +76,18 @@ router.start(() => {
 <a name="dataloader"></a>
 ## dataloaderMiddleware
 
-We sometimes need to load data during the route transition. `mr-router5` supports data loaders at route level or at global level.
+We oftentimes need to load data during route transition. `mr-router5` supports data loaders at route level and global level.
+
+ dataloader middleware will pass a single object with following properties to loader function
+ - `toState` - the 'to' state of the transition,
+ - `fromState` - the 'from' state of the transition,
+ - `routeTree` - the route tree instance,
+ - `router` - the router5 router instance,
+ - `carriedData`- data resolved or returned from previous loader function.
 
 ```js
 import { dataloaderMiddleware, RouteTree, RouteView, DataLoader, initMrRouter5 } from "mr-router5";
 import createRouter from "router5";
-
-// dataloader middleware will pass an object consists of `toState`, `fromState`, `routeTree`, `router`, `carriedData` properties as argument to loader functions.
 
 const checkAuth = () => { /* check auth */ }
 
@@ -90,19 +95,33 @@ const getData = () => Promise.resolve("test data");
 
 const processData = ({ carriedData }) => console.log(carriedData);
 
-// define route tree
 const routeTree = new RouteTree([
     new RouteView({name: "user", path: "/user"}, UserComponent)
+        // add data loaders to route view
         .addDataLoaders(
-            new DataLoader(getData), // data resolved here can be carried over to next data loader.
+            new DataLoader(getData), // data resolved or returned can be carried over to next data loader.
             new DataLoader(processData), // this will log "test data"
         )
-        .mergeDataLoaders() // call global data loaders after `addDataLoaders()`, global loaders can be defined later.
+
+        /**
+         * mark the position for calling global data loaders.
+         * 
+         * NOTE, it doesn't insert global data loaders, it only 
+         * marks the position to call global loaders during data loading.
+         * 
+         * Therefore global data loaders can be defined at anytime,
+         * and will be included during data loading.
+         **/
+        .mergeDataLoaders()
 
 ]);
 
-// add global data loader to route tree.
-// global loaders will not be auto loaded, you need to call `mergeDataLoaders()` to tell route view to load it.
+/**
+ * add global data loader to route tree.
+ * 
+ * NOTE, global loaders will not be auto loaded,
+ * you will need to call `mergeDataLoaders()` to mark the route view to load it.
+ **/
 routeTree.addDataLoaders(new DataLoader(checkAuth));
 
 const router = createRouter(routeTree.getRoutes(), {});
@@ -116,19 +135,22 @@ initMrRouter5(router, routeTree);
 <a name="payload"></a>
 ## payload
 
-You can set payload to route view or route tree.
+You can set payload to route view or route tree. This is the extra data you want to include to the route or during the route transition.
 
 ```js
-// set payload
 const routeTree = new RouteTree([
-    new RouteView({name: "user", path: "/user"}, UserComponent).setPayload("user", "John Doe")
+    new RouteView({name: "user", path: "/user"}, UserComponent)
+        // set payload to route view
+        .setPayload("user", "John Doe")
 ]);
 
+// set global payload to route tree
 routeTree.setPayload({ userList: ["John Doe", "Jane Doe"], loggedIn: true });
 
-// retrieve payload
+// retrieve route level payload
 routerStore.toRouteView.getPayload("user"); // John Doe
 
+// retrieve global level payload
 routeStore.routeTree.getPayload("userList"); // ["John Doe", "Jane Doe"]
 
 // or retrieve all payload

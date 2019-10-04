@@ -37,6 +37,7 @@ export default class RouteTree extends RouteExtra {
 
     /**
      * add route views to the route tree and router.
+     * NOTE, must be called after `initMrRouter5()` has been called.
      * @param routeViews - route views to be added.
      */
     addRouteViews(routeViews: RouteView[]) {
