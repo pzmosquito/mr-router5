@@ -24,14 +24,15 @@
   },
   "homepage": "https://github.com/pzmosquito/mr-router5#readme",
   "main": "dist/index.js",
-  "types": "src/types.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "doc": "rm -rf ../docs && typedoc --options ./typedoc.js ./src",
+    "dts": "rm -rf types && tsc -p .",
     "build": "webpack",
     "build:watch": "webpack --watch",
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watchAll",
-    "publish": "npm run build && npm publish"
+    "publish": "npm run doc && npm run dts && npm run build && npm publish"
   },
   "peerDependencies": {
     "mobx": "^4.0.0 || ^5.0.0",
