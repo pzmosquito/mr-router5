@@ -1,0 +1,9 @@
+.browserslistrc
+babel.config.js
+coverage/
+jest.config.js
+setupTests.js
+src/
+tsconfig.json
+typedoc.js
+webpack.config.js

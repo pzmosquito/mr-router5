@@ -32,7 +32,7 @@
     "build:watch": "webpack --watch",
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watchAll",
-    "publish": "npm run dts && npm run build && npm publish"
+    "prepublish": "npm run dts && npm run build"
   },
   "peerDependencies": {
     "mobx": "^4.0.0 || ^5.0.0",
