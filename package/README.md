@@ -97,12 +97,6 @@ const processData = ({ carriedData }) => console.log(carriedData);
 
 const routeTree = new RouteTree([
     new RouteView({name: "user", path: "/user"}, UserComponent)
-        // add data loaders to route view
-        .addDataLoaders(
-            new DataLoader(getData), // data resolved or returned can be carried over to next data loader.
-            new DataLoader(processData), // this will log "test data"
-        )
-
         /**
          * mark the position for calling global data loaders.
          * 
@@ -113,6 +107,12 @@ const routeTree = new RouteTree([
          * and will be included during data loading.
          **/
         .mergeDataLoaders()
+        
+        // add data loaders to route view
+        .addDataLoaders(
+            new DataLoader(getData), // data resolved or returned can be carried over to next data loader.
+            new DataLoader(processData), // this will log "test data"
+        )
 
 ]);
 
