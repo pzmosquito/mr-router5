@@ -53,7 +53,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "jest": "^24.9.0",
-    "mobx": "^5.13.1",
+    "mobx": "^5.14.2",
     "mobx-react-lite": "^1.5.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
