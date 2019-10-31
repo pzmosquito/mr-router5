@@ -59,7 +59,7 @@
     "router5": "^7.0.2",
     "typedoc": "^0.15.0",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "router5-transition-path": "^7.0.1"

@@ -26,7 +26,7 @@ First of all, router5 is just better than `react-router` IMO, simple, powerful, 
 ## Reference
 
 - [API docs](https://pzmosquito.github.io/mr-router5/)
-- [payload & data loader](#extra)
+- [payload](#payload)
 
 
 ## Basic Usage
@@ -73,43 +73,43 @@ router.start(() => {
 });
 ```
 
-<a name="extra"></a>
-## payload & data loader
+<a name="payload"></a>
+## payload
 
-You can set payload and data loader to route view or route tree. There are many ways to use payload and data loader, one example will be using middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
+You can use `extra` and `dataLoader` to route view or route tree. `extra` and `dataLoader` are simply JS Map. There are many ways to use them, one example will be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
+
+Currently, there's no difference between `extra` and `dataLoader` in terms of functionality. I keep them for future improvements.
 
 ```js
 const routeTree = new RouteTree([
     // set payload and data loader at route view level
     new RouteView({name: "login", path: "/login"}, Login)
-        .setPayload("requireLogin", false),
+        .extra.set("requireLogin", false),
     new RouteView({name: "user", path: "/user"}, UserComponent)
-        .setPayload("user", "John Doe")
-        .setDataLoader("getUserDetail", (user) => ({ /* user details */ }))
+        .extra.set("user", "John Doe")
+        .dataLoader.set("getUserDetail", (user) => ({ /* user details */ }))
 ]);
 
 // set payload and data loader at route tree level
-routeTree
-    .setPayload("requireLogin", true),
-    .setDataLoader("checkLogin", () => { /* check if user is logged in */ });
+routeTree.extra.set("requireLogin", true);
 
 // write middleware
 router.useMiddleware((router) => (toState, fromState, done) => {
     // get route view of the toState
     const rv = routeTree.getRouteView(toState.name);
     
-    // check route view's 'requireLogin' payload, default to routeTree's payload if doesn't exist
-    const requireLogin = rv.getPayload("requireLogin", routeTree.getPayload("requireLogin"));
+    // `getExtra()` and `getDataLoader()` are helper functions to get data with optional default value.
+    const requireLogin = rv.getExtra("requireLogin", routeTree.extra.get("requireLogin"));
     
     if (!requireLogin) {
         done();
         return;
     }
 
-    const isLoggedIn = routeTree.getDataLoader("checkLogin")();
+    const isLoggedIn = true; // check if user is logged in
     if (isLoggedIn) {
-        const user = rv.getPayload("user");
-        const userDetail = routeTree.getRouteView(toState.name).getDataLoader("getUserDetail")(user);
+        const user = rv.extra.get("user");
+        const userDetail = rv.dataLoader.get("getUserDetail")(user);
         // process and store userDetail
         done();
     }
