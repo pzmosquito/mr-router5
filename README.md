@@ -8,7 +8,7 @@ mr-router5 uses [Router5](https://router5.js.org) together with [MobX](https://m
 
 ## Why mr-router5
 
-First of all, router5 is just better than `react-router` IMO, simple, powerful, clean implementation. router5 has `react-router5` package that works with React application. However, using MobX makes the connection so much easier. `mr-router5` also has additional features that make route transition much more powerful and flexible.
+mr-router5 creates a minimal bridge between router5, MobX and React. When I say 'minimal bridge', I really mean it. Your React components stay untouched, there's no need to create HOC for your root App component. The global and route level payload makes the route transition more flexible and powerful.
 
 
 ## Peer Dependencies
@@ -49,7 +49,7 @@ const UserView = () => <div>'user view' component</div>;
 const routeTree = new RouteTree([
     new RouteView({name: "home", path: "/"}, Home),
     new RouteView({name: "users", path: "/users"}, UserNode),
-    new RouteView({name: "users.list", path: "/list"}, UserList)),
+    new RouteView({name: "users.list", path: "/list"}, UserList),
     new RouteView({name: "users.view", path: "/view"}, UserView),
 ]);
 
