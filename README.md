@@ -76,18 +76,19 @@ router.start(() => {
 <a name="payload"></a>
 ## payload
 
-You can use `extra` and `dataLoader` to route view or route tree. `extra` and `dataLoader` are simply JS Map. There are many ways to use them, one example will be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
+You can use `extra` and `dataLoader` for route view or route tree. `extra` and `dataLoader` are simply JS Map. There are many ways to use them, one example will be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
 
 Currently, there's no difference between `extra` and `dataLoader` in terms of functionality. I keep them for future improvements.
 
 ```js
 const routeTree = new RouteTree([
     // set payload and data loader at route view level
+    // `setExtra()` and `setDataLoader()` are helper functions to set data cascadingly.
     new RouteView({name: "login", path: "/login"}, Login)
-        .extra.set("requireLogin", false),
+        .setExtra("requireLogin", false),
     new RouteView({name: "user", path: "/user"}, UserComponent)
-        .extra.set("user", "John Doe")
-        .dataLoader.set("getUserDetail", (user) => ({ /* user details */ }))
+        .setExtra("user", "John Doe")
+        .setDataLoader("getUserDetail", (user) => ({ /* user details */ }))
 ]);
 
 // set payload and data loader at route tree level

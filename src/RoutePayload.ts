@@ -30,6 +30,26 @@ export default class RoutePayload {
     }
 
     /**
+     * helper function to set extra for chaining purpose.
+     * @param key - key of the extra.
+     * @param value - value of the extra.
+     */
+    setExtra(key: any, value: any) {
+        this._extra.set(key, value);
+        return this;
+    }
+
+    /**
+     * helper function to set dataLoader for chaining purpose.
+     * @param key - key of the dataLoader.
+     * @param value - value of the dataLoader.
+     */
+    setDataLoader(key: any, value: any) {
+        this._dataLoader.set(key, value);
+        return this;
+    }
+
+    /**
      * retrieve value of the data with default value.
      * @param data - which data to use.
      * @param key - key of the data.
