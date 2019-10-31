@@ -4,20 +4,12 @@ import { observer } from "mobx-react-lite";
 import RouterStore from "./RouterStore";
 import RouteTree from "./RouteTree";
 import RouteView from "./RouteView";
-import dataloaderMiddlewareWrapper from "./dataloader-middleware";
-import DataLoader from "./DataLoader";
 
 
 /**
  * @constant
  */
 const routerStore = new RouterStore();
-
-
-/**
- * @constant
- */
-const dataloaderMiddleware = dataloaderMiddlewareWrapper(routerStore);
 
 
 /**
@@ -45,8 +37,6 @@ export {
     RouteTree,
     RouteView,
     routerStore,
-    DataLoader,
-    dataloaderMiddleware,
     RouteComponent,
     initMrRouter5,
 };

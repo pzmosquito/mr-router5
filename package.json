@@ -26,10 +26,9 @@
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "doc": "rm -rf ../docs && typedoc --options ./typedoc.js ./src",
-    "dts": "rm -rf types && tsc -p .",
+    "doc": "rm -rf ./docs && typedoc --options ./typedoc.js ./src",
+    "dts": "rm -rf ./types && tsc --emitDeclarationOnly -p .",
     "build": "webpack",
-    "build:watch": "webpack --watch",
     "test": "jest --coverage",
     "test:watch": "npm run test -- --watchAll",
     "prepublish": "npm run dts && npm run build"
@@ -47,8 +46,8 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
     "@types/enzyme": "^3.10.3",
-    "@types/jest": "^24.0.19",
-    "@types/react": "^16.9.10",
+    "@types/jest": "^24.0.21",
+    "@types/react": "^16.9.11",
     "babel-loader": "^8.0.6",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",

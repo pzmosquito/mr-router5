@@ -1,10 +1,9 @@
 import React from "react";
 import { Route } from "router5";
-import RouteExtra from "./RouteExtra";
-import MergeDataLoaderTag from "./MergeDataLoaderTag";
+import RoutePayload from "./RoutePayload";
 
 
-export default class RouteView extends RouteExtra {
+export default class RouteView extends RoutePayload {
     /**
      * the router5 route object.
      * @private
@@ -40,17 +39,5 @@ export default class RouteView extends RouteExtra {
      */
     get route() {
         return this._route;
-    }
-
-    /**
-     * add MergeDataLoaderTag to dataLoaders as placeholder for merging global data laoders.
-     */
-    mergeDataLoaders() {
-        if (this.getDataLoaders().find(dl => dl instanceof MergeDataLoaderTag)) {
-            throw new Error("data loaders have been merged already");
-        }
-        this.addDataLoaders(RouteExtra.createMergeDataLoaderTag());
-
-        return this;
     }
 }
