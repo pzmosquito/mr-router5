@@ -1,10 +1,10 @@
 import { Router } from "router5";
 import RouteView from "./RouteView";
-import RouteExtra from "./RouteExtra";
+import RoutePayload from "./RoutePayload";
 
 
 
-export default class RouteTree extends RouteExtra {
+export default class RouteTree extends RoutePayload {
     /**
      * hold array of all route views.
      * @private
@@ -45,6 +45,7 @@ export default class RouteTree extends RouteExtra {
             throw new Error("router store must be initialized first.")
         }
         this.routeViews.push(...routeViews);
+        this.router.add(routeViews.map((rv) => rv.route));
     }
 
     /**

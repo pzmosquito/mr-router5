@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">RouteExtra</span>
+						<a href="routepayload.html" class="tsd-signature-type">RoutePayload</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">RouteView</span>
@@ -97,17 +97,16 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#dataloader" class="tsd-kind-icon">data<wbr>Loader</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#extra" class="tsd-kind-icon">extra</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="routeview.html#route" class="tsd-kind-icon">route</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#adddataloaders" class="tsd-kind-icon">add<wbr>Data<wbr>Loaders</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#getdataloaders" class="tsd-kind-icon">get<wbr>Data<wbr>Loaders</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#getpayload" class="tsd-kind-icon">get<wbr>Payload</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="routeview.html#mergedataloaders" class="tsd-kind-icon">merge<wbr>Data<wbr>Loaders</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#setpayload" class="tsd-kind-icon">set<wbr>Payload</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#getdataloader" class="tsd-kind-icon">get<wbr>Data<wbr>Loader</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="routeview.html#getextra" class="tsd-kind-icon">get<wbr>Extra</a></li>
 							</ul>
 						</section>
 					</div>
@@ -125,7 +124,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteView.ts#L22">RouteView.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RouteView.ts#L21">RouteView.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -178,7 +177,7 @@
 					<div class="tsd-signature tsd-kind-icon">component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">React.ComponentType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteView.ts#L17">RouteView.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RouteView.ts#L16">RouteView.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -193,7 +192,7 @@
 					<div class="tsd-signature tsd-kind-icon">props<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> =&nbsp;null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteView.ts#L22">RouteView.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RouteView.ts#L21">RouteView.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -213,6 +212,52 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="dataloader" class="tsd-anchor"></a>
+					<h3>data<wbr>Loader</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> dataLoader<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="routepayload.html">RoutePayload</a>.<a href="routepayload.html#dataloader">dataLoader</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RoutePayload.ts#L28">RoutePayload.ts:28</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getter of data loader.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="extra" class="tsd-anchor"></a>
+					<h3>extra</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> extra<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="routepayload.html">RoutePayload</a>.<a href="routepayload.html#extra">extra</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RoutePayload.ts#L21">RoutePayload.ts:21</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>getter of extra data.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="route" class="tsd-anchor"></a>
 					<h3>route</h3>
@@ -223,7 +268,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteView.ts#L41">RouteView.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RouteView.ts#L40">RouteView.ts:40</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -237,153 +282,81 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="adddataloaders" class="tsd-anchor"></a>
-					<h3>add<wbr>Data<wbr>Loaders</h3>
+					<a name="getdataloader" class="tsd-anchor"></a>
+					<h3>get<wbr>Data<wbr>Loader</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>Data<wbr>Loaders<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>dataLoaders<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="dataloader.html" class="tsd-signature-type">DataLoader</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MergeDataLoaderTag</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Data<wbr>Loader<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, defaultValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from RouteExtra.addDataLoaders</p>
+								<p>Inherited from <a href="routepayload.html">RoutePayload</a>.<a href="routepayload.html#getdataloader">getDataLoader</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteExtra.ts#L59">RouteExtra.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RoutePayload.ts#L60">RoutePayload.ts:60</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>add data loaders.</p>
+									<p>retrieve dataLoader data with optional default value.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>dataLoaders: <span class="tsd-signature-symbol">(</span><a href="dataloader.html" class="tsd-signature-type">DataLoader</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MergeDataLoaderTag</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>key: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>data loaders to add.</p>
+										<p>key of the dataLoader.</p>
 									</div>
 								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="getdataloaders" class="tsd-anchor"></a>
-					<h3>get<wbr>Data<wbr>Loaders</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Data<wbr>Loaders<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="dataloader.html" class="tsd-signature-type">DataLoader</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MergeDataLoaderTag</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from RouteExtra.getDataLoaders</p>
-								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteExtra.ts#L67">RouteExtra.ts:67</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>get all data loaders.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><a href="dataloader.html" class="tsd-signature-type">DataLoader</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MergeDataLoaderTag</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="getpayload" class="tsd-anchor"></a>
-					<h3>get<wbr>Payload</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Payload<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from RouteExtra.getPayload</p>
-								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteExtra.ts#L48">RouteExtra.ts:48</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>retrieve payload by name or all payload if name is not provided.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> defaultValue: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>name of the payload.</p>
+										<p>default value.</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-							<p>data of the payload.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="mergedataloaders" class="tsd-anchor"></a>
-					<h3>merge<wbr>Data<wbr>Loaders</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">merge<wbr>Data<wbr>Loaders<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteView.ts#L48">RouteView.ts:48</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>add MergeDataLoaderTag to dataLoaders as placeholder for merging global data laoders.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="setpayload" class="tsd-anchor"></a>
-					<h3>set<wbr>Payload</h3>
+					<a name="getextra" class="tsd-anchor"></a>
+					<h3>get<wbr>Extra</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Payload<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span>, data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Extra<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, defaultValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from RouteExtra.setPayload</p>
+								<p>Inherited from <a href="routepayload.html">RoutePayload</a>.<a href="routepayload.html#getextra">getExtra</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/c36a495/package/src/RouteExtra.ts#L27">RouteExtra.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/60e9842/src/RoutePayload.ts#L51">RoutePayload.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>set payload.</p>
+									<p>retrieve extra data with optional default value.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span></h5>
+									<h5>key: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>name of the payload of Object to set.</p>
+										<p>key of the extra.</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> data: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> defaultValue: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the data of the payload if &#39;name&#39; param is string.</p>
+										<p>default value.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -399,8 +372,8 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="dataloader.html" class="tsd-kind-icon">Data<wbr>Loader</a>
+					<li class=" tsd-kind-class tsd-is-private">
+						<a href="routepayload.html" class="tsd-kind-icon">Route<wbr>Payload</a>
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="routetree.html" class="tsd-kind-icon">Route<wbr>Tree</a>
@@ -419,23 +392,20 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="routeview.html#props" class="tsd-kind-icon">props</a>
 							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="routeview.html#dataloader" class="tsd-kind-icon">data<wbr>Loader</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="routeview.html#extra" class="tsd-kind-icon">extra</a>
+							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="routeview.html#route" class="tsd-kind-icon">route</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="routeview.html#adddataloaders" class="tsd-kind-icon">add<wbr>Data<wbr>Loaders</a>
+								<a href="routeview.html#getdataloader" class="tsd-kind-icon">get<wbr>Data<wbr>Loader</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="routeview.html#getdataloaders" class="tsd-kind-icon">get<wbr>Data<wbr>Loaders</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="routeview.html#getpayload" class="tsd-kind-icon">get<wbr>Payload</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="routeview.html#mergedataloaders" class="tsd-kind-icon">merge<wbr>Data<wbr>Loaders</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="routeview.html#setpayload" class="tsd-kind-icon">set<wbr>Payload</a>
+								<a href="routeview.html#getextra" class="tsd-kind-icon">get<wbr>Extra</a>
 							</li>
 						</ul>
 					</li>

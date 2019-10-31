@@ -28,9 +28,14 @@ test("getRouteView - addRouteViews()", () => {
 
     expect(routeTree.getRouteView("r1")).toBe(routeViews[0]);
     expect(routeTree.getRouteView("r2")).toBe(routeViews[1]);
+    expect(router.buildPath("r1")).toBe("/r1");
+    expect(router.buildPath("r2")).toBe("/r2");
+
+    expect(router.buildPath("r3")).toBe(null);
     expect(() => {
         routeTree.getRouteView("r3");
     }).toThrow();
+
 });
 
 test("getRouteView - addRouteViews() without setting router", () => {
@@ -48,10 +53,3 @@ test("getRoutes", () => {
     expect(routes[0].name).toBe("r1");
     expect(routes[1].name).toBe("r2");
 });
-
-// test("extends RoutePayload", () => {
-//     const routeTree = new RouteTree();
-
-//     expect(Object.keys(routeTree.getExtra()).length).toBe(0);
-//     expect(routeTree.getPreloader()).toBe(null);
-// })

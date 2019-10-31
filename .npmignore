@@ -1,9 +1,12 @@
-.browserslistrc
-babel.config.js
 coverage/
+docs/
+src/
+.browserslistrc
+.editorconfig
+.gitignore
+babel.config.js
 jest.config.js
 setupTests.js
-src/
 tsconfig.json
 typedoc.js
 webpack.config.js

@@ -8,8 +8,7 @@
     "target": "es6",
     "jsx": "react",
     "declaration": true,
-    "declarationDir": "types",
-    "emitDeclarationOnly": true
+    "declarationDir": "types"
   },
   "exclude": [
     "./src/__tests__"
