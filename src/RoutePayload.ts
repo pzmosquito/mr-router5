@@ -2,6 +2,13 @@
  * @private
  */
 export default class RoutePayload {
+    constructor() {
+        this.setExtra = this.setExtra.bind(this);
+        this.setDataLoader = this.setDataLoader.bind(this);
+        this.getExtra = this.getExtra.bind(this);
+        this.getDataLoader = this.getDataLoader.bind(this);
+    }
+
     /**
      * hold extra data.
      * @private

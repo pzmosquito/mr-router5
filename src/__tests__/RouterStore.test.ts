@@ -20,8 +20,10 @@ test("routerStore.routeUpdated()", () => {
     initMrRouter5(router, routeTree);
     router.start("/");
 
+    const { getRouteNode } = routerStore;
+
     router.navigate("users.view", () => {
         expect(routerStore.route.name).toBe("users.view");
-        expect(routerStore.getRouteNode("users").component).toBe(UserViewComponent);
+        expect(getRouteNode("users").component).toBe(UserViewComponent);
     });
 });

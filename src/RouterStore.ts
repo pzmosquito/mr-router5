@@ -6,6 +6,10 @@ import RouteView from "./RouteView";
 
 
 export default class RouterStore {
+    constructor() {
+        this.getRouteNode = this.getRouteNode.bind(this);
+    }
+
     /**
      * the observable 'to' state route.
      */

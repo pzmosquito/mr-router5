@@ -24,6 +24,11 @@ export default class RouteTree extends RoutePayload {
     constructor(routeViews: RouteView[] = []) {
         super();
         this.routeViews = routeViews;
+
+        this.setRouter = this.setRouter.bind(this);
+        this.addRouteViews = this.addRouteViews.bind(this);
+        this.getRoutes = this.getRoutes.bind(this);
+        this.getRouteView = this.getRouteView.bind(this);
     }
 
     /**

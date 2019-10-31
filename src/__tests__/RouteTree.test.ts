@@ -11,43 +11,44 @@ const routeViews = [
 
 test("getRouteView - constructor()", () => {
     const routeTree = new RouteTree(routeViews);
+    const { getRouteView } = routeTree;
 
     expect(() => {
         routeTree.getRouteView("r3")
     }).toThrow();
     expect(routeTree.getRouteView("r1")).toBe(routeViews[0]);
-    expect(routeTree.getRouteView("r2")).toBe(routeViews[1]);
+    expect(getRouteView("r2")).toBe(routeViews[1]);
 });
 
 test("getRouteView - addRouteViews()", () => {
     const router = createRouter();
-    const routeTree = new RouteTree();
-    routeTree.setRouter(router);
-    routeTree.addRouteViews(routeViews);
+    const { setRouter, addRouteViews, getRouteView } = new RouteTree();
+    setRouter(router);
+    addRouteViews(routeViews);
     router.start("/r1");
 
-    expect(routeTree.getRouteView("r1")).toBe(routeViews[0]);
-    expect(routeTree.getRouteView("r2")).toBe(routeViews[1]);
+    expect(getRouteView("r1")).toBe(routeViews[0]);
+    expect(getRouteView("r2")).toBe(routeViews[1]);
     expect(router.buildPath("r1")).toBe("/r1");
     expect(router.buildPath("r2")).toBe("/r2");
 
     expect(router.buildPath("r3")).toBe(null);
     expect(() => {
-        routeTree.getRouteView("r3");
+        getRouteView("r3");
     }).toThrow();
 
 });
 
 test("getRouteView - addRouteViews() without setting router", () => {
-    const routeTree = new RouteTree();
+    const { addRouteViews } = new RouteTree();
     expect(() => {
-        routeTree.addRouteViews(routeViews);
+        addRouteViews(routeViews);
     }).toThrow();
 });
 
 test("getRoutes", () => {
-    const routeTree = new RouteTree(routeViews);
-    const routes = routeTree.getRoutes();
+    const { getRoutes } = new RouteTree(routeViews);
+    const routes = getRoutes();
 
     expect(routes.length).toBe(2);
     expect(routes[0].name).toBe("r1");
