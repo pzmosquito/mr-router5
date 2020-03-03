@@ -32,7 +32,6 @@ test("getRouteView - addRouteViews()", () => {
     expect(router.buildPath("r1")).toBe("/r1");
     expect(router.buildPath("r2")).toBe("/r2");
 
-    expect(router.buildPath("r3")).toBe(null);
     expect(() => {
         getRouteView("r3");
     }).toThrow();
