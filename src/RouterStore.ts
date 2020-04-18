@@ -58,6 +58,7 @@ export default class RouterStore {
      * @param routeTree - route tree instance.
      * @private
      */
+    @action.bound
     init(router: Router, routeTree: RouteTree) {
         this.route = null;
         this.previousRoute = null;

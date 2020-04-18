@@ -1,9 +1,18 @@
 import React from "react";
+// import { configure } from "mobx";
 import { Router } from "router5";
 import { observer } from "mobx-react-lite";
 import RouterStore from "./RouterStore";
 import RouteTree from "./RouteTree";
 import RouteView from "./RouteView";
+
+
+/**
+ * configure mobx
+ */
+// configure({
+//     enforceActions: "observed",
+// });
 
 
 /**
