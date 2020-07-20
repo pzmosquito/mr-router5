@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "mr-router5 uses Router5 together with MobX for your favorite React application.",
   "keywords": [
     "router5",
@@ -40,27 +40,27 @@
     "router5": "^7.0.0 || ^8.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-decorators": "^7.8.3",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/preset-typescript": "^7.9.0",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@types/enzyme": "^3.10.5",
-    "@types/jest": "^25.2.1",
-    "@types/react": "^16.9.34",
+    "@types/jest": "^26.0.5",
+    "@types/react": "^16.9.43",
     "babel-loader": "^8.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "jest": "^26.0.1",
+    "jest": "^26.1.0",
     "mobx": "^5.15.4",
-    "mobx-react-lite": "^2.0.6",
+    "mobx-react-lite": "^2.0.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "router5": "^8.0.1",
-    "typedoc": "^0.17.6",
-    "typescript": "^3.8.3",
+    "typedoc": "^0.17.8",
+    "typescript": "^3.9.7",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "router5-transition-path": "^8.0.1"
