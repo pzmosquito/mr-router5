@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>RouterStore | mr-router5</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for mr-router5">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -94,7 +94,7 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="routerstore.html#routetree" class="tsd-kind-icon">route<wbr>Tree</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="routerstore.html#routeviews" class="tsd-kind-icon">route<wbr>Views</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="routerstore.html#router" class="tsd-kind-icon">router</a></li>
 							</ul>
 						</section>
@@ -102,7 +102,8 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="routerstore.html#getroutenode" class="tsd-kind-icon">get<wbr>Route<wbr>Node</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="routerstore.html#init" class="tsd-kind-icon">init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="routerstore.html#getrouteview" class="tsd-kind-icon">get<wbr>Route<wbr>View</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="routerstore.html#toroutes" class="tsd-kind-icon">to<wbr>Routes</a></li>
 							</ul>
 						</section>
 					</div>
@@ -120,7 +121,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L8">RouterStore.ts:8</a></li>
+									<li>Defined in src/RouterStore.ts:7</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="routerstore.html" class="tsd-signature-type">RouterStore</a></h4>
@@ -136,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">previous<wbr>Route<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">State</span><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L23">RouterStore.ts:23</a></li>
+							<li>Defined in src/RouterStore.ts:24</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -151,7 +152,7 @@
 					<div class="tsd-signature tsd-kind-icon">previous<wbr>Route<wbr>View<span class="tsd-signature-symbol">:</span> <a href="routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L35">RouterStore.ts:35</a></li>
+							<li>Defined in src/RouterStore.ts:36</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -166,7 +167,7 @@
 					<div class="tsd-signature tsd-kind-icon">route<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">State</span><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L17">RouterStore.ts:17</a></li>
+							<li>Defined in src/RouterStore.ts:18</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -181,7 +182,7 @@
 					<div class="tsd-signature tsd-kind-icon">route<wbr>View<span class="tsd-signature-symbol">:</span> <a href="routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol"> = null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L29">RouterStore.ts:29</a></li>
+							<li>Defined in src/RouterStore.ts:30</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -194,24 +195,24 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="routetree" class="tsd-anchor"></a>
-					<h3>route<wbr>Tree</h3>
+					<a name="routeviews" class="tsd-anchor"></a>
+					<h3>route<wbr>Views</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> routeTree<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="routetree.html" class="tsd-signature-type">RouteTree</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> routeViews<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L85">RouterStore.ts:85</a></li>
+									<li>Defined in src/RouterStore.ts:87</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>reference of route tree instance</p>
+									<p>array of the route views.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <a href="routetree.html" class="tsd-signature-type">RouteTree</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -219,21 +220,21 @@
 					<a name="router" class="tsd-anchor"></a>
 					<h3>router</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> router<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> router<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L78">RouterStore.ts:78</a></li>
+									<li>Defined in src/RouterStore.ts:80</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>reference of router instance</p>
+									<p>reference of router instance.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Router</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Router</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -250,7 +251,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L119">RouterStore.ts:119</a></li>
+									<li>Defined in src/RouterStore.ts:137</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -272,40 +273,65 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="init" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> init</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>router<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Router</span>, routeTree<span class="tsd-signature-symbol">: </span><a href="routetree.html" class="tsd-signature-type">RouteTree</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getrouteview" class="tsd-anchor"></a>
+					<h3>get<wbr>Route<wbr>View</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Route<wbr>View<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="routeview.html" class="tsd-signature-type">RouteView</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pzmosquito/mr-router5/blob/33d6086/src/RouterStore.ts#L61">RouterStore.ts:61</a></li>
+									<li>Defined in src/RouterStore.ts:95</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>initialize router store.</p>
+									<p>retrieve the route view instance of a given route name.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>router: <span class="tsd-signature-type">Router</span></h5>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>router5 router instance.</p>
-									</div>
-								</li>
-								<li>
-									<h5>routeTree: <a href="routetree.html" class="tsd-signature-type">RouteTree</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>route tree instance.</p>
+										<p>name of the route.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="routeview.html" class="tsd-signature-type">RouteView</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="toroutes" class="tsd-anchor"></a>
+					<h3>to<wbr>Routes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Routes<span class="tsd-signature-symbol">(</span>routeViews<span class="tsd-signature-symbol">: </span><a href="routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in src/RouterStore.ts:103</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>convert array of route views to array of routes.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>routeViews: <a href="routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>array of route views.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -321,12 +347,6 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-is-private">
-						<a href="routepayload.html" class="tsd-kind-icon">Route<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="routetree.html" class="tsd-kind-icon">Route<wbr>Tree</a>
-					</li>
 					<li class=" tsd-kind-class">
 						<a href="routeview.html" class="tsd-kind-icon">Route<wbr>View</a>
 					</li>
@@ -351,7 +371,7 @@
 								<a href="routerstore.html#routeview" class="tsd-kind-icon">route<wbr>View</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="routerstore.html#routetree" class="tsd-kind-icon">route<wbr>Tree</a>
+								<a href="routerstore.html#routeviews" class="tsd-kind-icon">route<wbr>Views</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="routerstore.html#router" class="tsd-kind-icon">router</a>
@@ -359,8 +379,11 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="routerstore.html#getroutenode" class="tsd-kind-icon">get<wbr>Route<wbr>Node</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="routerstore.html#init" class="tsd-kind-icon">init</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="routerstore.html#getrouteview" class="tsd-kind-icon">get<wbr>Route<wbr>View</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="routerstore.html#toroutes" class="tsd-kind-icon">to<wbr>Routes</a>
 							</li>
 						</ul>
 					</li>
@@ -372,9 +395,6 @@
 					<li class=" tsd-kind-variable">
 						<a href="../index.html#routerstore" class="tsd-kind-icon">router<wbr>Store</a>
 					</li>
-					<li class=" tsd-kind-function">
-						<a href="../index.html#initmrrouter5" class="tsd-kind-icon">init<wbr>MrRouter5</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -385,57 +405,12 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
@@ -445,6 +420,5 @@
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

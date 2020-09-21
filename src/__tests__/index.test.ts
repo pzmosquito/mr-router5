@@ -1,8 +1,7 @@
 import React from "react";
 import createRouter, { Router } from "router5";
 import { shallow } from "enzyme";
-import { initMrRouter5, routerStore, RouteComponent } from "..";
-import RouteTree from "../RouteTree";
+import { routerStore, RouteComponent } from "..";
 import RouteView from "../RouteView";
 
 
@@ -11,17 +10,17 @@ const LoginComponent = () => React.createElement("<div>Login Element</div>");
 const UserRouteNode = () => React.createElement("<RouteComponent />", { routeNodeName: "users" });
 const UserViewComponent = () => React.createElement("<div>User View Element</div>");
 
-const routeTree = new RouteTree([
+const routeViews = [
     new RouteView({ name: "home", path: "/" }, HomeComponent),
     new RouteView({ name: "login", path: "/login" }, LoginComponent),
     new RouteView({ name: "users", path: "/users" }, UserRouteNode),
     new RouteView({ name: "users.view", path: "/view" }, UserViewComponent, { userId: 0 }),
-]);
+];
 
 let router: Router = null;
 
 beforeEach(() => {
-    router = createRouter(routeTree.getRoutes());
+    router = createRouter(routerStore.toRoutes(routeViews));
 });
 
 afterEach(() => {
@@ -30,13 +29,13 @@ afterEach(() => {
 
 
 test("connectRouter", () => {
-    initMrRouter5(router, routeTree);
+    routerStore.init(router, routeViews);
     expect(routerStore.router).toBe(router);
-    expect(routerStore.routeTree).toBe(routeTree);
+    expect(routerStore.routeViews).toBe(routeViews);
 });
 
 test("RouteComponent", () => {
-    initMrRouter5(router, routeTree);
+    routerStore.init(router, routeViews);
     router.start("/");
 
     let elem;

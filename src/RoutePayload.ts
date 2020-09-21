@@ -21,21 +21,6 @@ export default class RoutePayload {
      */
     private _dataLoader = new Map();
 
-
-    /**
-     * getter of extra data.
-     */
-    get extra() {
-        return this._extra;
-    }
-
-    /**
-     * getter of data loader.
-     */
-    get dataLoader() {
-        return this._dataLoader;
-    }
-
     /**
      * helper function to set extra for chaining purpose.
      * @param key - key of the extra.
@@ -44,6 +29,16 @@ export default class RoutePayload {
     setExtra(key: any, value: any) {
         this._extra.set(key, value);
         return this;
+    }
+
+    /**
+     * retrieve extra data with optional default value.
+     * @param key - key of the extra.
+     * @param defaultValue - default value.
+     */
+    getExtra(key: any, defaultValue?: any) {
+        // return this.get(this._extra, key, defaultValue);
+        return this._extra.has(key) ? this._extra.get(key) : defaultValue;
     }
 
     /**
@@ -57,34 +52,12 @@ export default class RoutePayload {
     }
 
     /**
-     * retrieve value of the data with default value.
-     * @param data - which data to use.
-     * @param key - key of the data.
-     * @param defaultValue - default value.
-     * @return value of the key, or default value if key doesn't exist.
-     */
-    private get(data: any, key: any, defaultValue: any) {
-        if (data.has(key)) {
-            return data.get(key);
-        }
-        return defaultValue;
-    }
-
-    /**
-     * retrieve extra data with optional default value.
-     * @param key - key of the extra.
-     * @param defaultValue - default value.
-     */
-    getExtra(key: any, defaultValue?: any) {
-        return this.get(this._extra, key, defaultValue);
-    }
-
-    /**
      * retrieve dataLoader data with optional default value.
      * @param key - key of the dataLoader.
      * @param defaultValue - default value.
      */
     getDataLoader(key: any, defaultValue?: any) {
-        return this.get(this._dataLoader, key, defaultValue);
+        // return this.get(this._dataLoader, key, defaultValue);
+        return this._dataLoader.has(key) ? this._dataLoader.get(key) : defaultValue;
     }
 }

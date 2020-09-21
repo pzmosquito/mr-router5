@@ -1,13 +1,14 @@
 import { observable, action, ObservableMap } from "mobx";
 import { Router, SubscribeState, State } from "router5";
 import transitionPath from "router5-transition-path";
-import RouteTree from "./RouteTree";
 import RouteView from "./RouteView";
 
 
 export default class RouterStore {
     constructor() {
         this.getRouteNode = this.getRouteNode.bind(this);
+        this.getRouteView = this.getRouteView.bind(this);
+        this.toRoutes = this.toRoutes.bind(this);
     }
 
     /**
@@ -41,10 +42,10 @@ export default class RouterStore {
     private _router: Router = null;
 
     /**
-     * reference of route tree instance
+     * array of route views
      * @private
      */
-    private _routeTree: RouteTree = null;
+    private _routeViews: RouteView[] = null;
 
     /**
      * route component to activate for route nodes
@@ -55,18 +56,18 @@ export default class RouterStore {
     /**
      * initialize router store.
      * @param router - router5 router instance.
-     * @param routeTree - route tree instance.
+     * @param routeViews - array of route views.
      * @private
      */
     @action.bound
-    init(router: Router, routeTree: RouteTree) {
+    init(router: Router, routeViews: RouteView[]) {
         this.route = null;
         this.previousRoute = null;
         this.routeView = null;
         this.previousRouteView = null;
 
         this._router = router;
-        this._routeTree = routeTree;
+        this._routeViews = routeViews;
 
         this._router.subscribe(state => {
             this.routeUpdated(state);
@@ -74,17 +75,33 @@ export default class RouterStore {
     }
 
     /**
-     * reference of router instance
+     * reference of router instance.
      */
     get router() {
         return this._router;
     }
 
     /**
-     * reference of route tree instance
+     * array of the route views.
      */
-    get routeTree() {
-        return this._routeTree;
+    get routeViews() {
+        return this._routeViews;
+    }
+
+    /**
+     * retrieve the route view instance of a given route name.
+     * @param name - name of the route.
+     */
+    getRouteView(name: string) {
+        return this._routeViews.find((rv) => rv.route.name === name);
+    }
+
+    /**
+     * convert array of route views to array of routes.
+     * @param routeViews - array of route views.
+     */
+    toRoutes(routeViews: RouteView[]) {
+        return routeViews.map((rv) => rv.route);
     }
 
     /**
@@ -96,9 +113,9 @@ export default class RouterStore {
     private routeUpdated(state: SubscribeState) {
         this.route = state.route;
         this.previousRoute = state.previousRoute;
-        this.routeView = this._routeTree.getRouteView(this.route.name);
+        this.routeView = this.getRouteView(this.route.name);
         if (this.previousRoute) {
-            this.previousRouteView = this._routeTree.getRouteView(this.previousRoute.name);
+            this.previousRouteView = this.getRouteView(this.previousRoute.name);
         }
 
         const {intersection, toActivate} = transitionPath(this.route, this.previousRoute);
@@ -106,7 +123,7 @@ export default class RouterStore {
 
         for (let i = 0; i < activatePath.length - 1; i += 1) {
             const currRouteName = activatePath[i];
-            const nextRouteView = this._routeTree.getRouteView(activatePath[i + 1]);
+            const nextRouteView = this.getRouteView(activatePath[i + 1]);
 
             this.routeNodePath.set(currRouteName, nextRouteView);
         }
