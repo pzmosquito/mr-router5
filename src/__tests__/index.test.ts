@@ -1,7 +1,7 @@
 import React from "react";
 import createRouter, { Router } from "router5";
 import { shallow } from "enzyme";
-import { routerStore, RouteComponent } from "..";
+import { routerStore, RouteComponent, toRoutes } from "..";
 import RouteView from "../RouteView";
 
 
@@ -20,7 +20,7 @@ const routeViews = [
 let router: Router = null;
 
 beforeEach(() => {
-    router = createRouter(routerStore.toRoutes(routeViews));
+    router = createRouter(toRoutes(routeViews));
 });
 
 afterEach(() => {

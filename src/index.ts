@@ -18,8 +18,17 @@ const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) =
     return React.createElement(component, props);
 });
 
+/**
+ * convert array of route views to array of routes.
+ * @param routeViews - array of route views.
+ */
+function toRoutes(routeViews: RouteView[]) {
+    return routeViews.map((rv) => rv.route);
+}
+
 export {
     RouteView,
     routerStore,
     RouteComponent,
+    toRoutes,
 };

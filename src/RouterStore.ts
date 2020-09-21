@@ -8,7 +8,6 @@ export default class RouterStore {
     constructor() {
         this.getRouteNode = this.getRouteNode.bind(this);
         this.getRouteView = this.getRouteView.bind(this);
-        this.toRoutes = this.toRoutes.bind(this);
     }
 
     /**
@@ -94,14 +93,6 @@ export default class RouterStore {
      */
     getRouteView(name: string) {
         return this._routeViews.find((rv) => rv.route.name === name);
-    }
-
-    /**
-     * convert array of route views to array of routes.
-     * @param routeViews - array of route views.
-     */
-    toRoutes(routeViews: RouteView[]) {
-        return routeViews.map((rv) => rv.route);
     }
 
     /**

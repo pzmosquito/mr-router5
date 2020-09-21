@@ -1,6 +1,6 @@
 import React from "react";
 import createRouter from "router5";
-import { routerStore } from "..";
+import { routerStore, toRoutes } from "..";
 import RouteView from "../RouteView";
 
 
@@ -15,7 +15,7 @@ test("routerStore.routeUpdated()", () => {
         new RouteView({ name: "users.view", path: "/view" }, UserViewComponent),
     ];
 
-    const router = createRouter(routerStore.toRoutes(routeViews));
+    const router = createRouter(toRoutes(routeViews));
     routerStore.init(router, routeViews);
     router.start("/");
 
