@@ -51,7 +51,7 @@ routeStore.init(router, routeViews);
 
 ## Basic Usage
 
-*see [router5](https://router5.js.org/guides/defining-routes#adding-routes) on how to create router.*
+*see [router5](https://router5.js.org/guides/defining-routes#adding-routes) on how to create router instance.*
 
 ```js
 import React from "react";
@@ -73,7 +73,7 @@ const routeViews = [
     new RouteView({name: "users.view", path: "/view"}, UserView),
 ];
 
-// initialize router and router store.
+// create router instance and initialize mr-router5.
 const router = createRouter(toRoutes(routeViews), {});
 routeStore.init(router, routeViews);
 
@@ -96,9 +96,7 @@ router.start(() => {
 <a name="payload"></a>
 ## payload
 
-You can set `extra` and `dataLoader` for route view. `extra` and `dataLoader` are simply JS Map. There are many ways to use them, one example will be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
-
-Currently, there's no difference between `extra` and `dataLoader` in terms of functionality. I keep them for future improvements.
+You can add payload to each route view, by setting `extra` and `dataLoader`. There are many ways to use them, one example would be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
 
 ```js
 const routeViews = [
@@ -109,7 +107,7 @@ const routeViews = [
         .setDataLoader("getUserDetail", (user) => ({ /* user details */ }))
 ];
 
-// write middleware
+// router5 middleware
 router.useMiddleware((router) => (toState, fromState, done) => {
     // get route view of the toState
     const rv = routerStore.getRouteView(toState.name);
@@ -117,17 +115,18 @@ router.useMiddleware((router) => (toState, fromState, done) => {
     // skip login check if 'requireLogin' is false.
     if (!rv.getExtra("requireLogin", false)) {
         done();
-        return;
-    }
-
-    const isLoggedIn = true; // check if user is logged in
-    if (isLoggedIn) {
-        const user = rv.getExtra("user");
-        const userDetail = rv.dataLoader.get("getUserDetail")(user);
-        done();
     }
     else {
-        done({ redirect: { name: "login" } });
+        // check if user is logged in
+        const isLoggedIn = true;
+        if (isLoggedIn) {
+            const user = rv.getExtra("user");
+            const userDetail = rv.getDataLoader("getUserDetail")(user);
+            done();
+        }
+        else {
+            done({ redirect: { name: "login" } });
+        }
     }
 });
 ```
