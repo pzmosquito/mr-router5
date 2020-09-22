@@ -23,6 +23,26 @@ mr-router5 creates a minimal bridge between router5, MobX and React. When I say 
 `npm install --save mr-router5`
 
 
+## Upgrade v3 to v4
+
+`v4` removes the `RouteTree` class, the upgrade should be straightforward.
+```js
+// v3
+import { RouteTree, routerStore, initMrRouter5 } from "mr-router5";
+
+const routeTree = new RouteTree([...]);
+const router = createRouter(routeTree.getRoutes(), {});
+initMrRouter5(router, routeTree);
+
+// v4
+import { routerStore, toRoutes } from "mr-router5";
+
+const routeViews = [...];
+const router = createRouter(toRoutes(routeViews), {});
+routeStore.init(router, routeViews);
+```
+
+
 ## Reference
 
 - [API docs](https://pzmosquito.github.io/mr-router5/)
@@ -31,13 +51,13 @@ mr-router5 creates a minimal bridge between router5, MobX and React. When I say 
 
 ## Basic Usage
 
-*see [router5](https://router5.js.org/guides/defining-routes#adding-routes) on how to create router.*
+*see [router5](https://router5.js.org/guides/defining-routes#adding-routes) on how to create router instance.*
 
 ```js
 import React from "react";
 import { render } from "react-dom";
 import createRouter from "router5";
-import { initMrRouter5, RouteComponent, RouteTree, RouteView } from "mr-router5";
+import { RouteComponent, RouteView, routerStore, toRoutes } from "mr-router5";
 
 // define components.
 const Home = () => <div>'home' component</div>;
@@ -45,17 +65,17 @@ const UserNode = () => <div>'user' route node component</div>;
 const UserList = () => <div>'user list' component</div>;
 const UserView = () => <div>'user view' component</div>;
 
-// define route tree. NOTE, only flat routes are supported.
-const routeTree = new RouteTree([
+// define route views. NOTE, only flat routes are supported.
+const routeViews = [
     new RouteView({name: "home", path: "/"}, Home),
     new RouteView({name: "users", path: "/users"}, UserNode),
     new RouteView({name: "users.list", path: "/list"}, UserList),
     new RouteView({name: "users.view", path: "/view"}, UserView),
-]);
+];
 
-// initialize router and router store.
-const router = createRouter(routeTree.getRoutes(), {});
-initMrRouter5(router, routeTree);
+// create router instance and initialize mr-router5.
+const router = createRouter(toRoutes(routeViews), {});
+routeStore.init(router, routeViews);
 
 // create root route node.
 const routeNodeName = ""; // empty string for root route node
@@ -76,46 +96,37 @@ router.start(() => {
 <a name="payload"></a>
 ## payload
 
-You can use `extra` and `dataLoader` for route view or route tree. `extra` and `dataLoader` are simply JS Map. There are many ways to use them, one example will be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
-
-Currently, there's no difference between `extra` and `dataLoader` in terms of functionality. I keep them for future improvements.
+You can add payload to each route view, by setting `extra` and `dataLoader`. There are many ways to use them, one example would be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
 
 ```js
-const routeTree = new RouteTree([
-    // set payload and data loader at route view level
-    // `setExtra()` and `setDataLoader()` are helper functions to set data cascadingly.
-    new RouteView({name: "login", path: "/login"}, Login)
-        .setExtra("requireLogin", false),
+const routeViews = [
+    new RouteView({name: "login", path: "/login"}, Login),
     new RouteView({name: "user", path: "/user"}, UserComponent)
         .setExtra("user", "John Doe")
+        .setExtra("requireLogin", true)
         .setDataLoader("getUserDetail", (user) => ({ /* user details */ }))
-]);
+];
 
-// set payload and data loader at route tree level
-routeTree.extra.set("requireLogin", true);
-
-// write middleware
+// router5 middleware
 router.useMiddleware((router) => (toState, fromState, done) => {
     // get route view of the toState
-    const rv = routeTree.getRouteView(toState.name);
+    const rv = routerStore.getRouteView(toState.name);
     
-    // `getExtra()` and `getDataLoader()` are helper functions to get data with optional default value.
-    const requireLogin = rv.getExtra("requireLogin", routeTree.extra.get("requireLogin"));
-    
-    if (!requireLogin) {
-        done();
-        return;
-    }
-
-    const isLoggedIn = true; // check if user is logged in
-    if (isLoggedIn) {
-        const user = rv.extra.get("user");
-        const userDetail = rv.dataLoader.get("getUserDetail")(user);
-        // process and store userDetail
+    // skip login check if 'requireLogin' is false.
+    if (!rv.getExtra("requireLogin", false)) {
         done();
     }
     else {
-        done({ redirect: { name: "login" } });
+        // check if user is logged in
+        const isLoggedIn = true;
+        if (isLoggedIn) {
+            const user = rv.getExtra("user");
+            const userDetail = rv.getDataLoader("getUserDetail")(user);
+            done();
+        }
+        else {
+            done({ redirect: { name: "login" } });
+        }
     }
 });
 ```
