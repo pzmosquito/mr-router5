@@ -35,19 +35,19 @@ export default class RouterStore {
     previousRouteView: RouteView = null;
 
     /**
-     * reference of router instance
+     * reference of router instance.
      * @private
      */
     private _router: Router = null;
 
     /**
-     * array of route views
+     * the array of the route views.
      * @private
      */
     private _routeViews: RouteView[] = null;
 
     /**
-     * route component to activate for route nodes
+     * route component to activate for route nodes.
      * @private
      */
     private routeNodePath: ObservableMap<string, RouteView> = observable(new Map(), { deep: false });
@@ -81,7 +81,7 @@ export default class RouterStore {
     }
 
     /**
-     * array of the route views.
+     * the array of the route views.
      */
     get routeViews() {
         return this._routeViews;
