@@ -4,9 +4,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>mr-router5 - React MobX Router5</title>
-	<meta name="description" content="Documentation for mr-router5">
+	<meta name="description" content="Documentation for mr-router5 - React MobX Router5">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -22,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">mr-router5</a>
+					<a href="index.html" class="title">mr-router5 - React MobX Router5</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -38,8 +39,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -49,12 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="index.html">Globals</a>
-				</li>
-			</ul>
-			<h1>mr-router5</h1>
+			<h1>mr-router5 - React MobX Router5</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +63,6 @@
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class"><a href="classes/routeview.html" class="tsd-kind-icon">Route<wbr>View</a></li>
-								<li class="tsd-kind-class"><a href="classes/routerstore.html" class="tsd-kind-icon">Router<wbr>Store</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -93,10 +86,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="routecomponent" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> Route<wbr>Component</h3>
-					<div class="tsd-signature tsd-kind-icon">Route<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>displayName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = observer(({ routeNodeName }: { routeNodeName: string }) &#x3D;&gt; {const { component, props } &#x3D; routerStore.getRouteNode(routeNodeName);return React.createElement(component, props);})</span></div>
+					<div class="tsd-signature tsd-kind-icon">Route<wbr>Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>routeNodeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">ReactElement</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JSXElementConstructor</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/index.ts:15</li>
+							<li>Defined in index.ts:15</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -109,10 +102,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable">
 					<a name="routerstore" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> router<wbr>Store</h3>
-					<div class="tsd-signature tsd-kind-icon">router<wbr>Store<span class="tsd-signature-symbol">:</span> <a href="classes/routerstore.html" class="tsd-signature-type">RouterStore</a><span class="tsd-signature-symbol"> = new RouterStore()</span></div>
+					<div class="tsd-signature tsd-kind-icon">router<wbr>Store<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in src/index.ts:9</li>
+							<li>Defined in index.ts:9</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -129,13 +122,13 @@
 					<a name="toroutes" class="tsd-anchor"></a>
 					<h3>to<wbr>Routes</h3>
 					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>Routes<span class="tsd-signature-symbol">(</span>routeViews<span class="tsd-signature-symbol">: </span><a href="classes/routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Routes<span class="tsd-signature-symbol">(</span>routeViews<span class="tsd-signature-symbol">: </span><a href="classes/routeview.html" class="tsd-signature-type" data-tsd-kind="Class">RouteView</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DefaultDependencies</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in src/index.ts:25</li>
+									<li>Defined in index.ts:25</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -146,13 +139,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>routeViews: <a href="classes/routeview.html" class="tsd-signature-type">RouteView</a><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>routeViews: <a href="classes/routeview.html" class="tsd-signature-type" data-tsd-kind="Class">RouteView</a><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>array of route views.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Route</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">DefaultDependencies</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -161,8 +154,8 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals current ">
-						<a href="index.html"><em>Globals</em></a>
+					<li class="current ">
+						<a href="index.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
@@ -170,9 +163,6 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
 						<a href="classes/routeview.html" class="tsd-kind-icon">Route<wbr>View</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/routerstore.html" class="tsd-kind-icon">Router<wbr>Store</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="index.html#routecomponent" class="tsd-kind-icon">Route<wbr>Component</a>
@@ -195,7 +185,6 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>

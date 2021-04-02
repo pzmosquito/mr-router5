@@ -1,12 +1,12 @@
 module.exports = {
+    name: "mr-router5 - React MobX Router5",
+    entryPoints: ["./src/index.ts"],
     out: "./docs",
-    target: "ES6",
     readme: "none",
     exclude: [
         "**/__tests__/**/*",
     ],
-    mode: "file",
     excludePrivate: true,
     excludeProtected: true,
-    excludeNotExported: true,
+    excludeExternals: true,
 };
