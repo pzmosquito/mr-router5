@@ -8,5 +8,4 @@ module.exports = {
     ],
     excludePrivate: true,
     excludeProtected: true,
-    excludeExternals: true,
 };
