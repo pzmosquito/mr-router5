@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "4.0.1",
+  "version": "5.0.0-beta.0",
   "description": "mr-router5 uses Router5 together with MobX for your favorite React application.",
   "keywords": [
     "router5",
@@ -34,8 +34,8 @@
     "prepublishOnly": "npm run dts && npm run build"
   },
   "peerDependencies": {
-    "mobx": "^4 || ^5",
-    "mobx-react-lite": "^1 || ^2",
+    "mobx": "^4 || ^5 || ^6",
+    "mobx-react-lite": "^1 || ^2 || ^3",
     "react": "^16.8 || ^17",
     "router5": "^7 || ^8"
   },
@@ -48,16 +48,17 @@
     "@types/enzyme": "^3.10.8",
     "@types/jest": "^26.0.22",
     "@types/react": "^17.0.3",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
-    "jest": "^26.6.3",
-    "mobx": "^5.15.5",
-    "mobx-react-lite": "^2.0.7",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "jest": "^27.0.6",
+    "mobx": "^6.3.2",
+    "mobx-react-lite": "^3.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "router5": "^8.0.1",
-    "typedoc": "^0.20.34",
+    "typedoc": "^0.21.2",
     "typescript": "^4.2.3",
     "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0"

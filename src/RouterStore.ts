@@ -100,7 +100,7 @@ export default class RouterStore {
      * @param state - the current state route.
      * @private
      */
-    @action
+    @action.bound
     private routeUpdated(state: SubscribeState) {
         this.route = state.route;
         this.previousRoute = state.previousRoute;
