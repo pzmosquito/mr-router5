@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "5.0.0-beta.0",
+  "version": "5.0.0",
   "description": "mr-router5 uses Router5 together with MobX for your favorite React application.",
   "keywords": [
     "router5",
@@ -46,7 +46,7 @@
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-typescript": "^7.13.0",
     "@types/enzyme": "^3.10.8",
-    "@types/jest": "^26.0.22",
+    "@types/jest": "^27.0.2",
     "@types/react": "^17.0.3",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "babel-jest": "^27.0.6",
@@ -58,7 +58,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "router5": "^8.0.1",
-    "typedoc": "^0.21.2",
+    "typedoc": "^0.22.7",
     "typescript": "^4.2.3",
     "webpack": "^5.30.0",
     "webpack-cli": "^4.6.0"
