@@ -13,10 +13,10 @@ mr-router5 creates a minimal bridge between router5, MobX and React. When I say 
 
 ## Peer Dependencies
 
-- `React` ^16.8.0
-- `router5` ^7.0.0 || ^8.0.0
-- `mobx` ^4.0.0 || ^5.0.0
-- `mobx-react-lite` ^1.0.0 || ^2.0.0
+- `React` ^16.8 || ^17
+- `router5` ^7 || ^8
+- `mobx` ^4 || ^5 || ^6
+- `mobx-react-lite` ^1 || ^2 || ^3
 
 
 ## Installation
@@ -78,7 +78,7 @@ const router = createRouter(toRoutes(routeViews), {});
 routeStore.init(router, routeViews);
 
 // create root route node.
-const routeNodeName = ""; // empty string for root route node
+const routeNodeName = ""; // THIS NAME MUST MATCH THE ROUTE NAME! (empty string for root route node)
 const RootNode = () => (
     <div>
         <h2>Header</h2>
