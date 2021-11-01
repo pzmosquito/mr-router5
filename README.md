@@ -78,7 +78,7 @@ const router = createRouter(toRoutes(routeViews), {});
 routeStore.init(router, routeViews);
 
 // create root route node.
-const routeNodeName = ""; // empty string for root route node
+const routeNodeName = ""; // THIS NAME MUST MATCH THE ROUTE NAME! (empty string for root route node)
 const RootNode = () => (
     <div>
         <h2>Header</h2>
