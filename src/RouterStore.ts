@@ -13,25 +13,25 @@ export default class RouterStore {
     /**
      * the observable 'to' state route.
      */
-    @observable.ref
+    @observable
     route: State = null;
 
     /**
      * the observable 'from' state route.
      */
-    @observable.ref
+    @observable
     previousRoute: State = null;
 
     /**
      * the observable 'to' route view.
      */
-    @observable.ref
+    @observable
     routeView: RouteView = null;
 
     /**
      * the observable 'from' route view.
      */
-    @observable.ref
+    @observable
     previousRouteView: RouteView = null;
 
     /**
