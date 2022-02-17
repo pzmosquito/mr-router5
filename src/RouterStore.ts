@@ -1,15 +1,10 @@
-import { observable, action, ObservableMap } from "mobx";
+import { makeObservable, observable, action, ObservableMap } from "mobx";
 import { Router, SubscribeState, State } from "router5";
 import transitionPath from "router5-transition-path";
 import RouteView from "./RouteView";
 
 
 export default class RouterStore {
-    constructor() {
-        this.getRouteNode = this.getRouteNode.bind(this);
-        this.getRouteView = this.getRouteView.bind(this);
-    }
-
     /**
      * the observable 'to' state route.
      */
@@ -127,5 +122,11 @@ export default class RouterStore {
      */
     getRouteNode(routeNodeName: string) {
         return this.routeNodePath.get(routeNodeName);
+    }
+
+    constructor() {
+        this.getRouteNode = this.getRouteNode.bind(this);
+        this.getRouteView = this.getRouteView.bind(this);
+        makeObservable(this);
     }
 }
