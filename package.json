@@ -1,6 +1,6 @@
 {
   "name": "mr-router5",
-  "version": "5.1.0",
+  "version": "6.0.0",
   "description": "mr-router5 uses Router5 together with MobX for your favorite React application.",
   "keywords": [
     "router5",
@@ -34,8 +34,8 @@
     "prepublishOnly": "npm run dts && npm run build"
   },
   "peerDependencies": {
-    "mobx": "^4 || ^5 || ^6",
-    "mobx-react-lite": "^1 || ^2 || ^3",
+    "mobx": "^6",
+    "mobx-react-lite": "^3",
     "react": ">=16.8",
     "router5": "^7 || ^8"
   },
