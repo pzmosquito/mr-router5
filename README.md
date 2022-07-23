@@ -13,10 +13,10 @@ mr-router5 creates a minimal bridge between router5, MobX and React. When I say 
 
 ## Peer Dependencies
 
-- `React` ^16.8 || ^17
+- `React` >=16.8
 - `router5` ^7 || ^8
-- `mobx` ^4 || ^5 || ^6
-- `mobx-react-lite` ^1 || ^2 || ^3
+- `mobx` ^6
+- `mobx-react-lite` ^3
 
 
 ## Installation
