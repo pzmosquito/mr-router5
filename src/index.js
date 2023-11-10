@@ -8,12 +8,11 @@ import RouteView from "./RouteView";
  */
 const routerStore = new RouterStore();
 
-
 /**
  * @constant
  */
-const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) => {
-    const { component, props } = routerStore.getRouteNode(routeNodeName);
+const RouteComponent = observer(({ routeNodeName }) => {
+    const { component, props } = routerStore.routeNodePath.get(routeNodeName);
 
     return React.createElement(component, props);
 });
@@ -22,7 +21,7 @@ const RouteComponent = observer(({ routeNodeName }: { routeNodeName: string }) =
  * convert array of route views to array of routes.
  * @param routeViews - array of route views.
  */
-function toRoutes(routeViews: RouteView[]) {
+function toRoutes(routeViews) {
     return routeViews.map((rv) => rv.route);
 }
 

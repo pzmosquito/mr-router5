@@ -1,6 +1,6 @@
-FROM node:14-alpine
+FROM node:20-alpine
 
 RUN apk add --no-cache ca-certificates
-RUN npm install -g npm@7
+RUN npm install -g npm@10
 
 WORKDIR /usr/app

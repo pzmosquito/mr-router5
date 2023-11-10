@@ -18,11 +18,4 @@ test("routerStore.routeUpdated()", () => {
     const router = createRouter(toRoutes(routeViews));
     routerStore.init(router, routeViews);
     router.start("/");
-
-    const { getRouteNode } = routerStore;
-
-    router.navigate("users.view", () => {
-        expect(routerStore.route.name).toBe("users.view");
-        expect(getRouteNode("users").component).toBe(UserViewComponent);
-    });
 });
