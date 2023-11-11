@@ -108,7 +108,7 @@ const routeViews = [
 ];
 
 // router5 middleware
-router.useMiddleware((router) => (toState, fromState, done) => {
+const middleware = (router) => (toState, fromState, done) => {
     // get route view of the toState
     const rv = routerStore.getRouteView(toState.name);
     
@@ -128,7 +128,26 @@ router.useMiddleware((router) => (toState, fromState, done) => {
             done({ redirect: { name: "login" } });
         }
     }
-});
+};
+router.useMiddleware(middleware);
+
+// or you can use mr-router5 simplified middleware
+import { makeMiddleware } from "mr-router5";
+
+const middleware = (middlewareData) => {
+    // middlewareData is an object that can be destructured with the following properties.
+    const {
+        router,
+        toState,
+        fromState,
+        done,
+        getDataLoader,
+        getExtra,
+    } = middlewareData;
+
+    // rest of the logic is the same as above
+}
+router.useMiddleware(makeMiddleware(middleware));
 ```
 
 That's it. Enjoy routing.

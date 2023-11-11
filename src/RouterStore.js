@@ -1,4 +1,5 @@
 import { makeObservable, observable, action } from "mobx";
+import router5 from "router5";
 import transitionPath from "router5-transition-path";
 
 
@@ -33,7 +34,7 @@ export default class RouterStore {
      * the map of the route views.
      * @private
      */
-    routeViewMap = new Map();
+    routeViewsMap = new Map();
 
     /**
      * route component to activate for route nodes.
@@ -49,28 +50,17 @@ export default class RouterStore {
             route: observable,
             previousRoute: observable,
             routeNodePath: observable.shallow,
-            init: action.bound,
+            createRouter: action.bound,
             routeUpdated: action.bound,
         });
     }
 
-    /**
-     * initialize router store.
-     * @param router - router5 router instance.
-     * @param routeViews - array of route views.
-     */
-    init(router, routeViews) {
-        this.route = null;
-        this.previousRoute = null;
-        this.routeView = null;
-        this.previousRouteView = null;
+    createRouter(routeViews, options) {
+        this.routeViewsMap = new Map(routeViews.map((rv) => [rv.route.name, rv]));
+        this.router = router5(routeViews.map((rv) => rv.route), options);
+        this.router.subscribe(({ route, previousRoute }) => this.routeUpdated(route, previousRoute));
 
-        this.router = router;
-        this.routeViewMap = new Map(routeViews.map((rv) => [rv.route.name, rv]))
-
-        this.router.subscribe(state => {
-            this.routeUpdated(state);
-        });
+        return this.router;
     }
 
     /**
@@ -78,20 +68,18 @@ export default class RouterStore {
      * @param state - the current state route.
      * @private
      */
-    routeUpdated(state) {
-        this.route = state.route;
-        this.routeView = this.routeViewMap.get(this.route.name);
+    routeUpdated(route, previousRoute) {
+        this.route = route;
+        this.routeView = this.routeViewsMap.get(this.route.name);
 
-        this.previousRoute = state.previousRoute;
-        if (this.previousRoute) {
-            this.previousRouteView = this.routeViewMap.get(this.previousRoute.name);
-        }
+        this.previousRoute = previousRoute;
+        this.previousRouteView = this.previousRoute ? this.routeViewsMap.get(this.previousRoute.name) : this.previousRoute;
 
         const { intersection, toActivate } = transitionPath(this.route, this.previousRoute);
         const activatePath = [intersection, ...toActivate];
 
         activatePath.slice(0, -1).forEach((currRouteName, i) => {
-            const nextRouteView = this.routeViewMap.get(activatePath[i + 1]);
+            const nextRouteView = this.routeViewsMap.get(activatePath[i + 1]);
             this.routeNodePath.set(currRouteName, nextRouteView);
         });
     }
