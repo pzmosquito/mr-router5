@@ -9,11 +9,6 @@
     "router",
     "routing"
   ],
-  "engines": {
-    "node": ">=8",
-    "npm": ">=5"
-  },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pzmosquito/mr-router5.git"
@@ -24,7 +19,9 @@
     "url": "https://github.com/pzmosquito/mr-router5/issues"
   },
   "homepage": "https://github.com/pzmosquito/mr-router5#readme",
-  "main": "dist/index.js",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "scripts": {
     "build": "webpack",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest --coverage --no-cache",
@@ -43,11 +40,12 @@
     "@testing-library/user-event": "^14.5.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "mobx": "^6.10.2",
+    "mobx": "^6.11.0",
     "mobx-react-lite": "^4.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "router5": "^8.0.1"
+    "router5": "^8.0.1",
+    "vite": "^4.5.0"
   },
   "dependencies": {
     "router5-transition-path": "^8.0.1"
