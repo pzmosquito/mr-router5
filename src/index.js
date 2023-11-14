@@ -9,12 +9,11 @@ import RouteView from "./RouteView";
 const routerStore = new RouterStore();
 
 /**
- * RouteComponent is a React component that renders the view for a given route node.
- * It observes changes to the routeNodePath in the routerStore.
+ * Renders the view for a given route node and observes changes to the routeNodePath in the routerStore.
  * @param {Object} props - Properties passed to the component.
  * @param {string} props.routeNodeName - Name of the route node.
  */
-const RouteComponent = observer(({ routeNodeName }) => {
+const RouteNodeComponent = observer(({ routeNodeName }) => {
     const { component, props } = routerStore.routeNodePath.get(routeNodeName);
 
     return React.createElement(component, props);
@@ -27,7 +26,7 @@ const RouteComponent = observer(({ routeNodeName }) => {
  */
 function makeMiddleware(middlewareFn) {
     return (router) => (toState, fromState, done) => {
-        const { getDataLoader, getExtra } = routerStore.getRouteView(toState.name);
+        const { getDataLoader, getExtra } = routerStore.routeViewsMap.get(toState.name);
         const params = {
             router,
             toState,
@@ -43,6 +42,6 @@ function makeMiddleware(middlewareFn) {
 export {
     RouteView,
     routerStore,
-    RouteComponent,
+    RouteNodeComponent,
     makeMiddleware,
 };
