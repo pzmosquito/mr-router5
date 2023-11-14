@@ -6,7 +6,7 @@ import RouteView from "../RouteView";
 
 const HomeComponent = () => React.createElement("div", null, "Home Element");
 const UserRouteNode = () => React.createElement(RouteNodeComponent, { routeNodeName: "users" });
-const UserViewComponent = () => React.createElement("div", null, "User View Element");
+const UserViewComponent = ({ userId }) => React.createElement("div", null, `User ${userId} View Element`);
 
 const routeViews = [
     new RouteView({ name: "home", path: "/home" }, HomeComponent)
@@ -31,20 +31,33 @@ test("connectRouter", () => {
     expect(routerStore.router).toBe(router);
 });
 
-test("RouteNodeComponent renders components based on route changes", () => {
+test("routeNodePath should populate root route node as expected", () => {
     router.start("/");
     router.navigate("home", () => {
-        render(React.createElement(RouteNodeComponent, { routeNodeName: "" }));
         waitFor(() => {
-            expect(screen.getByText("Home Element")).toBeInTheDocument();
+            render(React.createElement(RouteNodeComponent, { routeNodeName: "" }));
         });
+        expect(routerStore.route.name).toBe("home");
+        expect(routerStore.previousRoute).toBe(null);
+        expect(routerStore.routeNodePath.size).toBe(1);
+        expect(routerStore.routeNodePath.get("").component).toBe(HomeComponent);
+        expect(screen.getByText("Home Element")).toBeInTheDocument();
+    });
+});
 
-        router.navigate("users.view", () => {
-            render(React.createElement(RouteNodeComponent, { routeNodeName: "users" }));
-            waitFor(() => {
-                expect(screen.getByText("User View Element")).toBeInTheDocument();
-            });
+test("routeNodePath should populate nested route node as expected", () => {
+    router.start("/");
+    router.navigate("home");
+    router.navigate("users.view", () => {
+        waitFor(() => {
+            render(React.createElement(RouteNodeComponent, { routeNodeName: "" }));
         });
+        expect(routerStore.route.name).toBe("users.view");
+        expect(routerStore.previousRoute.name).toBe("home");
+        expect(routerStore.routeNodePath.size).toBe(2);
+        expect(routerStore.routeNodePath.get("").component).toBe(UserRouteNode);
+        expect(routerStore.routeNodePath.get("users").component).toBe(UserViewComponent);
+        expect(screen.getByText("User 0 View Element")).toBeInTheDocument();
     });
 });
 
