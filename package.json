@@ -23,7 +23,7 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "scripts": {
-    "build": "webpack",
+    "build": "vite build",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest --coverage --no-cache",
     "test:watch": "npm run test -- --watchAll",
     "prepublishOnly": "npm run build"

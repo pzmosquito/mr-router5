@@ -1,12 +1,10 @@
 coverage/
-docs/
 src/
-.browserslistrc
 .editorconfig
 .gitignore
-babel.config.js
+Dockerfile
+fix-deps.cjs
 jest.config.js
+Makefile
 setupTests.js
-tsconfig.json
-typedoc.js
-webpack.config.js
+vite.config.js
