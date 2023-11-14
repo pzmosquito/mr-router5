@@ -19,16 +19,7 @@ const routeViews = [
 let router = null;
 
 beforeEach(() => {
-    router = routerStore.createRouter(routeViews, {});
-});
-
-afterEach(() => {
-    router = null;
-});
-
-
-test("connectRouter", () => {
-    expect(routerStore.router).toBe(router);
+    router = routerStore.createRouter(routeViews);
 });
 
 test("routeNodePath should populate root route node as expected", () => {

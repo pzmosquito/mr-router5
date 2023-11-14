@@ -44,20 +44,21 @@ export default class RouterStore {
             route: observable,
             previousRoute: observable,
             routeNodePath: observable.shallow,
-            createRouter: action.bound,
             routeUpdated: action.bound,
         });
+        this.createRouter = this.createRouter.bind(this);
     }
 
     /**
      * Creates a router instance with provided route views and options.
      * @param {Array} routeViews Array of route view objects.
-     * @param {Object} options Configuration options for router5.
+     * @param {Object} options Router options.
+     * @param {Object} dependencies Dependencies for middleware and plugins.
      * @returns The created router instance.
      */
-    createRouter(routeViews, options) {
+    createRouter(routeViews, options, dependencies) {
         this.routeViewsMap = new Map(routeViews.map((rv) => [rv.route.name, rv]));
-        this.router = router5(routeViews.map((rv) => rv.route), options);
+        this.router = router5(routeViews.map((rv) => rv.route), options, dependencies);
         this.router.subscribe(({ route, previousRoute }) => this.routeUpdated(route, previousRoute));
 
         return this.router;
@@ -78,9 +79,9 @@ export default class RouterStore {
         const { intersection, toActivate } = transitionPath(this.route, this.previousRoute);
         const activatePath = [intersection, ...toActivate];
 
-        activatePath.slice(0, -1).forEach((currRouteName, i) => {
-            const nextRouteView = this.routeViewsMap.get(activatePath[i + 1]);
-            this.routeNodePath.set(currRouteName, nextRouteView);
+        activatePath.slice(0, -1).forEach((routeName, routeIdx) => {
+            const nextRouteView = this.routeViewsMap.get(activatePath[routeIdx + 1]);
+            this.routeNodePath.set(routeName, nextRouteView);
         });
     }
 }
