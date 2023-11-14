@@ -5,46 +5,40 @@ import transitionPath from "router5-transition-path";
 
 export default class RouterStore {
     /**
-     * the observable 'to' state route.
+     * Current route.
      */
     route = null;
 
     /**
-     * the observable 'from' state route.
+     * Previous route.
      */
     previousRoute = null;
 
     /**
-     * the observable 'to' route view.
+     * The route view object for the current route.
      */
     routeView = null;
 
     /**
-     * the observable 'from' route view.
+     * The route view object for the previous route.
      */
     previousRouteView = null;
 
     /**
-     * reference of router instance.
-     * @private
+     * Instance of router5's router.
      */
     router = null;
 
     /**
-     * the map of the route views.
-     * @private
+     * Map of route views keyed by route name.
      */
     routeViewsMap = new Map();
 
     /**
-     * route component to activate for route nodes.
-     * @private
+     * Map of route node paths.
      */
     routeNodePath = new Map();
 
-    /**
-     * @constructor
-     */
     constructor() {
         makeObservable(this, {
             route: observable,
@@ -55,6 +49,12 @@ export default class RouterStore {
         });
     }
 
+    /**
+     * Creates a router instance with provided route views and options.
+     * @param {Array} routeViews Array of route view objects.
+     * @param {Object} options Configuration options for router5.
+     * @returns The created router instance.
+     */
     createRouter(routeViews, options) {
         this.routeViewsMap = new Map(routeViews.map((rv) => [rv.route.name, rv]));
         this.router = router5(routeViews.map((rv) => rv.route), options);
@@ -64,9 +64,9 @@ export default class RouterStore {
     }
 
     /**
-     * handle route update.
-     * @param state - the current state route.
-     * @private
+     * Updates the current and previous routes and their respective views.
+     * @param {Object} route The current route object.
+     * @param {Object} previousRoute The previous route object.
      */
     routeUpdated(route, previousRoute) {
         this.route = route;

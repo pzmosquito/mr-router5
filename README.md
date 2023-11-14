@@ -13,34 +13,11 @@ mr-router5 creates a minimal bridge between router5, MobX and React. When I say 
 
 ## Peer Dependencies
 
-- `React` >=16.8
-- `router5` ^7 || ^8
-- `mobx` ^6
-- `mobx-react-lite` ^3
+[see here](./package.json#L34).
 
 
 ## Installation
 `npm install --save mr-router5`
-
-
-## Upgrade v3 to v4
-
-`v4` removes the `RouteTree` class, the upgrade should be straightforward.
-```js
-// v3
-import { RouteTree, routerStore, initMrRouter5 } from "mr-router5";
-
-const routeTree = new RouteTree([...]);
-const router = createRouter(routeTree.getRoutes(), {});
-initMrRouter5(router, routeTree);
-
-// v4
-import { routerStore, toRoutes } from "mr-router5";
-
-const routeViews = [...];
-const router = createRouter(toRoutes(routeViews), {});
-routeStore.init(router, routeViews);
-```
 
 
 ## Reference
@@ -56,8 +33,7 @@ routeStore.init(router, routeViews);
 ```js
 import React from "react";
 import { render } from "react-dom";
-import createRouter from "router5";
-import { RouteComponent, RouteView, routerStore, toRoutes } from "mr-router5";
+import { RouteComponent, RouteView, routerStore } from "mr-router5";
 
 // define components.
 const Home = () => <div>'home' component</div>;
@@ -74,8 +50,7 @@ const routeViews = [
 ];
 
 // create router instance and initialize mr-router5.
-const router = createRouter(toRoutes(routeViews), {});
-routeStore.init(router, routeViews);
+const router = routerStore.createRouter(routeViews, {});
 
 // create root route node.
 const routeNodeName = ""; // THIS NAME MUST MATCH THE ROUTE NAME! (empty string for root route node)
@@ -96,9 +71,12 @@ router.start(() => {
 <a name="payload"></a>
 ## payload
 
-You can add payload to each route view, by setting `extra` and `dataLoader`. There are many ways to use them, one example would be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware).
+You can add payload to each route view, by setting `extra` and `dataLoader`. There are many ways to use them, one example would be middleware, see [router5 middleware](https://router5.js.org/advanced/middleware). The middleware with payload is ideal for fetching data or checking authentication prior to navigating to the target route.
 
 ```js
+import React from "react";
+import { render } from "react-dom";
+import { RouteView, makeMiddleware } from "mr-router5";
 const routeViews = [
     new RouteView({name: "login", path: "/login"}, Login),
     new RouteView({name: "user", path: "/user"}, UserComponent)
@@ -106,33 +84,6 @@ const routeViews = [
         .setExtra("requireLogin", true)
         .setDataLoader("getUserDetail", (user) => ({ /* user details */ }))
 ];
-
-// router5 middleware
-const middleware = (router) => (toState, fromState, done) => {
-    // get route view of the toState
-    const rv = routerStore.getRouteView(toState.name);
-    
-    // skip login check if 'requireLogin' is false.
-    if (!rv.getExtra("requireLogin", false)) {
-        done();
-    }
-    else {
-        // check if user is logged in
-        const isLoggedIn = true;
-        if (isLoggedIn) {
-            const user = rv.getExtra("user");
-            const userDetail = rv.getDataLoader("getUserDetail")(user);
-            done();
-        }
-        else {
-            done({ redirect: { name: "login" } });
-        }
-    }
-};
-router.useMiddleware(middleware);
-
-// or you can use mr-router5 simplified middleware
-import { makeMiddleware } from "mr-router5";
 
 const middleware = (middlewareData) => {
     // middlewareData is an object that can be destructured with the following properties.
@@ -144,9 +95,26 @@ const middleware = (middlewareData) => {
         getDataLoader,
         getExtra,
     } = middlewareData;
-
-    // rest of the logic is the same as above
+    
+    // skip login check if 'requireLogin' is false.
+    if (!getExtra("requireLogin", false)) {
+        done();
+    }
+    else {
+        // check if user is logged in
+        const isLoggedIn = true;
+        if (isLoggedIn) {
+            const user = getExtra("user");
+            const userDetail = getDataLoader("getUserDetail")(user);
+            done();
+        }
+        else {
+            done({ redirect: { name: "login" } });
+        }
+    }
 }
+
+// The 'makeMiddleware' wrapper simplifies the original router5 middleware implementation.
 router.useMiddleware(makeMiddleware(middleware));
 ```
 

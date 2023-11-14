@@ -1,16 +1,18 @@
 import React from "react";
-import router5CreateRouter from "router5";
 import { observer } from "mobx-react-lite";
 import RouterStore from "./RouterStore";
 import RouteView from "./RouteView";
 
 /**
- * @constant
+ * Instance of RouterStore.
  */
 const routerStore = new RouterStore();
 
 /**
- * @constant
+ * RouteComponent is a React component that renders the view for a given route node.
+ * It observes changes to the routeNodePath in the routerStore.
+ * @param {Object} props - Properties passed to the component.
+ * @param {string} props.routeNodeName - Name of the route node.
  */
 const RouteComponent = observer(({ routeNodeName }) => {
     const { component, props } = routerStore.routeNodePath.get(routeNodeName);
@@ -18,13 +20,11 @@ const RouteComponent = observer(({ routeNodeName }) => {
     return React.createElement(component, props);
 });
 
-function createRouter(routeViews, options) {
-    return router5CreateRouter(
-        routeViews.map((rv) => rv.route),
-        options,
-    );
-}
-
+/**
+ * Creates a middleware function for use with the router.
+ * @param {Function} middlewareFn - The middleware function to be used.
+ * @returns The middleware function wrapped with routerStore context.
+ */
 function makeMiddleware(middlewareFn) {
     return (router) => (toState, fromState, done) => {
         const { getDataLoader, getExtra } = routerStore.getRouteView(toState.name);
@@ -44,6 +44,5 @@ export {
     RouteView,
     routerStore,
     RouteComponent,
-    createRouter,
     makeMiddleware,
 };
