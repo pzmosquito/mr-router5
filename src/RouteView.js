@@ -1,33 +1,32 @@
 export default class RouteView {
     /**
      * the router5 route object.
-     * @private
      */
     #route = null;
 
     /**
-     * the component to render.
+     * the element to render.
      */
-    component = null;
+    #element = null;
 
     /**
-     * the props for the component.
+     * extra data.
      */
-    props = null;
-
     #extra = new Map();
+
+    /**
+     * data loader.
+     */
     #dataLoader = new Map();
 
     /**
      * create a route view.
      * @param route - router5 route object.
-     * @param component - the React component to render.
-     * @param props - the props of the React component.
+     * @param element - the element to render.
      */
-    constructor(route, component, props = {}) {
+    constructor(route, element) {
         this.#route = route;
-        this.component = component;
-        this.props = props;
+        this.#element = element;
 
         this.setExtra = this.setExtra.bind(this);
         this.setDataLoader = this.setDataLoader.bind(this);
@@ -44,9 +43,18 @@ export default class RouteView {
     }
 
     /**
+     * retrieve element to render.
+     * @return the element to render.
+     */
+    get element() {
+        return this.#element;
+    }
+
+    /**
      * helper function to set extra for chaining purpose.
      * @param key - key of the extra.
      * @param value - value of the extra.
+     * @return this.
      */
     setExtra(key, value) {
         this.#extra.set(key, value);
@@ -57,6 +65,7 @@ export default class RouteView {
      * retrieve extra data with optional default value.
      * @param key - key of the extra.
      * @param defaultValue - default value.
+     * @return extra data.
      */
     getExtra(key, defaultValue) {
         return this.#extra.get(key) ?? defaultValue;
@@ -66,6 +75,7 @@ export default class RouteView {
      * helper function to set dataLoader for chaining purpose.
      * @param key - key of the dataLoader.
      * @param value - value of the dataLoader.
+     * @return this.
      */
     setDataLoader(key, value) {
         this.#dataLoader.set(key, value);
@@ -76,6 +86,7 @@ export default class RouteView {
      * retrieve dataLoader data with optional default value.
      * @param key - key of the dataLoader.
      * @param defaultValue - default value.
+     * @return dataLoader data.
      */
     getDataLoader(key, defaultValue) {
         return this.#dataLoader.get(key) ?? defaultValue;

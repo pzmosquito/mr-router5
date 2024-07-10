@@ -14,9 +14,9 @@ const routerStore = new RouterStore();
  * @param {string} props.routeNodeName - Name of the route node.
  */
 const RouteNodeComponent = observer(({ routeNodeName }) => {
-    const { component, props } = routerStore.routeNodePath.get(routeNodeName);
+    const { element } = routerStore.routeNodePath.get(routeNodeName);
 
-    return React.createElement(component, props);
+    return element;
 });
 
 /**

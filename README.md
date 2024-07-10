@@ -58,10 +58,10 @@ import { RouteView } from "mr-router5";
 // import route nodes and other components
 
 const routeViews = [
-    new RouteView({name: "home", path: "/"}, Home),
-    new RouteView({name: "users", path: "/users"}, UserNode),
-    new RouteView({name: "users.list", path: "/list"}, UserList),
-    new RouteView({name: "users.view", path: "/view"}, UserView),
+    new RouteView({name: "home", path: "/"}, <Home />),
+    new RouteView({name: "users", path: "/users"}, <UserNode />),
+    new RouteView({name: "users.list", path: "/list"}, <UserList />),
+    new RouteView({name: "users.view", path: "/view"}, <UserView />),
 ];
 ```
 Note: `mr-router5` currently supports only flat routes, meaning nested routes are not yet available.
@@ -91,8 +91,8 @@ import { RouteView } from "mr-router5";
 // import route nodes and other components
 
 const routeViews = [
-    new RouteView({name: "login", path: "/login"}, Login),
-    new RouteView({name: "user", path: "/user"}, UserComponent)
+    new RouteView({name: "login", path: "/login"}, <Login />),
+    new RouteView({name: "user", path: "/user"}, <UserComponent />)
         .setExtra("user", "John Doe")
         .setExtra("requireLogin", true)
         .setDataLoader("getUserDetail", (user) => ({ /* user details */ }))
